@@ -1,0 +1,410 @@
+a:visited {
+	color:#93D7BF;
+	text-decoration:none;
+	font-family: "Times New Roman";
+}
+
+a:visited:hover {
+	color:#55BF9A;
+	text-decoration:none;
+	font-family: "Times New Roman";
+}
+
+body {
+	text-align: center;
+	background-image: url(../Images/Degra3A.gif);
+	/* [disabled]color: #FFFFFF; */
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#cuerpo {
+	text-align: center;
+	/* [disabled]color: #FFFFFF; */
+	/*background-image: url(../images/Degra2A.gif);*/
+	/* [disabled]background-repeat: repeat; */
+	/* [disabled]background-position: left top; */
+}
+
+
+#logo {
+	float: left;
+}
+
+#logo_fla {
+	float: left;
+	width: 402px;
+	margin-top: 0.5%;
+	height: 70px;
+	margin-bottom: 12px;
+}
+
+#Titular_fla {
+	float: left;
+	margin-left: 1.5%;
+	margin-top: 0.5%;
+	width: 562px;
+	text-align: center;
+	margin-bottom: 12px;
+	height: 70px;
+}
+
+h1 {
+	color: #999999;
+	float: left;
+	margin-left: 16px;
+	font-style: italic;
+	margin-top: 4px;
+	width: 560px;
+	font-size: 24px;
+	text-align: left;
+}
+
+#Conte {
+	height: 99%;
+	width: 980px;
+	margin-right: auto;
+	margin-left: auto;
+	color: #FFFFFF;
+	text-align: center;
+	margin-top: 0.5%;
+}
+
+#Caja2 {
+	float: left;
+	width: 810px;
+	color: #666666;
+	text-align: left;
+	height: auto;
+}
+
+#Caja2puz {
+	float: none;
+	width: 952px;
+	text-align: center;
+	height: 662px;
+	border: 1px solid #93D7BF;
+}
+
+/* Caja de las vistas en video 3D. */
+#Caja2vid3d {
+	width: 900px;
+	text-align: center;
+	height: 506px;
+	border: 1px solid #93D7BF;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 12px;
+	margin-bottom: 12px;
+}
+
+
+#Caja2b {
+	float: left;
+	width: 760px;
+	margin-top: 6px;
+	color: #FFFFFF;
+	text-align: left;
+}
+
+#Caja2 p {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 18px;
+	color: #666666;
+	margin-top: 30px;
+}
+
+#Caja2 a {
+	color: #999;
+	text-decoration: none;
+}
+
+#Caja2 a:hover {
+	color: #FF9900;
+	text-decoration: none;
+}
+
+#Caja2tut {
+	float: left;
+	color: #666666;
+	text-align: center;
+	height: 82%;
+	width: 61%;
+	vertical-align: middle;
+}
+
+#Caja2tut a {
+	color: #666;
+	text-decoration: none;
+}
+
+#Caja2tut a:hover {
+	color: #999;
+	text-decoration: none;
+}
+
+
+#Caja3 {
+	float: left;
+	width: 160px;
+	color: #FFFFFF;
+	padding-top: 0px;
+	text-align: left;
+	height: auto;
+	margin-right: 2px;
+	margin-left: 8px;
+	margin-top: 6px;
+}
+
+#Caja3 a {
+	text-decoration: none;
+	color: #666666;
+	display: block;
+	width: 148px;
+	background-image: url(../images/Menu_02A.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding-left: 12px;
+	margin-top: 6px;
+}
+
+#Caja3 a:hover {
+	text-decoration: none;
+	color: #999999;
+	display: block;
+	background-image: url(../images/Menu_03A.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding-left: 18px;
+	width: 142px;
+	margin-top: 6px;
+}
+
+#Caja3 a:visited {
+	color:#93D7BF;
+	text-decoration:none;
+	font-family: "Times New Roman", Times, serif;
+}
+
+#Caja3 a:visited:hover {
+	color:#55BF9A;
+	text-decoration:none;
+	font-family: "Times New Roman", Times, serif;
+}
+
+#Caja3b {
+	float: left;
+	width: 180px;
+	margin-top: 6px;
+	margin-left: 10px;
+	color: #FFFFFF;
+	padding-top: 0px;
+	text-align: left;
+}
+
+#Caja3b a {
+	text-decoration: none;
+	color: #666666;
+	font-weight: bold;
+	display: block;
+	width: 180px;
+}
+
+#Caja3b a:hover {
+	text-decoration: none;
+	color: #FF9900;
+	font-weight: bold;
+	display: block;
+}
+
+#Caja2 h2 {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 36px;
+	font-style: italic;
+	font-weight: bold;
+	margin-left: 280px;
+	color: #CCCCCC;
+}
+
+.SuMensaje {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 24px;
+	font-style: italic;
+	font-weight: bold;
+	display: block;
+	text-align: center;
+}
+
+#Caja2 #LI {
+	margin-left: 84px;
+}
+#mensaje {
+	margin-top: 6px;
+}
+
+#form1 #mensaje {
+
+}
+
+#marque {
+	clear: both;
+	height: 3.25%;
+	width: 100%;
+	margin-bottom: 0.5%;
+}
+
+#footer  {
+	height: 3.25%;
+	width: 100%;
+	margin-top: 0.5%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 0.5%;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 14px;
+	font-style: normal;
+	text-align: center;
+	color: #333333;
+}
+
+#footer  a  {
+	color: #333333;
+	text-decoration: none;
+}
+
+#footer  a:hover  {
+	color: #666666;
+	text-decoration: none;
+}
+
+#absolut {
+	position: absolute;
+	top: -2000px;
+	width: 800px;
+}
+
+#embesound {
+	visibility: hidden;
+	top: -3000px;
+	position: absolute;
+}
+
+.flotaimg   {
+	float: left;
+	margin-left: 38px;
+	padding: 0px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	text-align: center;
+	text-decoration: none;
+}
+
+
+.flotaimg2   {
+	float: left;
+	margin-left: 55px;
+	padding: 0px;
+	margin-top: 200px;
+	margin-bottom: 24px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.limpiar {
+	clear: both;
+	margin: 0px;
+	padding: 0px;
+}
+
+#TutorMenu {
+	vertical-align: top;
+	width: 202px;
+	padding-top: 1px;
+	padding-right: 4px;
+	padding-bottom: 1px;
+	padding-left: 4px;
+	float: left;
+}
+
+a  img {
+	border: 1px solid #CCCCCC;
+}
+
+a:hover  img {
+	border: 1px solid #FF9900;
+}
+#Caja3d {
+	float: left;
+	width: 155px;
+	color: #FFFFFF;
+	padding-top: 0px;
+	text-align: left;
+	height: auto;
+	margin-right: 4px;
+	margin-top: 6px;
+}
+#Caja3d a {
+	text-decoration: none;
+	color: #666666;
+	display: block;
+	width: 143px;
+	background-image: url(../images/Menu_02A.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding-left: 12px;
+	margin-top: 4px;
+}
+#Caja3d a:hover {
+	text-decoration: none;
+	color: #999999;
+	display: block;
+	background-image: url(../images/Menu_03A.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding-left: 18px;
+	width: 137px;
+	margin-top: 4px;
+}
+#Caja3d a:visited {
+	color:#93D7BF;
+	text-decoration:none;
+	font-family: "Times New Roman", Times, serif;
+}
+#Caja3d a:visited:hover {
+	color:#55BF9A;
+	text-decoration:none;
+	font-family: "Times New Roman", Times, serif;
+}
+
+/* */
+
+#Conte3d {
+	height: auto;
+	width: 996px;
+	margin-right: auto;
+	margin-left: auto;
+	color: #333;
+	text-align: center;
+	margin-top: 0.5%;
+	float: none;
+}
+
+
+
+
+
+
+
+
+.flotariz {
+	float: left;
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: 10px;
+	text-align: center;
+	padding-right: 10px;
+	margin-bottom: 14px;
+	margin-top: 14px;
+a:active {
+	color: #C30;
+}
