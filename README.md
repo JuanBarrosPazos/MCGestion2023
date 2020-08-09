@@ -1,2 +1,15 @@
 # MCGestion_16
-Gestion de stock y flujo de caja (beta)
+BETA. y2016/08 Gestion de stock y flujo de caja.
+
+----
+
+* No orientado como una tienda online.
+
+* Actualiza el stock de almacen y los precios, en base al flujo de caja.
+
+* Genera Factura de venta final al cliente.
+
+* Creación de proveedores y clientes.
+
+----
+
