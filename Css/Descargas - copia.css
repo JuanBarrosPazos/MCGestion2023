@@ -1,0 +1,441 @@
+a:visited {
+	color:#93D7BF;
+	text-decoration:none;
+	font-family: "Times New Roman";
+}
+
+a:visited:hover {
+	color:#55BF9A;
+	text-decoration:none;
+	font-family: "Times New Roman";
+}
+
+body {
+	text-align: center;
+	color: #FFFFFF;
+	background-image: url(../../images/Degra3A.gif);
+}
+
+#cuerpo {
+	text-align: center;
+	color: #FFFFFF;
+	/*background-image: url(../images/Degra2A.gif);*/
+	background-repeat: repeat;
+	background-position: left top;
+}
+
+#logo {
+	float: left;
+}
+
+#logo_fla {
+	float: left;
+	width: 41%;
+	margin-top: 0.5%;
+	height: 9%;
+	margin-bottom: 0.5%;
+}
+
+#Titular_fla {
+	float: left;
+	margin-left: 1.5%;
+	margin-top: 0.5%;
+	width: 57%;
+	text-align: center;
+	margin-bottom: 0.5%;
+	height: 9%;
+}
+
+h1 {
+	color: #999999;
+	float: left;
+	margin-left: 16px;
+	font-style: italic;
+	margin-top: 4px;
+	width: 560px;
+	font-size: 24px;
+	text-align: left;
+}
+table {
+	border: 1px solid #CCC;
+	margin-bottom: 12px;
+}
+.BorderInf {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+}
+.BorderSup {
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #CCC;
+}
+.BorderInfDch {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #CCC;
+	border-bottom-color: #CCC;
+}
+.BorderDch {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #CCC;
+}
+
+tr {
+	margin: 0px;
+	padding: 0px;
+}
+td {
+	margin: 0px;
+	padding: 4px;
+}
+th {
+	padding: 6px;
+	margin: 0px;
+}
+
+
+
+#Conte {
+	height: 90%;
+	width: 982px;
+	margin-right: auto;
+	margin-left: auto;
+	color: #FFFFFF;
+	text-align: center;
+	margin-top: 0.5%;
+}
+
+#Caja2 {
+	float: left;
+	width: 82.5%;
+	color: #666666;
+	text-align: left;
+	height: 82%;
+}
+#Caja2Admin {
+	float: left;
+	width: 99%;
+	color: #666666;
+	text-align: left;
+	height: 82%;
+}
+
+#Caja2t {
+	color: #666666;
+	text-align: left;
+	height: 82%;
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
+}
+#Caja2t a {
+	color: #666;
+	text-decoration: none;
+}
+#Caja2t a:hover {
+	color: #FF9900;
+	text-decoration: none;
+}
+
+
+#Caja2puz {
+	float: none;
+	width: 952px;
+	text-align: center;
+	height: 662px;
+	border: 1px solid #93D7BF;
+}
+
+/* Caja de las vistas en video 3D. */
+#Caja2vid3d {
+	width: 900px;
+	text-align: center;
+	height: 506px;
+	border: 1px solid #93D7BF;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 12px;
+	margin-bottom: 12px;
+}
+
+
+#Caja2b {
+	float: left;
+	width: 760px;
+	margin-top: 6px;
+	color: #FFFFFF;
+	text-align: left;
+}
+
+#Caja2 p {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 18px;
+	color: #666666;
+	margin-top: 30px;
+}
+
+#Caja2 a {
+	color: #666;
+	text-decoration: none;
+}
+#Caja2Admin a {
+	color: #666;
+	text-decoration: none;
+}
+
+
+
+#Caja2 a:hover {
+	color: #FF9900;
+	text-decoration: none;
+}
+#Caja2Admin a:hover {
+	color: #FF9900;
+	text-decoration: none;
+}
+
+
+
+#Caja2tut {
+	float: left;
+	color: #666666;
+	text-align: center;
+	height: 60%;
+	width: 61%;
+	vertical-align: middle;
+}
+
+#Caja2tut a {
+	color: #666;
+	text-decoration: none;
+}
+
+#Caja2tut a:hover {
+	color: #333;
+	text-decoration: none;
+}
+
+
+#Caja3 {
+	float: left;
+	width: 160px;
+	color: #FFFFFF;
+	padding-top: 0px;
+	text-align: left;
+	height: auto;
+	margin-right: 8px;
+}
+#Caja3t {
+	width: 160px;
+	color: #FFFFFF;
+	padding-top: 0px;
+	text-align: left;
+	height: auto;
+	vertical-align: top;
+}
+#Caja3t a {
+	text-decoration: none;
+	color: #666666;
+	display: block;
+	width: 150px;
+	background-image: url(../../images/Menu_02A.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding-left: 10px;
+	margin-top: 4px;
+}
+#Caja3t a:hover {
+	text-decoration: none;
+	color: #999999;
+	display: block;
+	background-image: url(../../images/Menu_03A.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+	padding-left: 10px;
+	width: 150px;
+	margin-top: 4px;
+}
+
+
+#Caja3 a {
+	text-decoration: none;
+	color: #666666;
+	display: block;
+	width: 150px;
+	background-image: url(../../images/Menu_02A.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding-left: 10px;
+	margin-top: 4px;
+}
+
+
+#Caja3 a:hover {
+	text-decoration: none;
+	color: #999999;
+	display: block;
+	background-image: url(../../images/Menu_03A.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+	padding-left: 10px;
+	width: 150px;
+	margin-top: 4px;
+}
+
+
+#Caja3 a:visited {
+	color:#93D7BF;
+	text-decoration:none;
+	font-family: "Times New Roman", Times, serif;
+}
+
+#Caja3 a:visited:hover {
+	color:#55BF9A;
+	text-decoration:none;
+	font-family: "Times New Roman", Times, serif;
+}
+
+#Caja3b {
+	float: left;
+	width: 180px;
+	margin-top: 6px;
+	margin-left: 10px;
+	color: #FFFFFF;
+	padding-top: 0px;
+	text-align: left;
+}
+
+#Caja3b a {
+	text-decoration: none;
+	color: #666666;
+	font-weight: bold;
+	display: block;
+	width: 180px;
+}
+
+#Caja3b a:hover {
+	text-decoration: none;
+	color: #FF9900;
+	font-weight: bold;
+	display: block;
+}
+
+#Caja2 h2 {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 36px;
+	font-style: italic;
+	font-weight: bold;
+	margin-left: 280px;
+	color: #CCCCCC;
+}
+
+.SuMensaje {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 24px;
+	font-style: italic;
+	font-weight: bold;
+	display: block;
+	text-align: center;
+}
+
+#Caja2 #LI {
+	margin-left: 84px;
+}
+#mensaje {
+	margin-top: 6px;
+}
+
+#form1 #mensaje {
+
+}
+
+#marque {
+	clear: both;
+	height: 3.25%;
+	width: 100%;
+	margin-bottom: 0.5%;
+}
+
+#footer  {
+	height: auto;
+	width: 100%;
+	margin-top: 4px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 2px;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 14px;
+	font-style: normal;
+	text-align: center;
+	color: #333333;
+}
+
+#footer  a  {
+	color: #333333;
+	text-decoration: none;
+}
+
+#footer  a:hover  {
+	color: #666666;
+	text-decoration: none;
+}
+
+#absolut {
+	position: absolute;
+	top: -2000px;
+	width: 800px;
+}
+
+#embesound {
+	visibility: hidden;
+	top: -3000px;
+	position: absolute;
+}
+
+.flotaimg   {
+	float: left;
+	margin-left: 38px;
+	padding: 0px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.flotaimg2   {
+	float: left;
+	margin-left: 55px;
+	padding: 0px;
+	margin-top: 20px;
+	margin-bottom: 24px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.limpiar {
+	clear: both;
+	margin: 0px;
+	padding: 0px;
+}
+
+#TutorMenu {
+	vertical-align: top;
+	width: 202px;
+	padding-top: 1px;
+	padding-right: 4px;
+	padding-bottom: 1px;
+	padding-left: 4px;
+	float: left;
+}
+
+a  img {
+	border: 1px solid #CCCCCC;
+}
+
+a:hover  img {
+	border: 1px solid #FF9900;
+}
