@@ -1,0 +1,1 @@
+<?php $_SESSION['clave'] = "Variable_Inical"; ?>
