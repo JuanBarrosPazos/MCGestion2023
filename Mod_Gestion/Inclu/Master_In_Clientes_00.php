@@ -19,7 +19,7 @@ if ($_SESSION['Nivel'] == 'cliente') {
   <li><a href='#' class='MenuBarItemSubmenu'>CLIENTES</a>
     <ul>
 
-   	 	<li><a href='clientes/cliente_Modificar_01.php'>CLIENTE VER & MODIFICAR</a></li>
+   	 	<li><a href='clientes/cliente_Modificar_01.php'>VER & MODIFICAR</a></li>
     	<li><a href='clientes/caja_00.php'>TIENDA</a></li>
 		<li><a href='clientes/ventas.php'>HISTORICO COMPRAS</a></li>  
 

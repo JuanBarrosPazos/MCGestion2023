@@ -119,16 +119,15 @@ function process_form(){
 		
 	if(mysqli_query($db, $sql)){
 
-			global $destination_file;
-			move_uploaded_file($_FILES['myimg']['tmp_name'], $destination_file);
-			global $tabla;
-			print( $tabla );
-			global $rename_filename;
-			rename($destination_file, $rename_filename);
+		global $destination_file;
+		move_uploaded_file($_FILES['myimg']['tmp_name'], $destination_file);
+		global $tabla;
+		print( $tabla );
+		global $rename_filename;
+		rename($destination_file, $rename_filename);
 
-			if(!file_exists($rename_filename)){
-						print("NO SE HA PODIDO GUARDAR EN ".$rename_filename);}
-				else{ print ("LA IMAGEN SE HA GUARDADO OK..."); }
+		if(!file_exists($rename_filename)){ print("NO SE HA PODIDO GUARDAR EN ".$rename_filename);
+		}else{ /*print ("LA IMAGEN SE HA GUARDADO OK...");*/ }
 
 		} else { print("</br><font color='#FF0000'>* MODIFIQUE L.117 </font></br> ".mysqli_error($db))."</br>";
 						show_form ();

@@ -146,9 +146,8 @@ function process_form(){
 		global $rename_filename;
 		rename($destination_file, $rename_filename);
 
-		if( !file_exists( $rename_filename ) ){
-					print("NO SE HA PODIDO GUARDAR EN ".$rename_filename);}
-			else{ print ("LA IMAGEN SE HA GUARDADO OK..."); }
+		if( !file_exists( $rename_filename ) ){ print("NO SE HA PODIDO GUARDAR EN ".$rename_filename);
+		}else{ /* print ("LA IMAGEN SE HA GUARDADO OK..."); */ }
 
 		global $cfone;
 		$datein = date('Y-m-d/H:i:s');

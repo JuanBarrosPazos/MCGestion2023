@@ -132,9 +132,8 @@ function process_form(){
 		global $rename_filename;
 		rename($destination_file, $rename_filename);
 
-		if(!file_exists($rename_filename)){
-					print("NO SE HA PODIDO GUARDAR EN ".$rename_filename);}
-			else{ print ("LA IMAGEN SE HA GUARDADO OK..."); }
+		if(!file_exists($rename_filename)){ print("NO SE HA PODIDO GUARDAR EN ".$rename_filename);
+		}else{ /*print ("LA IMAGEN SE HA GUARDADO OK...");*/ }
 
 	} else { print("<font color='#FF0000'>
 						* MODIFIQUE L.116 </font>&nbsp;&nbsp;&nbsp;".mysqli_error($db))."</br>";

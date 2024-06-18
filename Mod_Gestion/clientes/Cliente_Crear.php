@@ -110,9 +110,8 @@ function process_form(){
 			print( $tabla );
 			move_uploaded_file($_FILES['myimg']['tmp_name'], $destination_file);
 
-			if( !file_exists( $destination_file ) ){
-						print("NO SE HA PODIDO GUARDAR EN ".$destination_file);}
-				else{ print ("LA IMAGEN SE HA GUARDADO OK..."); }
+		if( !file_exists( $destination_file ) ){ print("NO SE HA PODIDO GUARDAR EN ".$destination_file);
+		}else{ 	/*print ("LA IMAGEN SE HA GUARDADO OK...");*/ }
 
 		} else { print("</br>
 				<font color='#FF0000'>* MODIFIQUE L.245 </font></br> ".mysqli_error($db))."

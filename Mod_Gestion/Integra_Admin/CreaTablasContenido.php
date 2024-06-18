@@ -31,7 +31,7 @@ $clientes = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_cl (
 `Tlf2` int(9) NOT NULL,
 `lastin` datetime collate utf8_spanish2_ci NOT NULL default CURRENT_TIMESTAMP,
 `lastout` datetime collate utf8_spanish2_ci NOT NULL default CURRENT_TIMESTAMP,
-`visitadmin` varchar(4) collate utf8_spanish2_ci NOT NULL,
+`visitadmin` varchar(4) collate utf8_spanish2_ci NOT NULL default '0',
 UNIQUE KEY `id` (`id`),
 UNIQUE KEY `ref` (`ref`),
 UNIQUE KEY `dni` (`dni`),
@@ -43,7 +43,7 @@ if(mysqli_query($db, $clientes)){
          global $table01a;
          $table01a = "\t* OK TABLA CLIENTES MOD GESTION. \n";
 
-        $vc = "INSERT INTO `$db_name`.$table_name_cl (`ref`,`Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`, `Tlf2`) VALUES('000000', 'cliente', 'Anonimo', 'Anonimo', 'untitled.png', '000000', '000000', '0', '000000', '', '', '000000', '000000', '000000')";
+        $vc = "INSERT INTO `$db_name`.$table_name_cl (`ref`,`Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`, `Tlf2`) VALUES('000000', 'cliente', 'Anonimo', 'Anonimo', 'untitled.png', '000000', '000000', '0', '000000', 'Anonimo', 'Anonimo', '000000', '000000', '000000')";
         
         if(mysqli_query($db, $vc)){
                 global $table01b;

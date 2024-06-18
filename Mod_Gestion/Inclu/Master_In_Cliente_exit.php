@@ -16,7 +16,7 @@ if ($_SESSION['Nivel'] == 'cliente') {
 		  
 	<!-- MENU CLIENTES -->
 
-  <li><a href='#' class='MenuBarItemSubmenu'>GESTION VER & CLIENTES</a>
+  <li><a href='#' class='MenuBarItemSubmenu'>CLIENTES</a>
     <ul>
 
       	<li><a href='cliente_Modificar_01.php'>CLIENTE MODIFICAR</a></li>
