@@ -1,6 +1,7 @@
 <?php
 
-	require '../Inclu/Admin_Inclu_01b.php';
+	global $rutaHeader;		$rutaHeader = "../";
+	require $rutaHeader.'Inclu/Inclu_Header.php';
 
 	if($_POST['config']){
 							
@@ -250,13 +251,13 @@ function process_form(){
 	
 	/************	PASAMOS LOS PARAMETROS A .LOG	*****************/
 	
-global $cfone;				global $text;				global $text2;
+global $cfone;				global $LogText;				global $LogText2;
 $datein = date('Y-m-d/H:i:s');
 $logdate = date('Y_m_d');
-$logtext = $cfone."\n - CONFIG INIT ".$datein.".\n * ".$db_name.". \n * ".$db_host.". \n * ".$db_user.". \n * ".$db_pass."\n".$dbconecterror.$text.$text2."\n";
+$LogText = $cfone."\n - CONFIG INIT ".$datein.".\n * ".$db_name.". \n * ".$db_host.". \n * ".$db_user.". \n * ".$db_pass."\n".$dbconecterror.$LogText.$LogText2."\n";
 $filename = "../logs/Config/".$logdate."_CONFIG_INIT.log";
 $log = fopen($filename, 'ab+');
-fwrite($log, $logtext);
+fwrite($log, $LogText);
 fclose($log);
 
 	}	
@@ -296,11 +297,11 @@ function ayear(){
 	fclose($fw2);
 	
 	if($fget == date('Y')){}
-	elseif($fget != date('Y')){ 	modif();
-									modif2();
-}
-
+	elseif($fget != date('Y')){ modif();
+								modif2();
 	}
+
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -393,7 +394,6 @@ function show_form($errors=[]){
 					</td>
 				</tr>
 					
-					
 				<tr>
 					<td align='right' valign='middle'  class='BorderSup' colspan='2'>
 						<input type='submit' value='INIT CONFIG' />
@@ -404,9 +404,7 @@ function show_form($errors=[]){
 				</tr>
 				
 		</form>														
-			
-			</table>				
-					"); 
+			</table>"); 
 	
 	}	
 
@@ -415,6 +413,6 @@ function show_form($errors=[]){
 				 ////////////////////				  ///////////////////
 ///
 
-	require '../Inclu/Admin_Inclu_02.php';
+	require '../Inclu/Inclu_Footer.php';
 
 ?>

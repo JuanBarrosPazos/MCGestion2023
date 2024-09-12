@@ -163,10 +163,9 @@ function ver_todo(){
 
 function UserLog(){
 
-	global $nombre;
-	global $apellido;
+	global $nombre; 	global $apellido;
+
 	global $orden;
-	
 	$orden = isset($_POST['Orden']);
 	
 	if (isset($_POST['todo'])){$nombre = "TODOS LOS USUARIOS ".$orden;};	
@@ -177,8 +176,7 @@ function UserLog(){
 	
 	$ActionTime = date('H:i:s');
 
-	global $dir;
-	$dir = "../Users/".$_SESSION['ref']."/log";
+	global $dir; 		$dir = "../Users/".$_SESSION['ref']."/log";
 	
 	global $text;
 	$text = PHP_EOL."** ADMIN VER ".$ActionTime.PHP_EOL."\t Filtro => ".$nombre." ".$apellido;

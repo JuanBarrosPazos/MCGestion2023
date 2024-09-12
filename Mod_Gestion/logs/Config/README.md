@@ -1,0 +1,2 @@
+## LOS LOG DE CONFIGURACIÓN DE SISTEMA SE ENCUENTRAN EN EL DIRECTORIO:
+## D:\Web Proyectos\MCGestion\MCGestion2023\Mod_Admin\config\logs

@@ -73,7 +73,7 @@ print(" <table align='center' style=\"margin-top:12px\">
                     APELLIDO
                 </td>
                 <td style='text-align:left !important;'>
-<input type='text' name='Apellidos' size=20 maxlenth=10 value='".@$defaults['Apellidos']."' />
+        <input type='text' name='Apellidos' size=20 maxlenth=10 value='".@$defaults['Apellidos']."' />
                 </td>
             </tr>
     </form>	

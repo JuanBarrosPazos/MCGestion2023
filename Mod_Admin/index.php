@@ -1,8 +1,7 @@
 <?php
 
-	require 'Inclu/error_hidden.php';
-	global $index;
-	$index = 1;
+	//require 'Inclu/error_hidden.php';
+	global $index; 		$index = 1;
 	require 'Inclu/Admin_head.php';
 
 				   ////////////////////				   ////////////////////
@@ -677,7 +676,7 @@ function show_form($errors=[]){
 									'name' => '',
 									'clave' => '',);
 								   }
-	if ($errors){
+	if($errors){
 
 		print("	<table align='center'>
 					<tr>
@@ -697,7 +696,7 @@ function show_form($errors=[]){
 				// ESCRIBE ERRORES EN INI_LOG
 				global $text;
 				$text = $errors[$a];
-				$logdate = date('Y-m-d');
+				$logdate = date('Y_m_d');
 				$logtext = "\t ** ".$text.PHP_EOL;
 				$filename = "config/logs/ini_log_".$logdate.".log";
 				$log = fopen($filename, 'ab+');
@@ -806,9 +805,9 @@ function ini_log(){
 
 	global $text;
 
-    $logdate = date('Y-m-d');
+    $logdate = date('Y_m_d');
 
-    $logtext = "** ".$ActionTime.PHP_EOL."\t ** ".$text.PHP_EOL;
+    $logtext = "** ".$ActionTime.PHP_EOL."\t\n".$text.PHP_EOL;
     $filename = "config/logs/ini_log_".$logdate.".log";
     $log = fopen($filename, 'ab+');
     fwrite($log, $logtext);

@@ -40,6 +40,10 @@
 	
 	} /* FIN @media screen and (max-width:740px) */
 
+.ocultahead{
+	visibility: visible;
+	}
+
 @media screen and (max-width:440px){
 
 	.imgtitle {	
@@ -460,7 +464,7 @@
 /*************************************/
 /*************************************/
 /*************************************/
-
+ 
 .botonverde {
 	background-color: #90faf5;
 }
@@ -470,7 +474,7 @@
 .botonrojo {
 	background-color: #ff4d4d;
 }
-.botonazul {
+.botonlila {
 	background-color: #dd92fd;
 }
 .botonleer {
@@ -481,7 +485,7 @@
 	border-radius: 8px;
 	background-color: #CCC;
 }
-.botonverde, .botonnaranja, .botonrojo, .botonazul, select {
+.botonverde, .botonnaranja, .botonrojo, .botonlila, select {
 	cursor: pointer;
 	border: none !important;
 	vertical-align: text-bottom;
@@ -491,7 +495,7 @@
 	font-weight: normal;
 	transition: all 1.2s ease;
 }
-.botonverde:hover, .botonnaranja:hover, .botonrojo:hover, .botonazul:hover, .botonleer:hover {
+.botonverde:hover, .botonnaranja:hover, .botonrojo:hover, .botonlila:hover, .botonleer:hover {
 	background-color: #dadada;
 }
 

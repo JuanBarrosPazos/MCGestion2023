@@ -18,8 +18,8 @@
 		global $db;
 		global $db_name;
 		
-		$admin =  "SELECT * FROM `$db_name`.$admin WHERE `ref` = '$rf'";
-		$qadmin = mysqli_query($db, $admin);
+		$Admin =  "SELECT * FROM `$db_name`.$Admin WHERE `ref` = '$rf'";
+		$qadmin = mysqli_query($db, $Admin);
 		$cadmin = mysqli_num_rows($qadmin);
 		
 	if($cadmin > 0){$errors [] = "YA EXISTE EL ADMINISTRADOR ".$rf;}

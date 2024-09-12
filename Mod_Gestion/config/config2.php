@@ -1,6 +1,7 @@
 <?php
 
-	require '../Inclu/Admin_Inclu_01b.php';
+	global $rutaHeader;		$rutaHeader = "../";
+	require $rutaHeader.'Inclu/Inclu_Header.php';
 	require '../../Mod_Admin/Inclu/my_bbdd_clave.php';
 	require '../../Mod_Admin/Conections/conection.php';
 	require '../../Mod_Admin/Conections/conect.php';
@@ -135,7 +136,7 @@ function process_form(){
 	
 	require "../config/TablesNames.php";
 
-	$sql = "INSERT INTO `$db_name`.$admin (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`, `Tlf2`) VALUES ('$rf', '$_POST[Nivel]', '$_POST[Nombre]', '$_POST[Apellidos]', '$imgNewName', '$_POST[doc]', '$_POST[dni]', '$_POST[ldni]', '$_POST[Email]', '$_POST[Usuario]', '$_POST[Password]', '$_POST[Direccion]', '$_POST[Tlf1]', '$_POST[Tlf2]')";
+	$sql = "INSERT INTO `$db_name`.$Admin (`ref`, `Nivel`, `Nombre`, `Apellidos`, `myimg`, `doc`, `dni`, `ldni`, `Email`, `Usuario`, `Password`, `Direccion`, `Tlf1`, `Tlf2`) VALUES ('$rf', '$_POST[Nivel]', '$_POST[Nombre]', '$_POST[Apellidos]', '$imgNewName', '$_POST[doc]', '$_POST[dni]', '$_POST[ldni]', '$_POST[Email]', '$_POST[Usuario]', '$_POST[Password]', '$_POST[Direccion]', '$_POST[Tlf1]', '$_POST[Tlf2]')";
 		
 	if(mysqli_query($db, $sql)){ 
 		
@@ -152,10 +153,10 @@ function process_form(){
 		global $cfone;
 		$datein = date('Y-m-d/H:i:s');
 		$logdate = date('Y_m_d');
-		$logtext = $cfone."\n - CREADO USER ADMIN 1. ".$datein.". User Ref: ".$rf.".\n \t Name: ".$_POST['Nombre']." ".$_POST['Apellidos'].". \n \t User: ".$_POST['Usuario'].".\n \t Pass: ".$_POST['Password'].".\n";
+		$LogText = $cfone."\n - CREADO USER ADMIN 1. ".$datein.". User Ref: ".$rf.".\n \t Name: ".$_POST['Nombre']." ".$_POST['Apellidos'].". \n \t User: ".$_POST['Usuario'].".\n \t Pass: ".$_POST['Password'].".\n";
 		$filename = "../logs/Config/".$logdate."_CONFIG_INIT.log";
 		$log = fopen($filename, 'ab+');
-		fwrite($log, $logtext);
+		fwrite($log, $LogText);
 		fclose($log);
 
 	} else { print("</br><font color='#FF0000'>
@@ -209,8 +210,8 @@ function show_form($errors=[]){
 
 		require "../Admin/UserRefCrea.php";
 
-		global $textit;
-		$textit = "DATOS DEL NUEVO ADMINISTRADOR";
+		global $LogTextit;
+		$LogTextit = "DATOS DEL NUEVO ADMINISTRADOR";
 
 		global $keyConfig2;
 		$keyConfig2 = 1;
@@ -225,7 +226,7 @@ function show_form($errors=[]){
 
 	function master_index(){
 		
-				require '../Inclu/Master_Index_Admin.php';
+				require '../Inclu_Menu/Master_Index_Admin.php';
 		
 				} 
 
@@ -238,6 +239,6 @@ function show_form($errors=[]){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	require '../Inclu/Admin_Inclu_02.php';
+	require '../Inclu/Inclu_Footer.php';
 		
 ?>

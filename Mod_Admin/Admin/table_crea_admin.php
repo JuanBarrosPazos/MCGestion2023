@@ -96,7 +96,6 @@
 
 			print("</td>
 				</tr>
-
 				<tr>
 					<td style='text-align:right !important;'>
 						<font color='#FF0000'>*</font> N&Uacute;MERO:

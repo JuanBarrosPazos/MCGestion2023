@@ -6,7 +6,7 @@
 
     require 'Mod_Admin/Inclu/error_hidden.php';
 
-  ?>
+?>
 
 <!DOCTYPE html>
 <html lang="es-es">

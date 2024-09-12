@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-	require 'Inclu/Inclu_Menu_00.php';
+	global $rutaHeader;		$rutaHeader = "";
+	require $rutaHeader.'Inclu/Inclu_Header.php'; 
 	require '../Mod_Admin/Inclu/my_bbdd_clave.php';
 	require '../Mod_Admin/Conections/conection.php';
 	require '../Mod_Admin/Conections/conect.php';
@@ -20,70 +21,148 @@ session_start();
 		if($form_errors = validate_form()){
 							suma_denegado ();
 							show_form($form_errors);
-		} else { admin_entrada();
-				 suma_acces();
-				 process_form();
+		}else{ 	admin_entrada();
+				suma_acces();
+				process_form();
 						}
-	}elseif(isset($_POST['salir'])) { salir();
-									  show_form();
+	}elseif((isset($_POST['salir']))||(isset($_GET['salir']))){
+													salir();
+									 				show_form();
+													unset($_SESSION['refcl']);
 	}elseif(isset($_SESSION['Nivel'])){
 							admin_entrada();
 							process_form();
 							//ayear();
-	}else { suma_visit();	
+	}else{ //consulta_tablas();
+			suma_visit();	
 			show_form();
-			/*
-				global $redir;
-				$redir = "<script type='text/javascript'>
-								function redir(){
-								window.location.href='../Mod_Admin/index.php';
-							}
-							setTimeout('redir()',10); */ /* 10 microsegundos 
-							</script>";
-				print ($redir); */
-				
-			}
-				
+			unset($_SESSION['refcl']);
+		/*
+			global $RedirUrl;	$RedirUrl = "../Mod_Admin/index.php";
+			global $RedirTime;	$RedirTime = 10;
+			require 'Inclu/AutoRedirUrl.php';
+			global $Redir;
+			print ($Redir);
+		*/
+	}
+
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+
+function consulta_tablas(){
+
+	/* DETECTA LAS TABLAS EN LA BBDD Y RETORNA LOS NOMBRES DE ESTAS MEDIANTE UN WHILE */
+
+	global $db;		global $db_name;
+
+	/* DETECTO LAS TABLAS CON CLAVE EN LA BBDD */
+	global $sqltcl;			global $table_name_cl;
+	$table_name_cl = $_SESSION['clave']."%";
+	$table_name_cl = "LIKE '$table_name_cl'";
+	$sqltcl = "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME $table_name_cl";
+	$querycl = mysqli_query($db, $sqltcl);
+	$countcl= mysqli_num_rows($querycl);
+	global $infoTCalve;
+	$infoTClave = "<p>* TABLAS EN BBDD CON CLAVE: ".$_SESSION['clave'].": ".$countcl."</p>";
+	echo $infoTClave;
+	/* FIN VERIFICO LAS TABLAS CON LA CLAVE EN LA BBDD */
+
+	/* DETECTO LAS TABLAS GASTOS EN LA BBDD */
+	global $table_name_gs;
+	$table_name_gs = $_SESSION['clave']."gastosshop_%";
+	$table_name_gs = "LIKE '$table_name_gs'";
+	global $sqltgs;
+	$sqltgs = "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME $table_name_gs";
+	echo "<p>* CONSULTA SQL GASTOS:<br>&nbsp;&nbsp;&nbsp;".$sqltgs."</p>";
+	$querygs = mysqli_query($db, $sqltgs);
+	$countgs= mysqli_num_rows($querygs);
+	global $infoTGastos;
+	$infoTGastos = "<p>- TABLAS GASTOS EN BBDD: ".$table_name_gs.": ".$countgs."</p>";
+	echo $infoTGastos;
+	/* FIN VERIFICO LAS TABLAS GASTOS EN LA BBDD */
+	/* WHILE PARA RECORRER LAS TABLAS GASTOS CONSULTADAS */
+		//$consulta = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES ";
+		$consulta = "SHOW TABLES FROM $db_name $table_name_gs";
+				echo "- CONSULTA SQL GASTOS:<br>&nbsp;&nbsp;&nbsp;".$consulta."<p>";
+		$respuesta = mysqli_query($db, $consulta);
+		if(!$respuesta){ print("* ERROR L.83 ".mysqli_error($db)."</p>");
+		}else{	echo "- WHILE TABLAS GASTOS:<br>";
+				global $count;	$count = 1;
+			while($fila = mysqli_fetch_row($respuesta)){
+					print("&nbsp;&nbsp;&nbsp;* ".$count.": ".$fila[0]."<br>");
+	/*
+	$sg = "UPDATE `$db_name`.`$fila[0]` SET `refprovee`='xxx', `factnif`='xxx', `factnom`='xxx' WHERE `$fila[0]`.`factnif` LIKE 'xxx' ";
+	echo "&nbsp;&nbsp;&nbsp;* ".$count.": ".$sg."<br>";
+	*/
+				$count ++;
+			}// FIN WHILE
+		}// FIN ELSE
+	/* FIN WHILE PARA RECORRER LAS TABLAS GASTOS */
+	
+	/* DETECTO LAS TABLAS VENTAS EN LA BBDD */
+	global $table_name_vn;
+	$table_name_vn = $_SESSION['clave']."ventasshop_%";
+	$table_name_vn = "LIKE '$table_name_vn'";
+	global $sqltvn;
+	$sqltvn = "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$db_name' AND TABLE_NAME $table_name_vn";
+	echo "<p>* CONSULTA SQL VENTAS:<br>&nbsp;&nbsp;&nbsp;".$sqltvn."</p>";
+	$queryvn = mysqli_query($db, $sqltvn);
+	$countvn= mysqli_num_rows($queryvn);
+	global $infoTVentas;
+	$infoTVentas = "<p>- TABLAS VENTAS EN BBDD: ".$table_name_vn.": ".$countvn."</p>";
+	echo $infoTVentas;
+	/* FIN VERIFICO LAS TABLAS VENTAS EN LA BBDD */
+	/* WHILE PARA RECORRER LAS TABLAS GASTOS CONSULTADAS */
+		//$consulta = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES ";
+		$consulta = "SHOW TABLES FROM $db_name $table_name_vn";
+				echo "- CONSULTA SQL VENTAS:<br>&nbsp;&nbsp;&nbsp;".$consulta."<p>";
+		$respuesta = mysqli_query($db, $consulta);
+		if(!$respuesta){ print("* ERROR L.110 ".mysqli_error($db)."</p>");
+		}else{	echo "- WHILE TABLAS VENTAS:<br>";
+				global $count;	$count = 1;
+			while($fila = mysqli_fetch_row($respuesta)) {
+					print("&nbsp;&nbsp;&nbsp; *".$count.": ".$fila[0]."<br>");
+					$count++;
+			}// FIN WHILE
+		}// FIN ELSE
+	/* FIN WHILE PARA RECORRER LAS TABLAS GASTOS */
+
+}
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
 function admin_entrada(){
 
-	global $db;			
-	global $db_name;
-	global $userid;
-	global $uservisita;
+	global $db;			global $db_name;
+	global $userid;		global $uservisita;
 
-	global $dir;
-	if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){ $dir = 'Admin';}
-	elseif ($_SESSION['Nivel'] == 'cliente'){ $dir = 'Clientes';}
-	elseif (($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'caja')){ $dir = 'User';}
-	
 	$total = $uservisita + 1;
 	$datein = date('Y-m-d/H:i:s');
 
 	require "config/TablesNames.php";
 
-	$sqladin = "UPDATE `$db_name`.$clientes SET `lastin` = '$datein', `visitadmin` = '$total' WHERE $clientes.`id` = '$userid' LIMIT 1 ";
+	$sqladin = "UPDATE `$db_name`.$ClientesWeb SET `lastin` = '$datein', `visitadmin` = '$total' WHERE $ClientesWeb.`id` = '$userid' LIMIT 1 ";
 		
 	if(mysqli_query($db, $sqladin)){
-			// print("* ");
-		} else { 
-			print("</br><font color='#FF0000'>* FATAL ERROR funcion admin_entrada(): </font></br> ".mysqli_error($db))."</br>";
-							}
-					
-	$logname = $_SESSION['Nombre'];	
-	$logape = $_SESSION['Apellidos'];	
-	$logname = trim($logname);	
-	$logape = trim($logape);	
-	$logdocu = $logname."_".$logape;
-	$logdate = date('Y_m_d');
-	$logtext = "\n** INICIO SESION => .".$datein.".\n \t User Ref: ".$_SESSION['ref'].".\n \t ".$_SESSION['Nombre']." ".$_SESSION['Apellidos']."\n \n";
-	$filename = "logs/".$dir."/".$logdate."_".$logdocu.".log";
-	$log = fopen($filename, 'ab+');
-	fwrite($log, $logtext);
-	fclose($log);
+
+	}else{ print("* ERROR L.144 ".mysqli_error($db))."</br>"; }
+		
+		global $LogText;
+		$LogText = "!! INICIO SESION USUARIO: ".$_SESSION['Nombre']." ".$_SESSION['Apellidos']." => ".$datein.PHP_EOL."\t\tREFERENCIA: ".$_SESSION['ref']." NIVEL: ".$_SESSION['Nivel'].PHP_EOL;
+
+		global $KeyLog;		$KeyLog = "index";
+		require 'logs/LogInfo.php';
+
+		// PASA LOG AL SISTEMA Mod_Admin SOLO INICIO Y CIERRE DE SESION...
+		$ActionTime = date('H:i:s');
+		$logdate = date('Y_m_d');
+		$LogText = "** ".$ActionTime.PHP_EOL."\t ** ".$LogText.PHP_EOL;
+		$filename = "../Mod_Admin/LogsAcceso/LogsAcceso_".$logdate.".log";
+		$log = fopen($filename, 'ab+');
+		fwrite($log, $LogText);
+		fclose($log);
 
 	} 
 
@@ -93,11 +172,10 @@ function admin_entrada(){
 
 function show_visit(){
 
-	global $rowv;
-	global $sumavisit;
+	global $rowv;		global $sumavisit;
 	
 	require "config/TablesNames.php";
-	$sqlv =  "SELECT * FROM $visitasClient";
+	$sqlv =  "SELECT * FROM $VisitasClientesWeb";
 	$qv = mysqli_query($db, $sqlv);
 	$rowv = mysqli_fetch_assoc($qv);
 	
@@ -105,31 +183,29 @@ function show_visit(){
 	
 	$tot = $rowv['admin'];
 
-	global $sumavisit;
-	$sumavisit = $tot + 1;
+	global $sumavisit;		$sumavisit = $tot + 1;
 
 	$idv = 69;
 
 	if(mysqli_query($db, $sqlv)){
-			print(" <div style='clear:both'></div>
-			 		<table align='right' style='margin-top:0px'>
-						<tr>	
-							<td align='right'><font color='#59746A'>VISITAS:</font></td>
-							<td  align='right'><font color='#59746A'>".$tot."</font></td>
-						</tr>
-						<tr>
-							<td><font color='#59746A'>ACCESOS PERMITIDOS: </font></td>
-							<td align='right'><font color='#59746A'>".$rowv['acceso']."</font></td>
-						</tr>
-						<tr>
-							<td><font color='#59746A'>ACCESOS DENEGADOS:</font></td>
-							<td align='right'><font color='#59746A'>".$rowv['deneg']."</font></td>
-						</tr>
-					</table></br>");
-		} else { 
-			("<font color='#FF0000'>* Error: </font></br>&nbsp;&nbsp;&nbsp;".mysqli_error($db)." </br>");
-				}
-		}
+		print(" <div style='clear:both'></div>
+		 		<table align='center' style='margin-top:0.1em; color: #59746a;'>
+					<tr>	
+						<td style='text-align:right;'>VISITS:</td>
+						<td style='text-align:left;'>".$tot."</td>
+					</tr>
+					<tr>
+						<td style='text-align:right;'>AUTHORIZED:</td>
+						<td style='text-align:left;'>".$rowv['acceso']."</td>
+					</tr>
+					<tr>
+						<td style='text-align:right;'>FORBIDDEN:</td>
+						<td style='text-align:left;'>".$rowv['deneg']."</td>
+					</tr>
+				</table>");
+	}else{ print("* ERROR L.96".mysqli_error($db)."</br>"); }
+
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -137,11 +213,10 @@ function show_visit(){
 
 function suma_visit(){
 
-	global $rowv;
-	global $sumavisit;
+	global $rowv;		global $sumavisit;
 	
 	require "config/TablesNames.php";
-	$sqlv =  "SELECT * FROM $visitasClient";
+	$sqlv =  "SELECT * FROM $VisitasClientesWeb";
 	$qv = mysqli_query($db, $sqlv);
 	$rowv = mysqli_fetch_assoc($qv);
 	
@@ -149,20 +224,18 @@ function suma_visit(){
 	
 	$tot = $rowv['admin'];
 
-	global $sumavisit;
-	$sumavisit = $tot + 1;
+	global $sumavisit; 		$sumavisit = $tot + 1;
 
 	$idv = 69;
 	
 	require "config/TablesNames.php";
 
-	$sqlv = "UPDATE `$db_name`.$visitasClient SET `admin` = '$sumavisit' WHERE $visitasClient.`idv` = '$idv' LIMIT 1 ";
+	$sqlv = "UPDATE `$db_name`.$VisitasClientesWeb SET `admin` = '$sumavisit' WHERE $VisitasClientesWeb.`idv` = '$idv' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlv)){ print(" </br>");
-		} else { 
-				print("<font color='#FF0000'>* Error: </font></br>&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
-							}
-		}
+	}else{ print("* ERROR L.151".mysqli_error($db)."</br>"); }
+
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -170,11 +243,10 @@ function suma_visit(){
 
 function suma_acces(){
 
-	global $rowa;
-	global $sumaacces;
+	global $rowa;		global $sumaacces;
 	
 	require "config/TablesNames.php";
-	$sqla =  "SELECT * FROM $visitasClient";
+	$sqla =  "SELECT * FROM $VisitasClientesWeb";
 	$qa = mysqli_query($db, $sqla);
 	
 	$rowa = mysqli_fetch_assoc($qa);
@@ -183,24 +255,18 @@ function suma_acces(){
 	
 	$tota = $rowa['acceso'];
 
-	global $sumaacces;
-	$sumaacces = $tota + 1;
+	global $sumaacces;		$sumaacces = $tota + 1;
 	
 	$idv = 69;
 	
 	require "config/TablesNames.php";
 
-	$sqla = "UPDATE `$db_name`.$visitasClient SET `acceso` = '$sumaacces' WHERE $visitasClient.`idv` = '$idv' LIMIT 1 ";
+	$sqla = "UPDATE `$db_name`.$VisitasClientesWeb SET `acceso` = '$sumaacces' WHERE $VisitasClientesWeb.`idv` = '$idv' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqla)){ print ('</br>');
-			} else { print("<font color='#FF0000'>
-						* Error: </font>
-						</br>
-						&nbsp;&nbsp;&nbsp;".mysqli_error($db)."
-						</br>");
-					}
+	}else{ print("* ERROR L.182 ".mysqli_error($db)."</br>"); }
 
-		}
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -208,11 +274,10 @@ function suma_acces(){
 
 function suma_denegado(){
 
-	global $rowd;
-	global $sumadeneg;
+	global $rowd;		global $sumadeneg;
 
 	require "config/TablesNames.php";
-	$sqld =  "SELECT * FROM $visitasClient";
+	$sqld =  "SELECT * FROM $VisitasClientesWeb";
 	$qd = mysqli_query($db, $sqld);
 	$rowd = mysqli_fetch_assoc($qd);
 	
@@ -220,24 +285,18 @@ function suma_denegado(){
 	
 	$dng = $rowd['deneg'];
 	
-	global $sumadeneg;
-	$sumadeneg = $dng + 1;
+	global $sumadeneg; 		$sumadeneg = $dng + 1;
 	
 	$idd = 69;
 	
 	require "config/TablesNames.php";
 
-	$sqld = "UPDATE `$db_name`.$visitasClient SET `deneg` = '$sumadeneg' WHERE $visitasClient.`idv` = '$idd' LIMIT 1 ";
+	$sqld = "UPDATE `$db_name`.$VisitasClientesWeb SET `deneg` = '$sumadeneg' WHERE $VisitasClientesWeb.`idv` = '$idd' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqld)){ print("	</br>");
-			} else { print("<font color='#FF0000'>
-						* Error: </font>
-						</br>
-						&nbsp;&nbsp;&nbsp;".mysqli_error($db)."
-						</br>");
-				}
+	}else{ print("* ERROR L.212 ".mysqli_error($db)."</br>"); }
 
-		}
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -245,33 +304,23 @@ function suma_denegado(){
 
 function validate_form(){
 	
-	global $db;
-	global $sql;
-	global $q;
-	global $row;
+	global $db;			global $sql;		global $q;			global $row;
 	
 	$errors = array();
 	
-	if (strlen(trim($_POST['Usuario'])) == 0){
-		$errors [] = "Usuario: Campo obligatorio.";
-		}
+	if(strlen(trim($_POST['Usuario'])) == 0){ $errors [] = "USUARIO: CAMPO OBLIGATORIO";
+	}else{ }
 	
-	if (strlen(trim($_POST['Password'])) == 0){
-		$errors [] = "Password: Campo Obligatorio:";
-		}
-		
+	if(strlen(trim($_POST['Password'])) == 0){ $errors [] = "PASSWORD: CAMPO OBLIGATORIO";
+	}else{ }
 	
-	if(trim($_POST['Usuario'] != @$row['Usuario'])){
-		$errors [] = "Nombre o Password incorrecto.";
-		}
-	
-	elseif(trim($_POST['Password'] != @$row['Password'])){
-		$errors [] = "Nombre o Password incorrecto.";
-		}
+	if(trim($_POST['Usuario'] != @$row['Usuario'])){ $errors [] = "NOMBRE O PASWORD INCORRECTO";
+	}elseif(trim($_POST['Password'] != @$row['Password'])){ $errors [] = "NOMBRE O PASWORD INCORRECTO";
+	}else{ }
 
 	return $errors;
 
-		} 
+} 
 		
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -279,38 +328,27 @@ function validate_form(){
 
 function process_form(){
 	
-if ($_SESSION['Nivel'] == 'cliente'){				 
-print("WELLCOME ".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". REF CLIENT: ".$_SESSION['ref']);
+if($_SESSION['Nivel'] == 'cliente'){				 
 	
 	master_index();
 								
-	global $nombre; 
-	global $apellido;
-	$nombre = $_SESSION['Nombre'];
-	$apellido = $_SESSION['Apellidos'];
+	global $nombre;			$nombre = $_SESSION['Nombre']; 
+	global $apellido;		$apellido = $_SESSION['Apellidos'];
 		
 	require "config/TablesNames.php";
-	$sqlb =  "SELECT * FROM $clientes WHERE `Nombre` = '$nombre' AND `Apellidos` = '$apellido'  ";
+	$sqlb =  "SELECT * FROM $ClientesWeb WHERE `Nombre` = '$nombre' AND `Apellidos` = '$apellido' ";
  	
 	$qb = mysqli_query($db, $sqlb);
 	
-	if(!$qb){ print("<font color='#FF0000'>Se ha producido un error: </font>".mysqli_error($db)."</br></br>");
-				show_form();	
-		} else { 
-				global $KeyIndex;
-				$KeyIndex = 1;
-				global $KeyBorraUser;
-				$KeyBorraUser = 1;
-				require "clientes/UserWhileTabla.php";
-
-					} /***** Fin de primer else . */
-		
-		}	else { 
-			require "Inclu/AccesoDenegado.php";			
-
-					}
+		if(!$qb){ print("<font color='#F1BD2D'>Se ha producido un error: </font>".mysqli_error($db)."</br></br>");
+					show_form();	
+		}else{  global $KeyIndex; 			$KeyIndex = 1;
+				global $KeyBorraUser; 		$KeyBorraUser = 1;
+				require "AdminClientesWeb/UserWhileTabla.php";
+		} /***** Fin de primer else . */
+	}else{ require "Inclu/AccesoDenegado.php"; }
 				
-	}	/* Final process_form(); */
+}	/* Final process_form(); */
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -320,69 +358,71 @@ function show_form($errors=[]){
 	
 	if(isset($_POST['oculto'])){
 		$defaults = $_POST;
-		} else { $defaults = array ('Usuario' => '',
-								    'Password' => '');
+	}else{ $defaults = array ('Usuario' => '',
+							  'Password' => '');
 								   }
 	
-	if ($errors){
-		print("<font color='#FF0000'>Solucione estos errores:</font></br>");
-		
-		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>* Campo </font>".$errors [$a]."</br>");
-			}
-		}
-		
-	print("".show_visit()."<div style='clear:both'></div>
-			<table align='center' style=\"margin-top:2px; margin-bottom:8px\" >
+	if($errors){
+		print("	<table align='center' style='color:#F1BD2D;'>
 				<tr>
-					<th colspan=2 width=100% valign=\"bottom\" class='BorderInf'>
-						<a href='clientes/Cliente_Crear.php'>
-							CREAR NUEVO CLIENTE
-						</a>
+					<th style='text-align:center;'>
+						* SOLUCIONE ESTOS ERRORES:<br/>
 					</th>
 				</tr>
-				
 				<tr>
-					<th colspan=2 width=100% valign=\"bottom\" class='BorderInf'>
+					<td style='text-align:left !important'>");
+	
+			for($a=0; $c=count($errors), $a<$c; $a++){
+				print("<font color='#F1BD2D'>**</font>  ".$errors [$a]."</br>");
+			}
+
+			print("</td>
+				</tr>
+			</table>");
+		}
+		
+	print("<div style='clear:both'></div>
+			<table align='center' style=\"margin-top:2px; margin-bottom:8px\" >
+				<tr>
+					<th colspan=2 style='width:100%; vertical-align:bottom; text-align:right;'>
+		<form name='boton' action='AdminClientesWeb/ClienteCrear.php' method='post' style='display: inline-block;' >
+			<button type='submit' title='CREAR NUEVO CLIENTE' class='botonazul imgButIco PersonAddBlack'>
+			</button>
+				<input type='hidden' name='volver' value=1 />
+		</form>
+					</th>
+				</tr>
+				<tr>
+					<th colspan=2 style='width:100%; vertical-align:bottom; text-align:center;' >
 						DATOS DE ACCESO CLIENTE
 					</th>
 				</tr>
-				
-			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
-						
 				<tr>
-					<td>	
-						USUARIO
-					</td>
+					<td style='text-align:right;'>USUARIO</td>
 					<td>
-		<input type='Password' name='Usuario' size=20 maxlength=50 value='".$defaults['Usuario']."' />
+		<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
+			<input type='Password' name='Usuario' size=20 maxlength=50 value='".$defaults['Usuario']."' />
 					</td>
 				</tr>
-	
 				<tr>
-					<td>	
-						PASSWORD
-					</td>
+					<td style='text-align:right;'>PASSWORD</td>
 					<td>
-		<input type='Password' name='Password' size=20 maxlength=50 value='".$defaults['Password']."' />
+			<input type='Password' name='Password' size=20 maxlength=50 value='".$defaults['Password']."' />
 					</td>
 				</tr>
-	
 				<tr>
-					<td valign='middle' align='right' colspan='2'>
-						<input type='submit' class='submit' value='ACCEDER' />
+					<td colspan='2' style='text-align:right; vertical-align:middle;'>
+			<button type='submit' title='ACCEDER' class='botonverde imgButIco CloseSessionBlack' style='vertical-align:top;' ></button>
 						<input type='hidden' name='oculto' value=1 />
+		</form>	
+						<a href='Admin_index.php' style='display:inline-block; float:left;'>
+			<button type='button' title='ACCESO ADMINISTRACION SISTEMA' class='botonverde imgButIco InicioBlack' style='vertical-align:top;' ></button>
+						</a>
 					</td>
 				</tr>
-		</form>	
-				<tr>
-					<th colspan=2 width=100% valign=\"bottom\" class='BorderSup'>
-						<a href='Admin_index.php'>
-							ACCESO ADMINISTRACION SISTEMA
-						</a>
-					</th>
-				</tr>
-			</table>"); 
+			</table>
+			<div style='clear:both'></div>");
+			show_visit();
 	
 	}	
 
@@ -392,38 +432,43 @@ function show_form($errors=[]){
 	
 	function master_index(){
 
-		require 'Inclu/Master_In_Clientes_00.php';
+		global $rutaindex;          $rutaindex = '';
+		global $rutaOut;            $rutaOut = $rutaindex.'../';
+		require 'Inclu_Menu/rutaindex.php';
+	
+		require 'Inclu_Menu/Master_Index.php';
 		
-				}
+	}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 	
-	function salir() {	unset($_SESSION['id']);
-						unset($_SESSION['Nivel']);
-						unset($_SESSION['Nombre']);
-						unset($_SESSION['Apellidos']);
-						unset($_SESSION['dni']);
-						unset($_SESSION['ldni']);
-						unset($_SESSION['Email']);
-						unset($_SESSION['Usuario']);
-						unset($_SESSION['Password']);
-						unset($_SESSION['Direccion']);
-						unset($_SESSION['Tlf1']);
-						unset($_SESSION['Tlf2']);
-						unset($_SESSION['ref']);
-						unset($_SESSION['myimg']);
-						unset($_SESSION['lastin']);
-						unset($_SESSION['lastout']);
-						unset($_SESSION['visitadmin']);
-				print("Se ha cerrado la sesión.</br>");
-			}
+	function salir(){
+
+		unset($_SESSION['id']);				unset($_SESSION['ref']);
+		unset($_SESSION['Nivel']);			unset($_SESSION['Nombre']);
+		unset($_SESSION['Apellidos']); 		unset($_SESSION['dni']);
+		unset($_SESSION['ldni']);			unset($_SESSION['Email']);
+		unset($_SESSION['Usuario']);		unset($_SESSION['Password']);
+		unset($_SESSION['Direccion']);		unset($_SESSION['Tlf1']);
+		unset($_SESSION['Tlf2']);			unset($_SESSION['myimg']);
+		unset($_SESSION['lastin']);			unset($_SESSION['lastout']);
+		unset($_SESSION['visitadmin']);		unset($_SESSION['GestMyImg']);
+		unset($_SESSION['nclient']);
+
+		print("HA CERRADO SESION</br>");
+		
+	}
 	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	require 'Inclu/Inclu_Footer_01.php';
+	require 'Inclu/Inclu_Footer.php';
+
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 ?>

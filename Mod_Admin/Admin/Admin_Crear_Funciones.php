@@ -101,8 +101,7 @@ if (preg_match('/^(\w{1})*(\s\w{1})/',$_POST['Apellidos'],$ref4)){	$rf4 = $ref4[
 					<th colspan=3 class='BorderInf'>
 						SE HA REGISTRADO CON ESTOS DATOS.
 					</th>
-				</tr>
-			");
+				</tr>");
 	
 			global $rutaimg;
 			$rutaimg = "src='".$carpetaimg."/".$new_name."'";
@@ -309,8 +308,7 @@ function show_form($errors=[]){
 				</table>");
 			}else{
 
-		global $imgform;
-		$imgform = "";
+		global $imgform; 	$imgform = "";
 		require 'table_crea_admin.php';
 
 			} // FIN CONDICIONAL NUMERO USUARIOS

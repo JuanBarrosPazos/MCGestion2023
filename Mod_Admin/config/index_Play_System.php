@@ -815,7 +815,7 @@ function show_form($errors=[]){
 				$text = $errors[$a];
 				$logdate = date('Y_m_d');
 				$logtext = "\t ** ".$text.PHP_EOL;
-				$filename = "LogsAcceso//LogsAcceso_".$logdate.".log";
+				$filename = "LogsAcceso/LogsAcceso_".$logdate.".log";
 				$log = fopen($filename, 'ab+');
 				fwrite($log, $logtext);
 				fclose($log);
@@ -957,22 +957,20 @@ function ver_todo(){
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	function salir() {	unset($_SESSION['id']);
-						unset($_SESSION['Nivel']);
-						unset($_SESSION['Nombre']);
-						unset($_SESSION['Apellidos']);
-						unset($_SESSION['doc']);
-						unset($_SESSION['dni']);
-						unset($_SESSION['ldni']);
-						unset($_SESSION['Email']);
-						unset($_SESSION['Usuario']);
-						unset($_SESSION['Password']);
-						unset($_SESSION['Direccion']);
-						unset($_SESSION['Tlf1']);
-						unset($_SESSION['Tlf2']);
-						unset($_SESSION['nclient']);
+	function salir() {	
 
-						echo "<div class='centradiv'>YOU HAVE CLOSE SESSION</div>";
+		unset($_SESSION['id']);				unset($_SESSION['ref']);
+		unset($_SESSION['Nivel']);			unset($_SESSION['Nombre']);
+		unset($_SESSION['Apellidos']); 		unset($_SESSION['dni']);
+		unset($_SESSION['ldni']);			unset($_SESSION['Email']);
+		unset($_SESSION['Usuario']);		unset($_SESSION['Password']);
+		unset($_SESSION['Direccion']);		unset($_SESSION['Tlf1']);
+		unset($_SESSION['Tlf2']);			unset($_SESSION['myimg']);
+		unset($_SESSION['lastin']);			unset($_SESSION['lastout']);
+		unset($_SESSION['visitadmin']);		unset($_SESSION['GestMyImg']);
+		unset($_SESSION['nclient']);
+
+		echo "<div class='centradiv' style='border:none !important;'>YOU HAVE CLOSE SESSION</div>";
 	}
 
 				   ////////////////////				   ////////////////////
@@ -998,7 +996,7 @@ function ini_log(){
     $logdate = date('Y_m_d');
 
     $logtext = "** ".$ActionTime.PHP_EOL."\t ** ".$text.PHP_EOL;
-    $filename = "LogsAcceso//LogsAcceso_".$logdate.".log";
+    $filename = "LogsAcceso/LogsAcceso_".$logdate.".log";
     $log = fopen($filename, 'ab+');
     fwrite($log, $logtext);
     fclose($log);

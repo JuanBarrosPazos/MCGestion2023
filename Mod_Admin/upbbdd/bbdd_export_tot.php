@@ -86,7 +86,7 @@
 	global $text;
 	$text = PHP_EOL."** RESPALDADO CREADO AUTOMATICO BBDD: ".$ActionTime.PHP_EOL."\t NOMBRE BBDD: ".$file_name;
 
-	$logdate = date('Y-m-d');
+	$logdate = date('Y_m_d');
 	$logtext = $text.PHP_EOL;
 	$filename = $dir."/".$logdate.".log";
 	$log = fopen($filename, 'ab+');

@@ -39,7 +39,7 @@
 	/* VALIDAMOS EL CAMPO  NUMERO DNI/NIF */
 	global $db;			global $sqldni;			global $qdni;		global $db_name;
 
-	$sqldni =  "SELECT * FROM `$db_name`.$admin WHERE $admin.`dni` = '$_POST[dni]'";
+	$sqldni =  "SELECT * FROM `$db_name`.$Admin WHERE $Admin.`dni` = '$_POST[dni]'";
 	$qdni = mysqli_query($db, $sqldni);
 	if(!$qdni){ }else{ $rowdni = mysqli_fetch_assoc($qdni);	}
 	
@@ -457,7 +457,7 @@
 	
 	global $db;			global $sqlml;			global $qml;		global $db_name;
 
-	$sqlml =  "SELECT * FROM `$db_name`.$admin WHERE $admin.`Email` = '$_POST[Email]'";
+	$sqlml =  "SELECT * FROM `$db_name`.$Admin WHERE $Admin.`Email` = '$_POST[Email]'";
 	$qml = mysqli_query($db, $sqlml);
 	if(!$qml){ }else{ $rowml = mysqli_fetch_assoc($qml); }
 
@@ -502,7 +502,7 @@
 	global $qus;
 	global $db_name;
 
-	$sqlus =  "SELECT * FROM `$db_name`.$admin WHERE $admin.`Usuario` = '$_POST[Usuario]'";
+	$sqlus =  "SELECT * FROM `$db_name`.$Admin WHERE $Admin.`Usuario` = '$_POST[Usuario]'";
 	$qus = mysqli_query($db, $sqlus);
 	if(!$qus){ }else{ $rowus = mysqli_fetch_assoc($qus); }
 
@@ -579,7 +579,7 @@
 	global $db;
 	global $db_name;
 
-	$sqltlf1 =  "SELECT * FROM `$db_name`.$admin WHERE $admin.`Tlf1` = '$_POST[Tlf1]' OR $admin.`Tlf2` = '$_POST[Tlf1]' ";
+	$sqltlf1 =  "SELECT * FROM `$db_name`.$Admin WHERE $Admin.`Tlf1` = '$_POST[Tlf1]' OR $Admin.`Tlf2` = '$_POST[Tlf1]' ";
 	$qtlf1 = mysqli_query($db, $sqltlf1);
 	if(!$qtlf1){ }else{ 
 		$countlf1 = mysqli_num_rows($qtlf1);
@@ -615,7 +615,7 @@
 	
 	if(strlen(trim($_POST['Tlf2'])) > 0){
 
-		$sqltlf2 =  "SELECT * FROM `$db_name`.$admin WHERE $admin.`Tlf1` = '$_POST[Tlf2]' OR $admin.`Tlf2` = '$_POST[Tlf2]'";
+		$sqltlf2 =  "SELECT * FROM `$db_name`.$Admin WHERE $Admin.`Tlf1` = '$_POST[Tlf2]' OR $Admin.`Tlf2` = '$_POST[Tlf2]'";
 		$qtlf2 = mysqli_query($db, $sqltlf2);
 		if(!$qtlf2){ }else{ 
 			$rowtlf2 = mysqli_fetch_assoc($qtlf2);

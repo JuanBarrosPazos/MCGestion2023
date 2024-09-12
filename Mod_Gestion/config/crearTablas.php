@@ -11,7 +11,7 @@
 	global $table_name_a;
 	$table_name_a = "`".$_SESSION['clave']."admin`";
 
-	$admin = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_a (
+	$Admin = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_a (
   `id` int(4) NOT NULL auto_increment,
   `ref` varchar(20) collate utf8_spanish2_ci NOT NULL,
   `Nivel` varchar(8) collate utf8_spanish2_ci NOT NULL default 'amd',
@@ -38,7 +38,7 @@
   UNIQUE KEY `Usuario` (`Usuario`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ";
 		
-	if(mysqli_query($db , $admin)){
+	if(mysqli_query($db , $Admin)){
 					global $table1;
 					$table1 = "\t* OK TABLA ADMIN.".PHP_EOL;
 				} else {
@@ -52,7 +52,7 @@
 	global $table_name_f;
 	$table_name_f = "`".$_SESSION['clave']."feedback`";
 
-	$feedback = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_f (
+	$Feedback = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_f (
 		`id` int(4) NOT NULL auto_increment,
 		`ref` varchar(20) collate utf8_spanish2_ci NOT NULL,
 		`Nivel` varchar(8) collate utf8_spanish2_ci NOT NULL default 'amd',
@@ -80,7 +80,7 @@
 		UNIQUE KEY `Usuario` (`Usuario`)
 	  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ";
 			  
-		  if(mysqli_query($db, $feedback)){
+		  if(mysqli_query($db, $Feedback)){
 						  global $table5;
 						  $table5 = "\t* OK TABLA FEEDBACK.".PHP_EOL;
 			 } else { global $table5;
@@ -117,7 +117,7 @@
 	global $table_name_c;
 	$table_name_c = "`".$_SESSION['clave']."visitasadmin`";
 
-	$visitasClient = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_c (
+	$VisitasClientesWeb = "CREATE TABLE IF NOT EXISTS `$db_name`.$table_name_c (
   `idv` int(2) NOT NULL,
   `visita` int(10) NOT NULL,
   `admin` int(10) NOT NULL,
@@ -126,7 +126,7 @@
   PRIMARY KEY  (`idv`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		
-	if(mysqli_query($db, $visitasClient)){
+	if(mysqli_query($db, $VisitasClientesWeb)){
 		global $link;
 		print ("<table align='center'>
 							".$link."
@@ -153,15 +153,15 @@
 	/************	PASAMOS LOS PARAMETROS A .LOG	*****************/
 	
 		global $data0;      $datein = date('Y-m-d H:i:s');
-		global $logdate;    $logdate = date('Y-m-d');
-		global $text;
-		$text = $text.PHP_EOL."** CONFIG INIT ".$datein;
-		$text = $text.PHP_EOL." * ".$db_name;
-		$text = $text.PHP_EOL." * ".$db_host;
-		$text = $text.PHP_EOL." * ".$db_user;
-		$text = $text.PHP_EOL." * ".$db_pass;
-		$text = $text.PHP_EOL.$dbconecterror;
-		$text = $text.PHP_EOL.$data0.$table1.$table2.$table3.$table4.$table5;
+		global $logdate;    $logdate = date('Y_m_d');
+		global $LogText;
+		$LogText = $LogText.PHP_EOL."** CONFIG INIT ".$datein;
+		$LogText = $LogText.PHP_EOL." * ".$db_name;
+		$LogText = $LogText.PHP_EOL." * ".$db_host;
+		$LogText = $LogText.PHP_EOL." * ".$db_user;
+		$LogText = $LogText.PHP_EOL." * ".$db_pass;
+		$LogText = $LogText.PHP_EOL.$dbconecterror;
+		$LogText = $LogText.PHP_EOL.$data0.$table1.$table2.$table3.$table4.$table5;
 
 		/************** FIN TABLAS DE ADMINISTRACION SISTEMA ***************/
             /************** ************** ***************/

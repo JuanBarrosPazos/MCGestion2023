@@ -1,199 +1,193 @@
 <?php 
 
-    global $db;
-    global $db_name;
+    global $db;     global $db_name;
 
-///////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 /* ADMIN */
 
-    global $admin;
-    $admin = "`".$_SESSION['clave']."admin`";
+    global $Admin;
+    $Admin = "`".$_SESSION['clave']."admin`";
 
-    global $visitasadmin;
-    $visitasadmin = "`".$_SESSION['clave']."visitasadmin`";
+    global $VisitasAdmin;
+    $VisitasAdmin = "`".$_SESSION['clave']."visitasadmin`";
 
-    global $feedback;
-    $feedback = "`".$_SESSION['clave']."feedback`";
+    global $Feedback;
+    $Feedback = "`".$_SESSION['clave']."feedback`";
 
-    global $globalfeedstock;
-    $globalfeedstock = "`".$_SESSION['clave']."globalfeedstock`";
-
-    global $globalfeedstockf;
-	$globalfeedstockf = "`".$_SESSION['clave']."globalfeedstockf`";
-
-	global $globalfeedprof;
-	$globalfeedprof = "`".$_SESSION['clave']."globalfeedprof`";
-
-
-    global $nametables;
-    $nametables = "`".$_SESSION['clave']."nametables`";
-
-///////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 /* VISITAS */
 
-    global $visitasClient;
-    $visitasClient = "`".@$_SESSION['clave']."visitascliente`";
+    global $VisitasClientesWeb;
+    $VisitasClientesWeb = "`".@$_SESSION['clave']."visitasclientesweb`";
 
-
-///////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 /* CLIENTES */
 
-    global $clientes;
-    $clientes = "`".@$_SESSION['clave']."clientes`";
+    global $ClientesWeb;
+    $ClientesWeb = "`".@$_SESSION['clave']."clientesweb`";
 
+    global $ClientesWebFeedback;
+    $ClientesWebFeedback = "`".@$_SESSION['clave']."clienteswebfeed`";
 
-    global $clientesfeedback;
-    $clientesfeedback = "`".@$_SESSION['clave']."clientesfeedback`";
+    global $producveedores;
+    $producveedores = "`".@$_SESSION['clave']."producveedores`";
 
-    global $proveedores;
-    $proveedores = "`".@$_SESSION['clave']."proveedores`";
-
-    global $proveedoresfeed;
-    $proveedoresfeed = "`".@$_SESSION['clave']."proveedoresfeed`";
-
+    global $producveedoresfeed;
+    $producveedoresfeed = "`".@$_SESSION['clave']."producveedoresfeed`";
     
-///////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 /* CAJA */
 
-    global $caja;
-    $caja = "`".@$_SESSION['clave']."caja`";
+    global $CajaShop;
+    $CajaShop = "`".@$_SESSION['clave']."cajashop`";
 
-
-///////////////
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
 /* PRODUCTO / VALOR / SECCIONES */
 
-    global $producto;
-    $producto = "`".@$_SESSION['clave']."producto`";
+    global $Productos;
+    $Productos = "`".@$_SESSION['clave']."productos`";
+
+    global $ProductosFeed;
+    $ProductosFeed = "`".@$_SESSION['clave']."productosfeed`";
 
     global $valor;
     $valor = "`".@$_SESSION['clave']."valor`";
 
+    global $Secciones;
+    $Secciones = "`".@$_SESSION['clave']."secciones`";
 
-    global $secciones;
-    $secciones = "`".@$_SESSION['clave']."secciones`";
-
-
-
-    global $secc;	
-	$secc = "`".@$_SESSION['clave']."pro".@$_POST['seccion']."`";
-
-    global $tablapro3;
-	$tablapro3 = "`".@$_SESSION['clave']."pro".@$_POST['seccion']."`";
+	global $SeccionesFeed;
+	$SeccionesFeed = "`".@$_SESSION['clave']."seccionesfeed`";
 
     /*
-        global $producto;
-        $producto = $_SESSION['clave']."pro".@$_POST['seccion'];
-        $secc = "`".$producto."`";
+    global $Stocks;
+    $Stocks = "`".$_SESSION['clave']."stocks`";
+    
+    global $StocksFeed;
+    $StocksFeed = "`".$_SESSION['clave']."stocksfeed`";
     */
- 
 
-    global $secc1;
-    $secc1 = "`".@$_SESSION['clave']."imgpro".@$_POST['seccion']."`";
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+    
+    global $NameTables;
+    $NameTables = "`".$_SESSION['clave']."nametables`";
 
-    global $secc2;
-    $secc2 = "`".@$_SESSION['clave']."imgpro".@$_SESSION['miseccion']."`";
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
-    global $secc3;
-    $secc3 = "`".@$_SESSION['clave']."imgpro".@$_POST['valor']."`";
+    global $VentasShop;     global $dyt1;
+    $VentasShop = "`".@$_SESSION['clave']."ventasshop_".$dyt1."`";
 
-	global $globalfeedseccion;
-	$globalfeedseccion = "`".@$_SESSION['clave']."globalfeedseccion`";
+	//global $modvn;
+	//$modvn = "`".@$_SESSION['clave']."ventasshop_".date('Y')."`";
 
+	//global $modvn2;
+	//$modvn2 = "`".@$_SESSION['clave']."ventasshop_".(date('Y')-1)."`";
 
-
-
-
-	global $seccx;
-	$seccx = "`".@$_SESSION['clave'].@$rowvnt['vseccion']."`";
-
-	global $seccx2;
-	$seccx2 = "`".@$_SESSION['clave'].@$_POST['seccion']."`";
-
-    global $seccx3;
-	$seccx3 = "`".@$_SESSION['clave'].@$_POST['vseccion']."`";
-
-
-
-
-    global $ventas;
-    $ventas = "`".@$_SESSION['clave']."ventas_".@$dyt1."`";
-
-	global $modvn;
-	$modvn = "`".@$_SESSION['clave']."ventas_".date('Y')."`";
-
-	global $modvn2;
-	$modvn2 = "`".@$_SESSION['clave']."ventas_".(date('Y')-1)."`";
-
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
 
     // OJO
-    global $gastos;
-	$gastos = "`".@$_SESSION['clave']."gastos_".@$dyt1."`";
+    global $GastosShop;
+	$GastosShop = "`".@$_SESSION['clave']."gastosshop_".@$dyt1."`";
 
-    global $gastos2;
-	$gastos2 = "`".@$_SESSION['clave'].'gastos_'.date('Y')."`";
+    global $GastosShop2;
+	$GastosShop2 = "`".@$_SESSION['clave']."gastosshop_".date('Y')."`";
 
-	global $gastos3;
-	$gastos3 = "`".@$_SESSION['clave'].'gastos_'.(date('Y')-1)."`";
+	global $GastosShop3;
+	$GastosShop3 = "`".@$_SESSION['clave']."gastosshop_".(date('Y')-1)."`";
+
+				   ////////////////////				   ////////////////////
+////////////////////				////////////////////				////////////////////
+				 ////////////////////				  ///////////////////
+
+    //global $secc;	
+	//$secc = "`".@$_SESSION['clave'].@$_POST['seccion']."produc"."`";
+
+    //   global $producto;
+    //    $producto = $_SESSION['clave'].@$_POST['seccion']"produc".;
+    //    $secc = "`".$producto."`";
+
+    //global $secc1;
+    //$secc1 = "`".@$_SESSION['clave'].@$_POST['seccion']."producimg"."`";
+
+    //global $secc2;
+    //$secc2 = "`".@$_SESSION['clave'].@$_SESSION['miseccion']."producimg"."`";
+
+    //global $secc3;
+    //$secc3 = "`".@$_SESSION['clave'].@$_POST['valor']."producimg"."`";
+
+	//global $seccx;
+	//$seccx = "`".@$_SESSION['clave'].@$rowvnt['vseccion']."produc"."`";
+
+	//global $seccx2;
+	//$seccx2 = "`".@$_SESSION['clave'].@$_POST['seccion']."produc"."`";
+
+    //global $seccx3;
+	//$seccx3 = "`".@$_SESSION['clave'].@$_POST['vseccion']."produc"."`";
+
+    // global $tablaproduc;
+	// $tablaproduc = "`".@$_SESSION['clave'].@$_POST['vseccion']."produc"."`";
+
+    // global $tablaproduc2;
+	// $tablaproduc2 = "`".@$_SESSION['clave'].@$rowvnt['vseccion']."produc"."`";
+
+
+    // global $tablafeedproduc;
+	// $tablafeedproduc = "`".@$_SESSION['clave'].@$rowvnt['vseccion']."producfeed"."`";
+
+	// global $tablafeedproduc2;
+	// $tablafeedproduc2 = "`".@$_SESSION['clave'].@$_POST['seccion']."producfeed"."`";
+	// $tablafeedproduc2 = $tablafeedproduc2;
+
+    // global $tablafeedproduc3;
+	// $tablafeedproduc3 = "`".@$_SESSION['clave'].@$_POST['vseccion']."producfeed"."`";
     
-    //
+    //global $sstock;
+	//$sstock = "`".@$_SESSION['clave'].@$rowrc['vseccion']."produc"."`";
 
-    global $tablapro;
-	$tablapro = "`".@$_SESSION['clave']."pro".@$_POST['vseccion']."`";
+	//global $Stocks;
+	//$Stocks = "`".@$_SESSION['clave'].@$_POST['vseccion']."stock"."`";
 
-    global $tablapro2;
-	$tablapro2 = "`".@$_SESSION['clave']."pro".@$rowvnt['vseccion']."`";
+	//global $tablastock2;
+	//$tablastock2 = "`".@$_SESSION['clave'].@$rowvnt['vseccion']."stock"."`";
 
-
-    global $tablafeedpro;
-	$tablafeedpro = "`".@$_SESSION['clave']."feedpro".@$rowvnt['vseccion']."`";
-
-	global $tablafeedpro2;
-	$tablafeedpro2 = "`".@$_SESSION['clave']."feedpro".@$_POST['seccion']."`";
-	$tablafeedpro2 = $tablafeedpro2;
-
-    global $tablafeedpro3;
-	$tablafeedpro3 = "`".@$_SESSION['clave']."feedpro".@$_POST['vseccion']."`";
-
-
-
-
-    global $sstock;
-	$sstock = "`".@$_SESSION['clave']."pro".@$rowrc['vseccion']."`";
-
-	global $tablastock;
-	$tablastock = "`".@$_SESSION['clave']."stock".@$_POST['vseccion']."`";
-
-	global $tablastock2;
-	$tablastock2 = "`".@$_SESSION['clave']."stock".@$rowvnt['vseccion']."`";
-
-    global $StockValor;
-    $StockValor = "`".@$_SESSION['clave']."stock".@$_POST['valor']."`";
-
+	//global $SeccionValor; 
+    //global $StockValor;
+    //$StockValor = "`".@$_SESSION['clave'].$SeccionValor."stock"."`";
    
-	global $tablastock3;
-	$tablastock3 = "`".@$_SESSION['clave']."stock".@$_POST['seccion']."`";
+	//global $tablastock3;
+	//$tablastock3 = "`".@$_SESSION['clave'].@$_POST['seccion']."stock"."`";
 
-    global $feedtable;
-    $feedtable = "`".@$_SESSION['clave']."feed".@$_POST['seccion']."`";
+    //global $StocksFeed;
+    //$StocksFeed = "`".@$_SESSION['clave'].@$_POST['seccion']."feedstock"."`";
 
-    global $feedtable3;
-	$feedtable3 = "`".@$_SESSION['clave']."feed".@$_POST['valor']."`";
+    //global $feedtable3;
+	//$feedtable3 = "`".@$_SESSION['clave'].$SeccionValor."stockfeed"."`";
 
-    global $feedtable2;
-	$feedtable2 = "`".@$_SESSION['clave']."feedpro".@$_POST['valor']."`";
+    //global $feedtable2;
+	//$feedtable2 = "`".@$_SESSION['clave'].@$_POST['valor']."feedproduc"."`";
 
-    global $feedtable2b;
-	$feedtable2b ="`".@$_SESSION['clave']."pro".@$_POST['valor']."`";
-
-
-
-///////////////
-
-
+    //global $feedtable2b;
+	//$feedtable2b ="`".@$_SESSION['clave'].@$_POST['valor']."produc"."`";
 
 ?>

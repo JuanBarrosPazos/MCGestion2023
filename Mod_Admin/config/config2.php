@@ -388,7 +388,7 @@ function show_form($errors=[]){
 				// ESCRIBE ERRORES EN INI_LOG
 				global $text;
 				$text = $errors[$a];
-				$logdate = date('Y-m-d');
+				$logdate = date('Y_m_d');
 				$logtext = "\t ** ".$text.PHP_EOL;
 				$filename = "logs/ini_log_".$logdate.".log";
 				$log = fopen($filename, 'ab+');
@@ -439,7 +439,7 @@ function ini_log(){
 
 	global $text;
 
-    $logdate = date('Y-m-d');
+    $logdate = date('Y_m_d');
 
     $logtext = "** ".$ActionTime.PHP_EOL."\t ** ".$text.PHP_EOL;
     $filename = "logs/ini_log_".$logdate.".log";

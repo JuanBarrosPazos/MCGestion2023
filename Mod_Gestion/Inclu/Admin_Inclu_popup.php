@@ -15,7 +15,7 @@
 <meta name="audience" content="All" />
 
 <title>Juan Barros Pazos</title>
-<link href="../Css/Descargas.css" rel="stylesheet" type="text/css" />
+<link href="../Css/gestion.css" rel="stylesheet" type="text/css" />
 
 
 <script src="../MenuVertical/SpryMenuBar.js" type="text/javascript"></script>
