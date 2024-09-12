@@ -2,12 +2,12 @@
 ## * DESCRIPCION GENERAL *
 ### GESTOR DE STOCK, VENTAS, ADMINISTRADORES Y CLIENTES.
 - Está aplicación implementa tres modulos.
-Mod_Admin para la gestión de administradores en sus distintos niveles de acceso.
-Mod_Conta para la gestión de ingresos, gastos, clientes, proveedores y balances.
-Mod_Gestion para la gestión del flujo de caja y almacén.
-Enfocada actualmente al servicio en hostelería, se podría implementar en cualquier sector.
-Podríamos crear secciones, productos, fechas de perecederos, modificar los stocks y los precios de los productos, su iva, etc...
-Realizar una comanda en una mesa o zona del local, modificarla, mover la comanda a otra zona del local, has el momento de finalizar la facturación.
+- Mod_Admin para la gestión de administradores en sus distintos niveles de acceso.
+- Mod_Conta para la gestión de ingresos, gastos, clientes, proveedores y balances.
+- Mod_Gestion para la gestión del flujo de caja y almacén.
+- Enfocada actualmente al servicio en hostelería, se podría implementar en cualquier sector.
+- Podríamos crear secciones, productos, fechas de perecederos, modificar los stocks y los precios de los productos, su iva, etc...
+- Realizar una comanda en una mesa o zona del local, modificarla, mover la comanda a otra zona del local, has el momento de finalizar la facturación.
 ----
 ## CUESTIONES PENDIENTES
   - LOGS PRODUCTOS, LOGS CAJA...
