@@ -7,7 +7,7 @@
 - Mod_Gestion para la gestión del flujo de caja y almacén.
 - Enfocada actualmente al servicio en hostelería, se podría implementar en cualquier sector.
 - Podríamos crear secciones, productos, fechas de perecederos, modificar los stocks y los precios de los productos, su iva, etc...
-- Realizar una comanda en una mesa o zona del local, modificarla, mover la comanda a otra zona del local, has el momento de finalizar la facturación.
+- Realizar una comanda en una mesa o zona del local, modificarla, mover la comanda a otra zona del local, hasta el momento de finalizar la facturación.
 ----
 ## CUESTIONES PENDIENTES
   - LOGS PRODUCTOS, LOGS CAJA...
