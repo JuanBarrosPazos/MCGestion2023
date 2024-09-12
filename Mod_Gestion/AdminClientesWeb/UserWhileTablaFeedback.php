@@ -83,73 +83,73 @@
 
 						<td colspan=16 align='right' class='BorderInfDch'>
 				<form name='ver' action='Feedback_ClienteVer02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=500px,height=610px')\" style='display: inline-block;'>
-						<input name='id' type='hidden' value='".$rowb['id']."' />
-						<input name='ref' type='hidden' value='".$rowb['ref']."' />
-						<input name='Nivel' type='hidden' value='".$rowb['Nivel']."' />
-						<input name='Nombre' type='hidden' value='".$rowb['Nombre']."' />
-						<input name='Apellidos' type='hidden' value='".$rowb['Apellidos']."' />
-						<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-						<input name='doc' type='hidden' value='".$rowb['doc']."' />
-						<input name='dni' type='hidden' value='".$rowb['dni']."' />
-						<input name='ldni' type='hidden' value='".$rowb['ldni']."' />
-						<input name='Email' type='hidden' value='".$rowb['Email']."' />
-						<input name='Usuario' type='hidden' value='".$rowb['Usuario']."' />
-						<input name='Password' type='hidden' value='".$rowb['Password']."' />
-						<input name='Direccion' type='hidden' value='".$rowb['Direccion']."' />
-						<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-						<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
-						<input name='lastin' type='hidden' value='".$rowb['lastin']."' />
-						<input name='lastout' type='hidden' value='".$rowb['lastout']."' />					
-						<input name='visitadmin' type='hidden' value='".$rowb['visitadmin']."' />					
-						<input name='borrado' type='hidden' value='".$rowb['borrado']."' />
+						<input type='hidden' name='id' value='".$rowb['id']."' />
+						<input type='hidden' name='ref' value='".$rowb['ref']."' />
+						<input type='hidden' name='Nivel' value='".$rowb['Nivel']."' />
+						<input type='hidden' name='Nombre' value='".$rowb['Nombre']."' />
+						<input type='hidden' name='Apellidos' value='".$rowb['Apellidos']."' />
+						<input type='hidden' name='myimg' value='".$rowb['myimg']."' />
+						<input type='hidden' name='doc' value='".$rowb['doc']."' />
+						<input type='hidden' name='dni' value='".$rowb['dni']."' />
+						<input type='hidden' name='ldni' value='".$rowb['ldni']."' />
+						<input type='hidden' name='Email' value='".$rowb['Email']."' />
+						<input type='hidden' name='Usuario' value='".$rowb['Usuario']."' />
+						<input type='hidden' name='Password' value='".$rowb['Password']."' />
+						<input type='hidden' name='Direccion' value='".$rowb['Direccion']."' />
+						<input type='hidden' name='Tlf1' value='".$rowb['Tlf1']."' />
+						<input type='hidden' name='Tlf2' value='".$rowb['Tlf2']."' />
+						<input type='hidden' name='lastin' value='".$rowb['lastin']."' />
+						<input type='hidden' name='lastout' value='".$rowb['lastout']."' />					
+						<input type='hidden' name='visitadmin' value='".$rowb['visitadmin']."' />					
+						<input type='hidden' name='borrado' value='".$rowb['borrado']."' />
 								<input type='submit' value='VER DETALLES' />
 								<input type='hidden' name='oculto2' value=1 />
 				</form>
 
 				<form name='modifica' action='FeedbackClienteRecuperar.php' method='POST' style='display: inline-block;'>
-						<input name='id' type='hidden' value='".$rowb['id']."' />
-						<input name='ref' type='hidden' value='".$rowb['ref']."' />
-						<input name='Nivel' type='hidden' value='".$rowb['Nivel']."' />
-						<input name='Nombre' type='hidden' value='".$rowb['Nombre']."' />
-						<input name='Apellidos' type='hidden' value='".$rowb['Apellidos']."' />
-						<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-						<input name='doc' type='hidden' value='".$rowb['doc']."' />
-						<input name='dni' type='hidden' value='".$rowb['dni']."' />
-						<input name='ldni' type='hidden' value='".$rowb['ldni']."' />
-						<input name='Email' type='hidden' value='".$rowb['Email']."' />
-						<input name='Usuario' type='hidden' value='".$rowb['Usuario']."' />
-						<input name='Password' type='hidden' value='".$rowb['Password']."' />
-						<input name='Direccion' type='hidden' value='".$rowb['Direccion']."' />
-						<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-						<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
-						<input name='lastin' type='hidden' value='".$rowb['lastin']."' />
-						<input name='lastout' type='hidden' value='".$rowb['lastout']."' />					
-						<input name='visitadmin' type='hidden' value='".$rowb['visitadmin']."' />
-						<input name='borrado' type='hidden' value='".$rowb['borrado']."' />									
+						<input type='hidden' name='id' value='".$rowb['id']."' />
+						<input type='hidden' name='ref' value='".$rowb['ref']."' />
+						<input type='hidden' name='Nivel' value='".$rowb['Nivel']."' />
+						<input type='hidden' name='Nombre' value='".$rowb['Nombre']."' />
+						<input type='hidden' name='Apellidos' value='".$rowb['Apellidos']."' />
+						<input type='hidden' name='myimg' value='".$rowb['myimg']."' />
+						<input type='hidden' name='doc' value='".$rowb['doc']."' />
+						<input type='hidden' name='dni' value='".$rowb['dni']."' />
+						<input type='hidden' name='ldni' value='".$rowb['ldni']."' />
+						<input type='hidden' name='Email' value='".$rowb['Email']."' />
+						<input type='hidden' name='Usuario' value='".$rowb['Usuario']."' />
+						<input type='hidden' name='Password' value='".$rowb['Password']."' />
+						<input type='hidden' name='Direccion' value='".$rowb['Direccion']."' />
+						<input type='hidden' name='Tlf1' value='".$rowb['Tlf1']."' />
+						<input type='hidden' name='Tlf2' value='".$rowb['Tlf2']."' />
+						<input type='hidden' name='lastin' value='".$rowb['lastin']."' />
+						<input type='hidden' name='lastout' value='".$rowb['lastout']."' />					
+						<input type='hidden' name='visitadmin' value='".$rowb['visitadmin']."' />
+						<input type='hidden' name='borrado' value='".$rowb['borrado']."' />									
 								<input type='submit' value='RECUPERAR DATOS USUARIO' />
 								<input type='hidden' name='oculto2' value=1 />
 				</form>
 
 				<form name='modifica' action='Feedback_ClienteBorrar.php' method='POST' style='display: inline-block;'>
-						<input name='id' type='hidden' value='".$rowb['id']."' />
-						<input name='ref' type='hidden' value='".$rowb['ref']."' />
-						<input name='Nivel' type='hidden' value='".$rowb['Nivel']."' />
-						<input name='Nombre' type='hidden' value='".$rowb['Nombre']."' />
-						<input name='Apellidos' type='hidden' value='".$rowb['Apellidos']."' />
-						<input name='myimg' type='hidden' value='".$rowb['myimg']."' />
-						<input name='doc' type='hidden' value='".$rowb['doc']."' />
-						<input name='dni' type='hidden' value='".$rowb['dni']."' />
-						<input name='ldni' type='hidden' value='".$rowb['ldni']."' />
-						<input name='Email' type='hidden' value='".$rowb['Email']."' />
-						<input name='Usuario' type='hidden' value='".$rowb['Usuario']."' />
-						<input name='Password' type='hidden' value='".$rowb['Password']."' />
-						<input name='Direccion' type='hidden' value='".$rowb['Direccion']."' />
-						<input name='Tlf1' type='hidden' value='".$rowb['Tlf1']."' />
-						<input name='Tlf2' type='hidden' value='".$rowb['Tlf2']."' />
-						<input name='lastin' type='hidden' value='".$rowb['lastin']."' />
-						<input name='lastout' type='hidden' value='".$rowb['lastout']."' />					
-						<input name='visitadmin' type='hidden' value='".$rowb['visitadmin']."' />
-						<input name='borrado' type='hidden' value='".$rowb['borrado']."' />											
+						<input type='hidden' name='id' value='".$rowb['id']."' />
+						<input type='hidden' name='ref' value='".$rowb['ref']."' />
+						<input type='hidden' name='Nivel' value='".$rowb['Nivel']."' />
+						<input type='hidden' name='Nombre' value='".$rowb['Nombre']."' />
+						<input type='hidden' name='Apellidos' value='".$rowb['Apellidos']."' />
+						<input type='hidden' name='myimg' value='".$rowb['myimg']."' />
+						<input type='hidden' name='doc' value='".$rowb['doc']."' />
+						<input type='hidden' name='dni' value='".$rowb['dni']."' />
+						<input type='hidden'  name='ldni'value='".$rowb['ldni']."' />
+						<input type='hidden' name='Email' value='".$rowb['Email']."' />
+						<input type='hidden' name='Usuario' value='".$rowb['Usuario']."' />
+						<input type='hidden' name='Password' value='".$rowb['Password']."' />
+						<input type='hidden' name='Direccion' value='".$rowb['Direccion']."' />
+						<input type='hidden' name='Tlf1' value='".$rowb['Tlf1']."' />
+						<input type='hidden' name='Tlf2' value='".$rowb['Tlf2']."' />
+						<input type='hidden' name='lastin' value='".$rowb['lastin']."' />
+						<input type='hidden' name='lastout' value='".$rowb['lastout']."' />					
+						<input type='hidden' name='visitadmin' value='".$rowb['visitadmin']."' />
+						<input type='hidden' name='borrado' value='".$rowb['borrado']."' />											
 								<input type='submit' value='BORRAR FEEDBACK USUARIO' />
 								<input type='hidden' name='oculto2' value=1 />
 				</form>

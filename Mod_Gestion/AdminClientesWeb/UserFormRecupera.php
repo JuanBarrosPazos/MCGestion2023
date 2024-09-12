@@ -27,14 +27,14 @@
 				</th>
 	
 	<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]'>
-		<input name='id' type='hidden' value='".$defaults['id']."' />					
-		<input name='ref' type='hidden' value='".$defaults['ref']."' />	
+		<input type='hidden' name='id' value='".$defaults['id']."' />					
+		<input type='hidden' name='ref' value='".$defaults['ref']."' />	
 		<input type='hidden' name='Nombre'value='".$defaults['Nombre']."' />
 		<input type='hidden' name='Apellidos' value='".$defaults['Apellidos']."' />
-		<input name='myimg' type='hidden' value='".$defaults['myimg']."' />
-		<input name='lastin' type='hidden' value='".$defaults['lastin']."' />					
-		<input name='lastout' type='hidden' value='".$defaults['lastout']."' />					
-		<input name='visitadmin' type='hidden' value='".$defaults['visitadmin']."' />					
+		<input type='hidden' name='myimg' value='".$defaults['myimg']."' />
+		<input type='hidden' name='lastin' value='".$defaults['lastin']."' />					
+		<input type='hidden' name='lastout' value='".$defaults['lastout']."' />					
+		<input type='hidden' name='visitadmin' value='".$defaults['visitadmin']."' />					
 		<input type='hidden' name='doc' value='".$defaults['doc']."' />
 		<input type='hidden' name='dni' value='".$defaults['dni']."' />
 		<input type='hidden' name='ldni' value='".$defaults['ldni']."' />

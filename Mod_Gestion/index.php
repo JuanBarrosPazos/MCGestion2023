@@ -385,6 +385,11 @@ function show_form($errors=[]){
 			<table align='center' style=\"margin-top:2px; margin-bottom:8px\" >
 				<tr>
 					<th colspan=2 style='width:100%; vertical-align:bottom; text-align:right;'>
+		<form name='boton' action='AdminClientesWeb/ClavesPerdidas.php' method='post' style='display: inline-block; float:left;' >
+			<button type='submit' title='NO RECUERDO MIS CLAVES' class='botonazul imgButIco CandadoBlack'>
+			</button>
+				<input type='hidden' name='volver' value=1 />
+		</form>
 		<form name='boton' action='AdminClientesWeb/ClienteCrear.php' method='post' style='display: inline-block;' >
 			<button type='submit' title='CREAR NUEVO CLIENTE' class='botonazul imgButIco PersonAddBlack'>
 			</button>

@@ -422,20 +422,6 @@ img { border-radius: 0.8em; }
 }
 
 
-.CancelBlack{
-	background-image: url(../Images/BotonIcos/cancel_black.png);
-}
-.CancelGrey{
-	background-image: url(../Images/BotonIcos/cancel_grey.png);
-}
-.CancelWhite{
-	background-image: url(../Images/BotonIcos/cancel_white.png);
-}
-.CancelBlack:hover, .CancelGrey:hover, .CancelWhite:hover{
-	background-image: url(../Images/BotonIcos/cancel_grey.png);
-}
-
-
 .CachedBlack{
 	background-image: url(../Images/BotonIcos/cached_black.png);
 }
@@ -447,6 +433,20 @@ img { border-radius: 0.8em; }
 }
 .CachedBlack:hover, .CachedGrey:hover, .CachedWhite:hover{
 	background-image: url(../Images/BotonIcos/cached_grey.png);
+}
+
+
+.CandadoBlack{ 
+	background-image: url(../Images/BotonIcos/candado_black.png);
+}
+.CandadoGrey{
+	background-image: url(../Images/BotonIcos/candado_grey.png);
+}
+.CandadoWhite{
+	background-image: url(../Images/BotonIcos/candado_white.png);
+}
+.CandadoBlack:hover, .CandadoGrey:hover, .CandadoWhite:hover{
+	background-image: url(../Images/BotonIcos/candado_grey.png);
 }
 
 
@@ -534,6 +534,20 @@ img { border-radius: 0.8em; }
 }
 
 
+.HomeBlack{
+	background-image: url(../Images/BotonIcos/home_black.png);
+}
+.HomeGrey{
+	background-image: url(../Images/BotonIcos/home_grey.png);
+}
+.HomeWhite{
+	background-image: url(../Images/BotonIcos/home_white.png);
+}
+.HomeBlack:hover, .HomeGrey:hover, .HomeWhite:hover{
+	background-image: url(../Images/BotonIcos/home_grey.png);
+}
+
+
 .InfoBlack{
 	background-image: url(../Images/BotonIcos/info_black.png);
 }
@@ -559,6 +573,20 @@ img { border-radius: 0.8em; }
 }
 .InicioBlack:hover, .InicioGrey:hover, .InicioWhite:hover{
 	background-image: url(../Images/BotonIcos/inicio_grey.png);
+}
+
+
+.MailBlack{
+	background-image: url(../Images/BotonIcos/mail_black.png);
+}
+.MailGrey{
+	background-image: url(../Images/BotonIcos/mail_grey.png);
+}
+.MailWhite{
+	background-image: url(../Images/BotonIcos/mail_white.png);
+}
+.MailBlack:hover, .MMailGrey:hover, .MailWhite:hover{
+	background-image: url(../Images/BotonIcos/mail_grey.png);
 }
 
 

@@ -87,7 +87,7 @@
                     <tr>
                         <td style='text-align:right;'>MAIL <font color='#F1BD2D'>*</font></td>
                         <td>
-            <input type='text' name='Email' size=40 maxlength=50 placeholder='MI EMAIL EN MINUSCULAS' value='".$defaults['Email']."' required />
+            <input type='email' name='Email' size=40 maxlength=50 placeholder='MI EMAIL EN MINUSCULAS' value='".$defaults['Email']."' required />
                         </td>
                     </tr>	
                     <tr>

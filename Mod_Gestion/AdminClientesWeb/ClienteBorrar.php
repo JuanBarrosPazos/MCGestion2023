@@ -54,7 +54,6 @@ function process_form(){
 	require '../Inclu/AutoRedirUrl.php';
 	global $Redir;      print ($Redir);
 
-
 	} // FIN function process_form()
 
 				   ////////////////////				   ////////////////////

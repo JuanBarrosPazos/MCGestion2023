@@ -1573,30 +1573,30 @@ function subtotal(){
 			if($RowClientesWebClientRef2['doc']=='local'){ $CssHeight = 'height=290px'; }else{ $CssHeight = 'height=530px'; }
 
 				print("<form name='data_client' action='ClienteVer02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=320px,".$CssHeight."')\" style='display:inline-block;'>
-					<input name='id' type='hidden' value='".$RowClientesWebClientRef2['id']."' />
-					<input name='Nivel' type='hidden' value='".$RowClientesWebClientRef2['Nivel']."' />
-					<input name='ref' type='hidden' value='".$RowClientesWebClientRef2['ref']."' />
-					<input name='Nombre' type='hidden' value='".$RowClientesWebClientRef2['Nombre']."' />
-					<input name='Apellidos' type='hidden' value='".$RowClientesWebClientRef2['Apellidos']."' />
-					<input name='myimg' type='hidden' value='".$RowClientesWebClientRef2['myimg']."' />
-					<input name='doc' type='hidden' value='".$RowClientesWebClientRef2['doc']."' />
-					<input name='dni' type='hidden' value='".$RowClientesWebClientRef2['dni']."' />
-					<input name='ldni' type='hidden' value='".$RowClientesWebClientRef2['ldni']."' />
-					<input name='Email' type='hidden' value='".$RowClientesWebClientRef2['Email']."' />
-					<input name='Usuario' type='hidden' value='".$RowClientesWebClientRef2['Usuario']."' />
-					<input name='Password' type='hidden' value='".$RowClientesWebClientRef2['Password']."' />
-					<input name='Direccion' type='hidden' value='".$RowClientesWebClientRef2['Direccion']."' />
-					<input name='Tlf1' type='hidden' value='".$RowClientesWebClientRef2['Tlf1']."' />
-					<input name='Tlf2' type='hidden' value='".$RowClientesWebClientRef2['Tlf2']."' />
-					<input name='lastin' type='hidden' value='".$RowClientesWebClientRef2['lastin']."' />
-					<input name='lastout' type='hidden' value='".$RowClientesWebClientRef2['lastout']."' />
-					<input name='visitadmin' type='hidden' value='".$RowClientesWebClientRef2['visitadmin']."' />
+					<input type='hidden' name='id' value='".$RowClientesWebClientRef2['id']."' />
+					<input type='hidden' name='Nivel' value='".$RowClientesWebClientRef2['Nivel']."' />
+					<input type='hidden' name='ref' value='".$RowClientesWebClientRef2['ref']."' />
+					<input type='hidden' name='Nombre' value='".$RowClientesWebClientRef2['Nombre']."' />
+					<input type='hidden' name='Apellidos' value='".$RowClientesWebClientRef2['Apellidos']."' />
+					<input type='hidden' name='myimg' value='".$RowClientesWebClientRef2['myimg']."' />
+					<input type='hidden' name='doc' value='".$RowClientesWebClientRef2['doc']."' />
+					<input type='hidden' name='dni' value='".$RowClientesWebClientRef2['dni']."' />
+					<input type='hidden' name='ldni' value='".$RowClientesWebClientRef2['ldni']."' />
+					<input type='hidden' name='Email' value='".$RowClientesWebClientRef2['Email']."' />
+					<input type='hidden' name='Usuario' value='".$RowClientesWebClientRef2['Usuario']."' />
+					<input type='hidden' name='Password' value='".$RowClientesWebClientRef2['Password']."' />
+					<input type='hidden' name='Direccion' value='".$RowClientesWebClientRef2['Direccion']."' />
+					<input type='hidden' name='Tlf1' value='".$RowClientesWebClientRef2['Tlf1']."' />
+					<input type='hidden' name='Tlf2' value='".$RowClientesWebClientRef2['Tlf2']."' />
+					<input type='hidden' name='lastin' value='".$RowClientesWebClientRef2['lastin']."' />
+					<input type='hidden' name='lastout' value='".$RowClientesWebClientRef2['lastout']."' />
+					<input type='hidden' name='visitadmin' value='".$RowClientesWebClientRef2['visitadmin']."' />
 			<button type='submit' title='DATOS CLIENTE' class='botonlila imgButIco InfoBlack'></button>
 						<input type='hidden' name='data_client' value=1 />
 				</form>");
 		} // FIN elseif($ClientRef != '')
 		print("<form name='coment_client' action='CompraComent.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=500px,height=320px')\" style='display:inline-block;'>
-				<input name='oper' type='hidden' value='".$RefOperShop."' />
+				<input type='hidden' name='oper' value='".$RefOperShop."' />
 		<button type='submit' title='COMENTARIOS COMPRA' class='botonazul imgButIco DatosBlack'></button>
 				<input type='hidden' name='coment_client' value=1 />
 			</form>
