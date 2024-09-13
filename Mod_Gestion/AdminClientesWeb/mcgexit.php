@@ -51,7 +51,7 @@ function admin_salida(){
 	if(mysqli_query($db, $sqladout)){
 				} else {
 				print("</br>
-				<font color='#FF0000'>
+				<font color='#F1BD2D'>
 		* FATAL ERROR funcion admin_entrada(): </font></br> ".mysqli_error($db))."
 				</br>";
 					}

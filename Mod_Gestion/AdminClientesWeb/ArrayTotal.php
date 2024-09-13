@@ -51,7 +51,7 @@ if(($ArrayAdmin == 1)||($ArrayCliente == 1)){
 						'NIFepenr' => 'NIF Establecimientos Permanentes Entidades no Residentes',
 						*/
 					);
-    } elseif($ArrayProveedor == 1) {
+    }elseif($ArrayProveedor == 1) {
         	$doctype = array (	'DNI' => 'DNI/NIF Espa&ntilde;oles',
 						'NIE' => 'NIE/NIF Extranjeros',
 						'NIFespecial' => 'NIF Persona F&iacute;sica Especial',

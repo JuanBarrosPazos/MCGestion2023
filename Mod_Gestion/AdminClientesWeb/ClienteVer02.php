@@ -29,7 +29,13 @@ function process_form(){
 	
 	global $nombre;		$nombre = $_POST['Nombre'];
 	global $apellido;	$apellido = $_POST['Apellidos'];
-	
+	global $Borrado;
+	if(strlen(trim($_POST['borrado']))>0){
+			$Borrado = "<tr>
+							<td style='text-align:right;'>BORRADO </td>
+							<td colspan='2'>".$_POST['borrado']."</td>
+						</tr>";
+	}else{ $Borrado = ""; }
 	print("<table align='center' style='font-size:1.0em !important;'>
 				<tr>
 					<th colspan=3 style='color:#F1BD2D;'>
@@ -114,6 +120,7 @@ function process_form(){
 					<td style='text-align:right;'>Nº VISITAS </td>
 					<td colspan='2'>".$_POST['visitadmin']."</td>
 				</tr>
+				".$Borrado."
 				<tr>
 					<td colspan=3 style='text-align:right;' >
 			<form name='closewindow' action='$_SERVER[PHP_SELF]'  onsubmit=\"window.close()\">

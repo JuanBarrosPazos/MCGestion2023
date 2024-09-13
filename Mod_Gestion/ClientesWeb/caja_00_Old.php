@@ -177,11 +177,11 @@ function pago2($errors=[]){
 													}
 		
 	if ($errors){
-		print("<font color='#FF0000'>
+		print("<font color='#F1BD2D'>
 				Solucione estos errores: </font></br>");
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
-					print("<font color='#FF0000'>* </font>".$errors [$a]."</br>");
+					print("<font color='#F1BD2D'>* </font>".$errors [$a]."</br>");
 					$RefOperShop = $_SESSION['oper'];
 					global $LogTextcarro;
 					$LogTextcarro = "	* PAGO 01 =>\t
@@ -1958,7 +1958,7 @@ function process_form($errors=[]){
 					}
 	
 	if ($errors){
-		print("<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font></br>* ".$_POST['proname'].".</br>");
+		print("<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font></br>* ".$_POST['proname'].".</br>");
 
 		if($_POST['selec_pro']){
 				$defaults = array ( 'kgcash1' => '',
@@ -1966,7 +1966,7 @@ function process_form($errors=[]){
 				}
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
-		print("<font color='#FF0000'>* </font>".$errors [$a]."</br>");
+		print("<font color='#F1BD2D'>* </font>".$errors [$a]."</br>");
 
 			$RefOperShop = $_SESSION['oper'];
 			if($_POST['producto'] == ''){$tpro = 'TODOS LOS PRODUCTOS';}
@@ -2171,10 +2171,10 @@ print ("* ".$_SESSION['modif1e'].",".$_SESSION['modif1d'].".");
 
 	if ($errors){
 			
-	print("<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font></br>* ".$_POST['proname'].".</br>");
+	print("<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font></br>* ".$_POST['proname'].".</br>");
 		
 	for($a=0; $c=count($errors), $a<$c; $a++){
-		print("<font color='#FF0000'>* </font>".$errors [$a]."</br>");
+		print("<font color='#F1BD2D'>* </font>".$errors [$a]."</br>");
 
 			///////////////////
 

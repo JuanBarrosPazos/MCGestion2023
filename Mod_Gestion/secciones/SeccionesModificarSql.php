@@ -14,7 +14,7 @@
 	if(trim($_POST['valor1'] != $_POST['valor2'])){
 		/*
 		print("Valor 1 ".$_POST['valor1']." y Valor Nuevo ".$_POST['valor2']." 
-		<font color='#FF0000'>NO SON IGUALES</font>");
+		<font color='#F1BD2D'>NO SON IGUALES</font>");
 		*/
 		
 	/*****************	MODIFICA VARIABLE DE SECCIONES	*****************/

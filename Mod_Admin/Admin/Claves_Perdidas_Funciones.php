@@ -2,55 +2,40 @@
 
  function validate_form(){
 	 
-	global $sql;
-	global $q;
-	global $row;
-	global $db;
-	global $db_name;
+	global $sql; 		global $q; 		global $row;
+	global $db; 		global $db_name;
 		
 	 $errors = array();
 		 
 	/* Validamos el campo mail. */
 	
 	if(strlen(trim($_POST['Email'])) == 0){
-		$errors [] = "Mail: <font color='#FF0000'>Este campo es obligatorio.</font>";
-		}
-	
-	elseif (strlen(trim($_POST['Email'])) < 5 ){
-		$errors [] = "Mail: <font color='#FF0000'>Escriba más de cinco carácteres.</font>";
-		}
-		
-	elseif (!preg_match('/^[^@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.*\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/',$_POST['Email'])){
-		$errors [] = "Mail: <font color='#FF0000'>Esta dirección no es válida.</font>";
-		}
+		$errors [] = "MAIL CAMPO OBLIGATORIO";
+	}elseif(strlen(trim($_POST['Email'])) < 5 ){
+		$errors [] = "MAIL MAS DE 5 CARACTERES";
+	}elseif(!preg_match('/^[^@´`\'áéíóú#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.*\s]+@([-a-z0-9]+\.)+[a-z]{2,}$/',$_POST['Email'])){
+		$errors [] = "MAIL DIRECCION NO VALIDA";
+	}
 		
 	/* Validamos el campo dni */
 	
-		if(strlen(trim($_POST['dni'])) == 0){
-		$errors [] = "Nº DNI: <font color='#FF0000'>Este campo es obligatorio.</font>";
-		}
-	
-	elseif (!preg_match('/^[\d]+$/',$_POST['dni'])){
-		$errors [] = "Nº DNI: <font color='#FF0000'>Sólo se admiten números.</font>";
-		}
-
-	elseif (strlen(trim($_POST['dni'])) < 8){
-		$errors [] = "Nº DNI: <font color='#FF0000'>Más de 7 digitos.</font>";
-		}
+	if(strlen(trim($_POST['dni'])) == 0){
+		$errors [] = "Nº DNI CAMPO OBLIGATORIO";
+	}elseif (!preg_match('/^[\d]+$/',$_POST['dni'])){
+		$errors [] = "Nº DNI SÓLO NÚMEROS";
+	}elseif (strlen(trim($_POST['dni'])) < 8){
+		$errors [] = "Nº DNI MAS DE 7 DIGITOS";
+	}
 
 	/* Validamos el campo ldni */
 	
 	if(strlen(trim($_POST['ldni'])) == 0){
-		$errors [] = "Letra DNI: <font color='#FF0000'>Este campo es obligatorio.</font>";
-		}
-	
-	elseif (!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['ldni'])){
-		$errors [] = "Letra DNI: <font color='#FF0000'>Solo texto</font>";
-		}
-
-	elseif (!preg_match('/^[^a-z]+$/',$_POST['ldni'])){
-		$errors [] = "Letra DNI: <font color='#FF0000'>Solo mayusculas</font>";
-		}
+		$errors [] = "Letra DNI CAMPO OBLIGATORIO";
+	}elseif (!preg_match('/^[^0-9@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\.\*]+$/',$_POST['ldni'])){
+		$errors [] = "Letra DNI SOLO TEXTO";
+	}elseif (!preg_match('/^[^a-z]+$/',$_POST['ldni'])){
+		$errors [] = "Letra DNI SOLO MAYUSCULAS";
+	}
 
 	/* Realizamos un condicional de validacion de campos Nombre y dni.*/
 		
@@ -66,23 +51,18 @@
 	$_SESSION['L_ldni'] = @$row['ldni'];
 
 	if(trim($_POST['Email'] != $_SESSION['L_Email'])){
-		$errors [] = "Email, Nº DNI o Letra.";
-		}
-		
-	elseif(trim($_POST['dni'] != $_SESSION['L_dni'])){
-		$errors [] = "Email, Nº DNI o Letra.";
-		} 
-		
-	elseif(trim($_POST['ldni'] != $_SESSION['L_ldni'])){
-		$errors [] = "Email, Nº DNI o Letra.";
-		} 
-	 
-	elseif (@$row['Nivel'] == 'close'){
+		$errors [] = "NO HAY DATOS";
+	}elseif(trim($_POST['dni'] != $_SESSION['L_dni'])){
+		$errors [] = "NO HAY DATOS";
+	}elseif(trim($_POST['ldni'] != $_SESSION['L_ldni'])){
+		$errors [] = "NO HAY DATOS";
+	}elseif (@$row['Nivel'] == 'close'){
 		$errors [] = "ACCESO RESTRINGIDO POR EL WEB MASTER";
-		}
+	}
 	 
 	return $errors;
- 			}
+
+}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -90,38 +70,32 @@
 
 function show_form($errors=[]){
 	
-	global $sql;
-	global $q;
-	global $row;
-	
 	if(isset($_POST['oculto2'])){
-				$defaults = array (	'Asunto' => 'SUS CLAVES DE ACCESO.',
-									'Email' => $_POST['Email'],
-									'dni' => isset($_POST['dni']),	
-									'ldni' => isset($_POST['ldni']));
-								   }
-	
-	if(isset($_POST['oculto'])){
+		$defaults = array (	'Asunto' => 'SUS CLAVES DE ACCESO',
+							'Email' => $_POST['Email'],
+							'dni' => $_POST['dni'],	
+							'ldni' => $_POST['ldni']);
+	}elseif(isset($_POST['oculto'])){
 		$defaults = $_POST;
-		} else {
-				$defaults = array (	'Asunto' => 'SUS CLAVES DE ACCESO.',
-									'Email' => '',
-									'dni' => '',
-									'ldni' => isset($_POST['ldni']));
-									}
-	
-	if ($errors){
+	}else{
+		$defaults = array (	'Asunto' => 'SUS CLAVES DE ACCESO',
+							'Email' => '',
+							'dni' => '',
+							'ldni' => '');
+	}
+
+	if($errors){
 		print("<table align='center'>
 					<tr>
 						<td style='text-align:'center'>
-							<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font><br/>
+							<font color='#FF9900'>* SOLUCIONE ESTOS ERRORES:</font><br/>
 						</td>
 					</tr>
 					<tr>
 						<td style='text-align:left'>");
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>* </font>".$errors [$a]."<br/>");
+			print("<font color='#FF9900'>* </font>".$errors [$a]."<br/>");
 			}
 		print("</td>
 				</tr>
@@ -134,59 +108,40 @@ function show_form($errors=[]){
 				</embed>");
 				}
 	
-	print("<table align='center' style=\"border:0px;margin_bottom:6px;margin-top:14px\">
+				print("<table align='center' style=\"border:0px;margin_bottom:6px;margin-top:14px\">
 
-	<form name='Perdidos' method='post' action='$_SERVER[PHP_SELF]'>
-			<tr>
-				<th colspan=2>
-		<input name='Asunto' type='hidden' value='".$defaults['Asunto']."' />".$defaults['Asunto']."
-					</th>
+				<tr>
+					<th style='color:#F1BD2D;'>".$defaults['Asunto']."</th>
 				</tr>
-
-			<tr>
-				<td>	
-					Su E Mail:
-				</td>
-				<td>
-		<input type='text' name='Email' size=30 value='".$defaults['Email']."' />
-				</td>
-			</tr>
-	
-			<tr>
-				<td>	
-					Su DNI:
-				</td>
-				<td>
-		<input type='text' name='dni' size=30 maxlength=8 value='".$defaults['dni']."' />
+				<tr>
+					<td>
+		<form name='Perdidos' method='post' action='$_SERVER[PHP_SELF]'>
+			<input name='Asunto' type='hidden' value='".$defaults['Asunto']."' />
+			<input type='email' name='Email' size=30 placeholder='MI EMAIL' value='".$defaults['Email']."' required/>
 					</td>
-			</tr>
+				</tr>
+				<tr>
+					<td>
+			<input type='text' name='dni' size=30 maxlength=8 pattern='[0-9]{8,8}' placeholder='NUM. DNI' value='".$defaults['dni']."' required/>
+						</td>
+				</tr>
+				<tr>
+					<td>
+			<input type='text' name='ldni' size=30 maxlength=1 pattern='[A-Z]{1,1}' placeholder='LETRA DNI' value='".$defaults['ldni']."' required />
+					</td>
+				</tr>
+				<tr>
+					<td align='right'>
+			<input type='submit' value='ENVIAR MIS CLAVES' class='botonverde' />
+			<input type='hidden' name='oculto' value=1 />
+		</form>	
+			<a href='../index.php' class='botonverde' style='display:inline-block; float:left;'>
+				INICIO CLIENTES
+			</a>
+					</td>
+				</tr>
+		</table>");
 	
-			<tr>
-				<td>	
-					Su Letra DNI:
-				</td>
-				<td>
-		<input type='text' name='ldni' size=30 maxlength=1 value='".$defaults['ldni']."' />
-				</td>
-			</tr>
-				
-			<tr align='center'>
-				<td colspan='2' align='right'>
-		<input type='submit' value='ENVIAR MIS CLAVES' class='botonverde' />
-		<input type='hidden' name='oculto' value=1 />
-	</form>	
-				</td>
-			</tr>
-				
-			<tr>
-				<td colspan='2' align='center'>
-					<a href='../index.php'>
-						Volver Admin Access.
-					</a>
-				</td>
-			</tr>
-	</table>"); /* Fin del print */
-
 	}	/* Fin de la función show_form(); */
 
 				   ////////////////////				   ////////////////////
@@ -434,7 +389,7 @@ function process_form(){
 			print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
 						<tr>
 							<td align='center'>
-								<font color='#FF0000'>
+								<font color='#FF9900'>
 									EL MENSAJE NO HA PODIDO ENVIARSE,
 									LO SENTIMOS MUCHO, ".$_POST['Nombre']." ".$_POST['Apellidos']."
 									MUCHAS GRACIAS.

@@ -422,6 +422,20 @@ img { border-radius: 0.8em; }
 }
 
 
+.CancelBlack{
+	background-image: url(../Images/BotonIcos/cancel_black.png);
+}
+.CancelGrey{
+	background-image: url(../Images/BotonIcos/cancel_grey.png);
+}
+.CancelWhite{
+	background-image: url(../Images/BotonIcos/cancel_white.png);
+}
+.CancelBlack:hover, .CancelGrey:hover, .CancelWhite:hover{
+	background-image: url(../Images/BotonIcos/cancel_grey.png);
+}
+
+
 .CachedBlack{
 	background-image: url(../Images/BotonIcos/cached_black.png);
 }

@@ -462,7 +462,11 @@ function show_form($errors=[]){
 		unset($_SESSION['visitadmin']);		unset($_SESSION['GestMyImg']);
 		unset($_SESSION['nclient']);
 
-		print("HA CERRADO SESION</br>");
+		print("<table align='center' style=\"border:0px\">
+				<tr>
+					<td align='center' style='color:#F1BD2D;' >HA CERRADO SESION</td>
+				</tr>
+			</table>");
 		
 	}
 	

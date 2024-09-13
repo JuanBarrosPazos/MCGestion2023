@@ -12,10 +12,10 @@
 		$accion = "ClienteCrear.php";
 		$BotonIco = "PersonAddBlack";
 		$valor = "CREAR CLIENTE";
-		$BotonFeed = "<form name='boton' action='Feedback_ClienteVer.php' method='post' style='display: inline-block;' >
+		$BotonFeed = "<form name='boton' action='FeedbackClienteVer.php' method='post' style='display: inline-block;' >
 				<button type='submit' title='GESTION FEEDBACK' class='botonazul imgButIco CachedBlack'>
 				</button>
-						<input type='hidden' name='volver' value=1 />
+						<input type='hidden' name='todo' value=1 />
 					 </form>";
 	}
 
@@ -42,7 +42,7 @@
 			<form name='boton' action='".$accion."' method='post' style='display: inline-block;' >
 				<button type='submit' title='".$valor."' class='botonazul imgButIco ".$BotonIco."'>
 				</button>
-					<input type='hidden' name='volver' value=1 />
+					<input type='hidden' name='todo' value=1 />
 			</form>
 					".$BotonFeed."
 					</th>

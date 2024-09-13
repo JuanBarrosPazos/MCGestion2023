@@ -23,6 +23,23 @@
 		$RutaClientesWeb = "";
 	}
 
+	global $KeyFeedback; 	
+	global $ActionModifRecup;	global $TituloModifRecup;	global $BotonModifRecup;	
+	global $ActionBorraUser;	global $TituloBorraUser;
+	if($KeyFeedback == 1){ 
+		$ActionModifRecup = "FeedbackClienteRecuperar.php";
+		$TituloModifRecup = "RECUPERAR DATOS USUARIO";
+		$BotonModifRecup = "RestoreBlack";
+		$ActionBorraUser = "FeedbackClienteBorrar.php";
+		$TituloBorraUser = "BORRAR FEEDBACK USUARIO";
+	}else{
+		$ActionModifRecup = "ClienteModificar.php";
+		$TituloModifRecup = "MODIFICAR DATOS";
+		$BotonModifRecup = "DatosBlack";
+		$ActionBorraUser = "ClienteBorrar.php";
+		$TituloBorraUser = "BORRAR USUARIO";
+	}
+
 	if(mysqli_num_rows($qb)== 0){
 			print ("<table align='center' style=\"border:0px\">
 						<tr>
@@ -69,28 +86,29 @@
 			require 'UserWhileTablaRow.php';
 
 			print("<input type='hidden' name='oculto2' value=1 />
-			</form>
+			</form>");
 
-			<form name='modifica_img' action='".$Ruta.$RutaClientesWeb."ClienteModificarImg.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=380px,height=480px')\" style='display: inline-block;'>
+		if($KeyFeedback == 1){ 
+		}else{
+			print("<form name='modifica_img' action='".$Ruta.$RutaClientesWeb."ClienteModificarImg.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=380px,height=480px')\" style='display: inline-block;'>
 				<button type='submit' title='MODIFICAR IMAGEN' class='botonlila imgButIco FotoBlack'>
 				</button>");
-
 			require 'UserWhileTablaRow.php';
-				
 			print("<input type='hidden' name='oculto2' value=1 />
-			</form>
+			</form>");
+		}
 
-			<form name='modifica' action='".$Ruta.$RutaClientesWeb."ClienteModificar.php' method='POST' style='display: inline-block;'>
-				<button type='submit' title='MODIFICAR DATOS' class='botonlila imgButIco DatosBlack'>
+			print("<form name='modifica' action='".$Ruta.$RutaClientesWeb.$ActionModifRecup."' method='POST' style='display: inline-block;'>
+				<button type='submit' title='".$TituloModifRecup."' class='botonlila imgButIco ".$BotonModifRecup."'>
 				</button>");
 
 			require 'UserWhileTablaRow.php';
 				
 			print("<input type='hidden' name='oculto2' value=1 />
 			</form>
-
-			<form name='modifica' action='".$Ruta.$RutaClientesWeb."ClienteBorrar.php' method='POST' style='display: inline-block;'>
-				<button type='submit' title='BORRAR USUARIO' class='botonrojo imgButIco DeleteBlack'>
+			
+			<form name='modifica' action='".$Ruta.$RutaClientesWeb.$ActionBorraUser."' method='POST' style='display: inline-block; margin-left: -0.2em'>
+				<button type='submit' title='".$ActionBorraUser."' class='botonrojo imgButIco DeleteBlack'>
 				</button>");
 
 			require 'UserWhileTablaRow.php';

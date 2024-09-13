@@ -126,7 +126,7 @@ function process_form(){
 	require "../Admin/UserTablaCrea.php";	
 
 	if( file_exists( '../Admin/img_admin/'.$destination_file) ){
-		print("<br><font color='#FF0000'>**</font> El archivo ".$destination_file." ya existe, seleccione otra imagen.</br>");
+		print("<br><font color='#F1BD2D'>**</font> El archivo ".$destination_file." ya existe, seleccione otra imagen.</br>");
 		unlink($destination_file);
 		show_form();
 	} else {
@@ -159,7 +159,7 @@ function process_form(){
 		fwrite($log, $LogText);
 		fclose($log);
 
-	} else { print("</br><font color='#FF0000'>
+	} else { print("</br><font color='#F1BD2D'>
 					* MODIFIQUE L.177 </font></br> ".mysqli_error($db))."</br>";
 				show_form ();
 					}
@@ -195,10 +195,10 @@ function show_form($errors=[]){
 								   }
 
    if ($errors){
-		print("<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font></br>");
+		print("<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font></br>");
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>**</font>  ".$errors[$a]."</br>");
+			print("<font color='#F1BD2D'>**</font>  ".$errors[$a]."</br>");
 			}
 		}
 

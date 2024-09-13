@@ -118,7 +118,7 @@ function process_form(){
 		require '../Inclu/AutoWindowClose.php';
 		global $Redir; 		print ($Redir);
 
-	}else{ print("<font color='#FF0000'>
+	}else{ print("<font color='#F1BD2D'>
 					* MODIFIQUE L.116 </font>&nbsp;&nbsp;&nbsp;".mysqli_error($db))."</br>";
 					show_form ();
 	}

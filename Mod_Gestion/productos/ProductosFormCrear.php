@@ -20,13 +20,13 @@
 		<input type='hidden' name='kgbad1' value='".$defaults['kgbad1']."' />
 		<input type='hidden' name='kgbad2' value='".$defaults['kgbad2']."' />
 			<tr>
-				<td style='text-align:right;'>NOMBRE <font color='#FF0000'>*</font></td>
+				<td style='text-align:right;'>NOMBRE <font color='#F1BD2D'>*</font></td>
 				<td>
 		<input type='text' name='nombre' size=38 maxlength=14 value='".$defaults['nombre']."' pattern='[A-Z0-9\s]{5,14}' placeholder='MAYUSCULAS O NUMEROS MINIMO 5' required />
 				</td>
 			</tr>
 			<tr>
-				<td style='text-align:right;'>REFERENCIA <font color='#FF0000'>*</font></td>
+				<td style='text-align:right;'>REFERENCIA <font color='#F1BD2D'>*</font></td>
 				<td>
 		<input type='text' name='ref' size=38 maxlength=14 value='".$defaults['ref']."' pattern='[a-z0-9]{7,14}' placeholder='MINUSCULAS O _ \" SIN ESPACIOS\" MIN. 8' required />
 				</td>
@@ -36,7 +36,7 @@
 				<td>".$semana."</td>
 			</tr>
 			<tr>
-				<td style='text-align:right;'>UNIT ENTRADA<font color='#FF0000'>*</font></td>
+				<td style='text-align:right;'>UNIT ENTRADA<font color='#F1BD2D'>*</font></td>
 				<td>
 		<input name='kgin1' type='number' size='5' maxlength='2' value='".$defaults['kgin1']."' style='text-align:right;' />
 		,
@@ -44,7 +44,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td style='text-align:right;'>€ PVP SIN IVA<font color='#FF0000'>*</font></td>
+				<td style='text-align:right;'>€ PVP SIN IVA<font color='#F1BD2D'>*</font></td>
 				<td>
 		<input name='pvp1' type='number' size='5' maxlength='5' value='".$defaults['pvp1']."' style='text-align:right;' />
 		,
@@ -53,7 +53,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td style='text-align:right;'>TIPO DE IVA<font color='#FF0000'>*</font></td>
+				<td style='text-align:right;'>TIPO DE IVA<font color='#F1BD2D'>*</font></td>
 				<td>
 			<select name='iva'>");
 				foreach($iva as $optioniva => $labeliva){

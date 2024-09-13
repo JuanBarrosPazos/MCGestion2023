@@ -26,7 +26,13 @@
 					<input type='hidden' name='lastin' value='".$_POST['lastin']."' />					
 					<input type='hidden' name='lastout' value='".$_POST['lastout']."' />					
 					<input type='hidden' name='visitadmin' value='".$_POST['visitadmin']."' />";
+		global $Feedback;
+		if($Feedback == 1){
 			$Action = "ClienteVer.php";
+		}else{
+			$Action = "ClienteVer.php";
+		}
+			
 	}else{ $PostValues = "";	$Action = "../index.php"; }
 
 	// CONMUTA EL VALOR DE LA REFERENCIA CLIENTE...
@@ -65,13 +71,13 @@
 	}else{
 		$ModifImgBotonIni = "<tr>
 								<th colspan=3 style='text-align:right;'>".$BotonCreaCliente."
-				<form name='boton' action='".$Action."' method='post' style='display: inline-block;' >
-                    <button type='submit' title='INICIO CLIENTES' class='botonverde imgButIco InicioBlack'>
+				<form name='boton' action='ClienteVer.php' method='post' style='display: inline-block;' >
+                    <button type='submit' title='INICIO CLIENTES' class='botonverde imgButIco PersonsBlack'>
                     </button>
 						<input type='hidden' name='todo' value=1 />
 				</form>
-				<form name='boton' action='".$Action."' method='post' style='display:inline-block;' >
-						<button type='submit' title='CANCELAR Y VOLVER' class='botonverde imgButIco CancelBlack' >
+				<form name='boton' action='ClienteVer.php' method='post' style='display:inline-block;' >
+						<button type='submit' title='INICIO FEEDBACK' class='botonverde imgButIco CachedBlack' >
 						</button>
 							<input type='hidden' name='todo' value=1 />
 				</form>

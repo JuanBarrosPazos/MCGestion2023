@@ -223,7 +223,7 @@ function show_visit(){
 							</tr>
 						</table>
 						</br>");
-		} else { print("<font color='#FF0000'>* Error: </font></br>
+		} else { print("<font color='#F1BD2D'>* Error: </font></br>
 						&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
 					}
 
@@ -258,7 +258,7 @@ function suma_visit(){
 	$sqlv = "UPDATE `$db_name`.$VisitasAdmin SET `admin` = '$sumavisit' WHERE $VisitasAdmin.`idv` = '$idv' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqlv)){ print(" </br>");
-			} else { print("<font color='#FF0000'>* Error: </font></br>
+			} else { print("<font color='#F1BD2D'>* Error: </font></br>
 						&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
 						}
 		}
@@ -290,7 +290,7 @@ function suma_acces(){
 	$sqla = "UPDATE `$db_name`.$VisitasAdmin SET `acceso` = '$sumaacces' WHERE $VisitasAdmin.`idv` = '$idv' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqla)){ print ('</br>');
-			} else { print("<font color='#FF0000'>* Error: </font></br>
+			} else { print("<font color='#F1BD2D'>* Error: </font></br>
 							&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
 						}
 
@@ -325,7 +325,7 @@ function suma_denegado(){
 	$sqld = "UPDATE `$db_name`.$VisitasAdmin SET `deneg` = '$sumadeneg' WHERE $VisitasAdmin.`idv` = '$idd' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqld)){ print("	</br>");
-			} else { print("<font color='#FF0000'>* Error: </font></br>
+			} else { print("<font color='#F1BD2D'>* Error: </font></br>
 							&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
 				}
 		}
@@ -396,10 +396,10 @@ function show_form($errors=[]){
 								   }
 	
 	if ($errors){
-		print("<font color='#FF0000'>Solucione estos errores:</font></br>");
+		print("<font color='#F1BD2D'>Solucione estos errores:</font></br>");
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>* Campo </font>".$errors [$a]."</br>");
+			print("<font color='#F1BD2D'>* Campo </font>".$errors [$a]."</br>");
 			}
 		}
 		

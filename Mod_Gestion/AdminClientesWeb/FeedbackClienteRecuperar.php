@@ -25,11 +25,11 @@ if ($_SESSION['Nivel'] == 'admin'){
 					} elseif(isset($_POST['modifica'])){
 							if($form_errors = validate_form()){
 										show_form($form_errors);
-							} else { process_form();
+							}else{ process_form();
 									 log_info();
 										}
-			} else { show_form(); }
-	} else { require "../Inclu/AccesoDenegado.php";	}
+			}else{ show_form(); }
+	}else{ require "../Inclu/AccesoDenegado.php";	}
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -54,62 +54,50 @@ function validate_form(){
 
 function process_form(){
 	
-	global $Titulo;
-	$Titulo = "DATOS ADMINISTRADOR RECUPERADO";
-
 	//require "UserRefCrea.php";
-	global $rf;
-	$rf = $_POST['ref'];
+	global $Feedback;		$Feedback = 1;
+	global $rf;				$rf = $_POST['ref'];
 
-	global $rutImg; 			$rutImg = "img_cliente/";
-	global $safe_filename; 		$safe_filename = $_POST['myimg'];
-
-	require "UserTablaCrea.php";
-
-	global $nombre;			$nombre = $_POST['Nombre'];
-	global $apellido;		$apellido = $_POST['Apellidos'];
-
+	global $db;		global $db_name;
 	require "../config/TablesNames.php";
 
-	$sqlc = "INSERT INTO `$db_name`.$ClientesWeb SET `ref` = '$rf', `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `myimg` = '$_POST[myimg]', `doc` = '$_POST[doc]', `dni` = '$_POST[dni]', `ldni` = '$_POST[ldni]', `Email` = '$_POST[Email]', `Usuario` = '$_POST[Usuario]', `Password` = '$_POST[Password]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]', `lastin` = '$_POST[lastin]', `lastout` = '$_POST[lastout]', `visitadmin` = '$_POST[visitadmin]' ";
-
-	if(mysqli_query($db, $sqlc)){
-							print( $tabla );
-				} else {
-					print("<font color='#FF0000'>* ERROR L.76</font></br>&nbsp;".mysqli_error($db))."</br>";
-						show_form ();
-						global $texerror;
-						$texerror = "\n\t ".mysqli_error($db);
+	$SqlInsertClientesWeb = "INSERT INTO `$db_name`.$ClientesWeb SET `ref` = '$rf', `Nivel` = '$_POST[Nivel]', `Nombre` = '$_POST[Nombre]', `Apellidos` = '$_POST[Apellidos]', `myimg` = '$_POST[myimg]', `doc` = '$_POST[doc]', `dni` = '$_POST[dni]', `ldni` = '$_POST[ldni]', `Email` = '$_POST[Email]', `Usuario` = '$_POST[Usuario]', `Password` = '$_POST[Password]', `Direccion` = '$_POST[Direccion]', `Tlf1` = '$_POST[Tlf1]', `Tlf2` = '$_POST[Tlf2]', `lastin` = '$_POST[lastin]', `lastout` = '$_POST[lastout]', `visitadmin` = '$_POST[visitadmin]' ";
+	
+	global $LogText;
+	if(mysqli_query($db, $SqlInsertClientesWeb)){
+			global $Titulo;				$Titulo = "DATOS ADMINISTRADOR RECUPERADO";
+			global $rutImg; 			$rutImg = "img_cliente/";
+			global $safe_filename; 		$safe_filename = $_POST['myimg'];
+			require "UserTablaCrea.php";
+			print($tabla);
+	}else{	print("<font color='#F1BD2D'>* ERROR L.76</font></br>&nbsp;".mysqli_error($db))."</br>";
+			show_form ();
+					$LogText = $LogText." ".mysqli_error($db)."\n\t";
 							}
 							
 	//require "../config/TablesNames.php";
 	
-	$sqlc2 = "DELETE FROM `$db_name`.$ClientesWebFeedback WHERE $ClientesWebFeedback.`id` = '$_POST[id]' LIMIT 1 ";
+	$SqlDeleteClientesWebFeedback = "DELETE FROM `$db_name`.$ClientesWebFeedback WHERE $ClientesWebFeedback.`id` = '$_POST[id]' LIMIT 1 ";
 
-	if(mysqli_query($db, $sqlc2)){
-					print("HA RECUPERADO FEEDBACK ADMIN");
-				} else {
-				print("<font color='#FF0000'>ERROR L.93 </font></br>&nbsp;".mysqli_error($db))."</br>";
-							}
+	if(mysqli_query($db, $SqlDeleteClientesWebFeedback)){
+			print("<table align='center' style=\"border:0px\">
+						<tr>
+							<td align='center' style='color:#F1BD2D;' >HA RECUPERADO FEEDBACK ADMIN</td>
+						</tr>
+					</table>");
+	}else{	print("*ERROR SQL L.93 ".mysqli_error($db))."</br>"; }
 
-			}	
+}	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-			
-	global $dt;
-	$id = $_POST['id'];
-
 function show_form($errors=[]){
 	
-	$dt = $_POST['doc'];
-	
-	global $img;
-	$img = 	$_POST['myimg'];
-
-	//require "UserRefCrea.php";
+	global $dt;			$dt = $_POST['doc'];
+	global $img;		$img = 	$_POST['myimg'];
+	global $defaults;	global $img2;
 
 	if(isset($_POST['oculto2'])){
 		$defaults = array ( 'id' => $_POST['id'],
@@ -132,12 +120,8 @@ function show_form($errors=[]){
 							'lastin' => $_POST['lastin'],
 							'lastout' => $_POST['lastout'],
 							'visitadmin' => $_POST['visitadmin'],);
-						}
-								   
-		elseif(isset($_POST['modifica'])){
-			global $img2;
-			$img2 = 'untitled.png';
-
+	}elseif(isset($_POST['modifica'])){
+		$img2 = 'untitled.png';
 		$defaults = array ( 'id' => $_POST['id'],
 							'ref' => $_POST['ref'],
 							'Nombre' => $_POST['Nombre'],
@@ -160,20 +144,9 @@ function show_form($errors=[]){
 							'visitadmin' => $_POST['visitadmin'],);
 					}
 	
-	if ($errors){
-		print("<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font></br>");
-		
-		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>** </font>".$errors [$a]."</br>");
-			}
-		}
-		
-		global $KeyFeedback;
-		$KeyFeedback = 1;
-		global $ArrayCliente;
-		$ArrayCliente = 1;
-		require "ArrayTotal.php";
-
+		global $KeyFeedback;		$KeyFeedback = 1;
+		global $ArrayCliente;		$ArrayCliente = 1;
+		//require "ArrayTotal.php";
 		require "UserFormRecupera.php";
 
 	

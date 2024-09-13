@@ -23,7 +23,7 @@
 						</button>
 								<input type='hidden' name='todo' value=1 />
 				</form>
-				<form name='boton' action='Feedback_ClienteVer.php' method='post' ".$estilo." >
+				<form name='boton' action='FeedbackClienteVer.php' method='post' ".$estilo." >
 						<button type='submit' title='INICIO FEEDBACK' class='botonverde imgButIco CachedBlack' >
 						</button>
 							<input type='hidden' name='volver' value=1 />

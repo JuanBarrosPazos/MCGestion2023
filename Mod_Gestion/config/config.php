@@ -73,70 +73,70 @@ function validate_form(){
 	
 	
 	if(strlen(trim($_POST['host'])) == 0){
-		$errors [] = "HOST: <font color='#FF0000'> es obligatorio.</font>";
+		$errors [] = "HOST: <font color='#F1BD2D'> es obligatorio.</font>";
 		}
 	
 	elseif (strlen(trim($_POST['host'])) < 4){
-		$errors [] = "HOST: <font color='#FF0000'>Más de 3 carácteres.</font>";
+		$errors [] = "HOST: <font color='#F1BD2D'>Más de 3 carácteres.</font>";
 		}
 		
 	elseif (!preg_match('/^[^@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\*]+$/',$_POST['host'])){
-		$errors [] = "HOST: <font color='#FF0000'>caracteres no validos.</font>";
+		$errors [] = "HOST: <font color='#F1BD2D'>caracteres no validos.</font>";
 		}
 		
 	elseif (!preg_match('/^[a-z A-Z 0-9 \.]+$/',$_POST['host'])){
-		$errors [] = "HOST: <font color='#FF0000'>NO VALIDOS</font>";
+		$errors [] = "HOST: <font color='#F1BD2D'>NO VALIDOS</font>";
 		}
 
 	
 	if(strlen(trim($_POST['user'])) == 0){
-		$errors [] = "USER: <font color='#FF0000'> es obligatorio.</font>";
+		$errors [] = "USER: <font color='#F1BD2D'> es obligatorio.</font>";
 		}
 	
 	elseif (strlen(trim($_POST['user'])) < 4){
-		$errors [] = "USER: <font color='#FF0000'>Más de 3 carácteres.</font>";
+		$errors [] = "USER: <font color='#F1BD2D'>Más de 3 carácteres.</font>";
 		}
 		
 	elseif (!preg_match('/^[^@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\*]+$/',$_POST['user'])){
-		$errors [] = "USER: <font color='#FF0000'>caracteres no validos.</font>";
+		$errors [] = "USER: <font color='#F1BD2D'>caracteres no validos.</font>";
 		}
 		
 	elseif (!preg_match('/^[a-z A-Z 0-9 \.]+$/',$_POST['user'])){
-		$errors [] = "USER: <font color='#FF0000'>NO VALIDOS</font>";
+		$errors [] = "USER: <font color='#F1BD2D'>NO VALIDOS</font>";
 		}
 
 	
 	if(strlen(trim($_POST['pass'])) == 0){
-		$errors [] = "PASS: <font color='#FF0000'> es obligatorio.</font>";
+		$errors [] = "PASS: <font color='#F1BD2D'> es obligatorio.</font>";
 		}
 	
 	elseif (strlen(trim($_POST['pass'])) < 4){
-		$errors [] = "PASS: <font color='#FF0000'>Más de 3 carácteres.</font>";
+		$errors [] = "PASS: <font color='#F1BD2D'>Más de 3 carácteres.</font>";
 		}
 		
 	elseif (!preg_match('/^[^@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\*]+$/',$_POST['pass'])){
-		$errors [] = "PASS: <font color='#FF0000'>caracteres no validos.</font>";
+		$errors [] = "PASS: <font color='#F1BD2D'>caracteres no validos.</font>";
 		}
 		
 	elseif (!preg_match('/^[a-z A-Z 0-9 \.]+$/',$_POST['pass'])){
-		$errors [] = "PASS: <font color='#FF0000'>NO VALIDOS</font>";
+		$errors [] = "PASS: <font color='#F1BD2D'>NO VALIDOS</font>";
 		}
 
 	
 	if(strlen(trim($_POST['name'])) == 0){
-		$errors [] = "NAME: <font color='#FF0000'> es obligatorio.</font>";
+		$errors [] = "NAME: <font color='#F1BD2D'> es obligatorio.</font>";
 		}
 	
 	elseif (strlen(trim($_POST['name'])) < 4){
-		$errors [] = "NAME: <font color='#FF0000'>Más de 3 carácteres.</font>";
+		$errors [] = "NAME: <font color='#F1BD2D'>Más de 3 carácteres.</font>";
 		}
 		
 	elseif (!preg_match('/^[^@#$&%<>:"·\(\)=¿?!¡\[\]\{\};,:\*]+$/',$_POST['name'])){
-		$errors [] = "NAME: <font color='#FF0000'>caracteres no validos.</font>";
+		$errors [] = "NAME: <font color='#F1BD2D'>caracteres no validos.</font>";
 		}
 		
 	elseif (!preg_match('/^[a-z A-Z 0-9 \.]+$/',$_POST['name'])){
-		$errors [] = "NAME: <font color='#FF0000'>NO VALIDOS</font>";
+		$errors [] = "NAME: <font color='#F1BD2D'>NO VALIDOS</font>";
 		}
 
 			return $errors;
@@ -323,10 +323,10 @@ function show_form($errors=[]){
 								   }
 	
 	if ($errors){
-		print("<font color='#FF0000'>* SOLUCIONE ESTOS ERRORES:</font></br>");
+		print("<font color='#F1BD2D'>* SOLUCIONE ESTOS ERRORES:</font></br>");
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>**</font>  ".$errors [$a]."</br>");
+			print("<font color='#F1BD2D'>**</font>  ".$errors [$a]."</br>");
 			}
 		}
 		
@@ -356,7 +356,7 @@ function show_form($errors=[]){
 						
 				<tr>
 					<td width=200px>	
-						<font color='#FF0000'>*</font>
+						<font color='#F1BD2D'>*</font>
 						DB HOST ADRESS
 					</td>
 					<td width=200px>
@@ -366,7 +366,7 @@ function show_form($errors=[]){
 					
 				<tr>
 					<td width=200px>	
-						<font color='#FF0000'>*</font>
+						<font color='#F1BD2D'>*</font>
 						DB USER NAME
 					</td>
 					<td width=200px>
@@ -376,7 +376,7 @@ function show_form($errors=[]){
 					
 				<tr>
 					<td width=200px>	
-						<font color='#FF0000'>*</font>
+						<font color='#F1BD2D'>*</font>
 						DB PASSWORD
 					</td>
 					<td width=200px>
@@ -386,7 +386,7 @@ function show_form($errors=[]){
 				
 				<tr>
 					<td width=200px>	
-						<font color='#FF0000'>*</font>
+						<font color='#F1BD2D'>*</font>
 						DB NAME
 					</td>
 					<td width=200px>

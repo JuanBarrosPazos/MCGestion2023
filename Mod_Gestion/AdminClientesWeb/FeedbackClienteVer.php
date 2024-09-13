@@ -37,7 +37,7 @@ function validate_form(){
 	$errors = array();
 	
 	if ( (strlen(trim($_POST['Nombre'])) == 0) && (strlen(trim($_POST['Apellidos'])) == 0) ){
-		$errors [] = " <font color='#FF0000'>UNO DE LOS DOS CAMPOS OBLIGATORIO</font>";
+		$errors [] = " <font color='#F1BD2D'>UNO DE LOS DOS CAMPOS OBLIGATORIO</font>";
 		}
 	
 	return $errors;
@@ -51,13 +51,10 @@ function validate_form(){
 
 function process_form(){
 	
-	global $db;
+	global $db;			global $db_name;
 	
-	global $nombre;
-	global $apellido;
-	
-	$nombre = $_POST['Nombre'];
-	$apellido = $_POST['Apellidos'];
+	global $nombre;		$nombre = $_POST['Nombre'];
+	global $apellido;	$apellido = $_POST['Apellidos'];
 	
 	show_form();
 		
@@ -75,12 +72,14 @@ function process_form(){
  	
 	$qb = mysqli_query($db, $sqlb);
 	
-	if(!$qb){ print("<font color='#FF0000'>
+	if(!$qb){ print("<font color='#F1BD2D'>
 					Se ha producido un error: </font>".mysqli_error($db)."</br></br>");
 				show_form();	
 		}else{
 			
-				require "UserWhileTablaFeedback.php";
+			global $KeyFeedback; 		$KeyFeedback = 1;
+			//require "UserWhileTablaFeedback.php";
+			require "UserWhileTabla.php";
 
 			} // FIN ELSE WHILE TABLA
 		
@@ -92,39 +91,31 @@ function process_form(){
 
 
 function show_form($errors=[]){
-	
+
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
+
+	global $defaults;
 	if(isset($_POST['oculto'])){
-		$defaults = $_POST;
-		}
-	elseif(isset($_POST['todo'])){
-		$defaults = $_POST;
-		}else{global $ordenar;
-				$defaults = array ('Nombre' => '',
-								   'Apellidos' => '',
-								   'Orden' => $ordenar);
-								   						}
+			$defaults = array ('Nombre' => $_POST['Nombre'],
+								'Apellidos' => $_POST['Apellidos'],
+								'Orden' => $Orden);
+	}elseif(isset($_POST['todo'])){
+			$defaults = array ('Nombre' => '', 'Apellidos' => '','Orden' => $Orden);
+	}else{	$defaults = array ('Nombre' => '', 'Apellidos' => '','Orden' => $Orden);
+				}
 	
-	if ($errors){
-		print("<font color='#FF0000'>
-				Solucione estos errores: </font></br>");
+	require 'TableValidateErrors.php';
 		
-		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>* </font>".$errors [$a]."</br>");
-			}
-		}
-		
-		global $KeyFeedback;
-		$KeyFeedback = 1;
-		global $FormTitulo;
-		$FormTitulo = "VER FEEDBACK";
+		global $KeyFeedback; 		$KeyFeedback = 1;
+		global $FormTitulo;			$FormTitulo = "VER FEEDBACK";
 		require "UserFormFiltro.php";
 
-	}	
+}	
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
-///
 
 function ver_todo(){
 		
@@ -139,13 +130,12 @@ function ver_todo(){
 	$qb = mysqli_query($db, $sqlb);
 	
 	if(!$qb){
-			print("<font color='#FF0000'>Se ha producido un error: </font></br>".mysqli_error($db)."</br>");
-			
-		}else{
-			
-			require "UserWhileTablaFeedback.php";
+			print("<font color='#F1BD2D'>Se ha producido un error: </font></br>".mysqli_error($db)."</br>");
+	}else{
+			//require "UserWhileTablaFeedback.php";
+			require "UserWhileTabla.php";
 
-			} // FIN ELSE WHILE TABLA
+	} // FIN ELSE WHILE TABLA
 		
 	}	
 

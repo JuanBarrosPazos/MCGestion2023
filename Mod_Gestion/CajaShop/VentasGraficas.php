@@ -44,8 +44,8 @@
 				$StyleCount = "style='height: ".$PorcentLiquidoCaja."%;'";
 		}elseif($LiquidoCaja < 0){
 				$PorcentLiquidoCaja = ($LiquidoCaja*100)/(abs($sumapvptot));
-                $StyleLabel = "style='background-color: #F8CD41; color:#FF0000; font-weight: bold; border-radius: 0.4em 0.4em 0.0em 0.0em !important;'";
-				$StyleCount = "style='height: 1.2em !important; bottom: -3.2em !important; background-color: #FF0000 !important; left: 0.03em; border-radius: 0.0em 0.0em 0.4em 0.4em !important;'";
+                $StyleLabel = "style='background-color: #F8CD41; color:#F1BD2D; font-weight: bold; border-radius: 0.4em 0.4em 0.0em 0.0em !important;'";
+				$StyleCount = "style='height: 1.2em !important; bottom: -3.2em !important; background-color: #F1BD2D !important; left: 0.03em; border-radius: 0.0em 0.0em 0.4em 0.4em !important;'";
 		}else{ 	$PorcentLiquidoCaja = 0.00;
 				$StyleCount = "style='height: ".$PorcentLiquidoCaja."%;'";
 		}

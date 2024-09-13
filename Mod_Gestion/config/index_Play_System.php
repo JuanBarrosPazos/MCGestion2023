@@ -63,7 +63,7 @@ function admin_entrada(){
 	if(mysqli_query($db, $sqladin)){
 			// print("* ");
 		}else{ 
-			print("</br><font color='#FF0000'>* FATAL ERROR funcion admin_entrada(): </font></br> ".mysqli_error($db))."</br>";
+			print("</br><font color='#F1BD2D'>* FATAL ERROR funcion admin_entrada(): </font></br> ".mysqli_error($db))."</br>";
 							}
 					
 	$logname = $_SESSION['Nombre'];	
@@ -120,7 +120,7 @@ function show_visit(){
 						</tr>
 					</table></br>");
 		}else{ 
-			("<font color='#FF0000'>* Error: </font></br>&nbsp;&nbsp;&nbsp;".mysqli_error($db)." </br>");
+			("<font color='#F1BD2D'>* Error: </font></br>&nbsp;&nbsp;&nbsp;".mysqli_error($db)." </br>");
 				}
 		}
 
@@ -153,7 +153,7 @@ function suma_visit(){
 
 	if(mysqli_query($db, $sqlv)){ print(" </br>");
 		}else{ 
-				print("<font color='#FF0000'>* Error: </font></br>&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
+				print("<font color='#F1BD2D'>* Error: </font></br>&nbsp;&nbsp;&nbsp;".mysqli_error($db)."</br>");
 							}
 		}
 
@@ -186,7 +186,7 @@ function suma_acces(){
 	$sqla = "UPDATE `$db_name`.$VisitasClientesWeb SET `acceso` = '$sumaacces' WHERE $VisitasClientesWeb.`idv` = '$idv' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqla)){ print ('</br>');
-			}else{ print("<font color='#FF0000'>
+			}else{ print("<font color='#F1BD2D'>
 						* Error: </font>
 						</br>
 						&nbsp;&nbsp;&nbsp;".mysqli_error($db)."
@@ -223,7 +223,7 @@ function suma_denegado(){
 	$sqld = "UPDATE `$db_name`.$VisitasClientesWeb SET `deneg` = '$sumadeneg' WHERE $VisitasClientesWeb.`idv` = '$idd' LIMIT 1 ";
 
 	if(mysqli_query($db, $sqld)){ print("	</br>");
-			}else{ print("<font color='#FF0000'>
+			}else{ print("<font color='#F1BD2D'>
 						* Error: </font>
 						</br>
 						&nbsp;&nbsp;&nbsp;".mysqli_error($db)."
@@ -287,13 +287,11 @@ print("WELLCOME ".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". REF CLIENT: 
  	
 	$qb = mysqli_query($db, $sqlb);
 	
-	if(!$qb){ print("<font color='#FF0000'>Se ha producido un error: </font>".mysqli_error($db)."</br></br>");
+	if(!$qb){ print("<font color='#F1BD2D'>Se ha producido un error: </font>".mysqli_error($db)."</br></br>");
 				show_form();	
 		}else{ 
-				global $KeyIndex;
-				$KeyIndex = 1;
-				global $KeyBorraUser;
-				$KeyBorraUser = 1;
+				global $KeyIndex;		$KeyIndex = 1;
+				global $KeyBorraUser;	$KeyBorraUser = 1;
 				require "ClientesWeb/UserWhileTabla.php";
 
 					} /***** Fin de primer else . */
@@ -318,10 +316,10 @@ function show_form($errors=[]){
 								   }
 	
 	if ($errors){
-		print("<font color='#FF0000'>Solucione estos errores:</font></br>");
+		print("<font color='#F1BD2D'>Solucione estos errores:</font></br>");
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>* Campo </font>".$errors [$a]."</br>");
+			print("<font color='#F1BD2D'>* Campo </font>".$errors [$a]."</br>");
 			}
 		}
 		

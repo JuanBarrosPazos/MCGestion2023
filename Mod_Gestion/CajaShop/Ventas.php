@@ -63,7 +63,7 @@ session_start();
 				print ("<table align='center' style=\"border:0px\">
 							<tr>
 								<td align='center'>
-									<font color='#FF0000'>NO HAY DATOS</font>
+									<font color='#F1BD2D'>NO HAY DATOS</font>
 								</td>
 							</tr>
 						</table>");

@@ -1,7 +1,13 @@
 <?php
 
-	global $nombre; 		$nombre = $_POST['Nombre'];
-	global $apellido; 		$apellido = $_POST['Apellidos'];
+	global $nombre; global $apellido;	
+	if((isset($_POST['Nombre']))&&(isset($_POST['Apellidos']))){
+			$nombre = $_POST['Nombre'];
+	 		$apellido = $_POST['Apellidos'];
+	}else{
+			$nombre = "";
+			$apellido = "";
+	}
 
 	global $rf1;	global $rf2;	global $rf3;	global $rf4;
 

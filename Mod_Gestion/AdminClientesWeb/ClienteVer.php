@@ -19,7 +19,7 @@ session_start();
 									log_info();
 		}elseif(isset($_POST['oculto'])){
 				if($form_errors = validate_form()){
-					show_form($form_errors);
+						show_form($form_errors);
 				}else{ 	process_form();
 						log_info();
 							}
@@ -57,24 +57,25 @@ function process_form(){
 	
 	show_form();
 		
-	global $nom;	$nom = "%".$_POST['Nombre']."%";
-	global $ape;	$ape = "%".$_POST['Apellidos']."%";
+	global $LikeNombre;		$LikeNombre = "`Nombre` LIKE '%".$_POST['Nombre']."%'";
+	global $LikeApellido;	$LikeApellido = "`Apellidos` LIKE '%".$_POST['Apellidos']."%'";
 
-	if(strlen(trim($_POST['Apellidos'])) == 0){ $ape = $nom; }else{ }
-	if(strlen(trim($_POST['Nombre'])) == 0){ $nom = $ape; }else{ }
+	if(strlen(trim($_POST['Apellidos'])) == 0){ $LikeApellido = $LikeNombre; }else{ }
+	if(strlen(trim($_POST['Nombre'])) == 0){ $LikeNombre = $LikeApellido; }else{ }
 	
 	global $orden;
 	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
 		
 	require "../config/TablesNames.php";
-	//$sqlb =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE '$nom' OR `Apellidos` LIKE '$ape' ORDER BY `Nombre` ASC ";
-	$sqlb =  "SELECT * FROM $ClientesWeb WHERE (`Nombre` LIKE '$nom' OR `Apellidos` LIKE '$ape') AND `doc` <> 'local' ORDER BY `Nombre` ASC ";
+	//$sqlb =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE '$LikeNombre' OR `Apellidos` LIKE '$LikeApellido' ORDER BY `Nombre` ASC ";
+	$sqlb =  "SELECT * FROM $ClientesWeb WHERE ($LikeNombre OR $LikeApellido) AND `doc` <> 'local' ORDER BY `Nombre` ASC ";
 	
 		$qb = mysqli_query($db, $sqlb);
 	
 		if(!$qb){ print("* ERROR SQL L.70 </font>".mysqli_error($db)."</br>");
 					show_form();	
-		}else{ 	global $KeyBorraUser;	$KeyBorraUser = 1;
+		}else{ 	global $KeyBorraUser;		$KeyBorraUser = 1;
+				global $KeyFeedback; 		$KeyFeedback = 0;
 				require "UserWhileTabla.php";
 		} // FIN ELSE WHILE TABLA 
 	} // FIN function process_form()
@@ -99,9 +100,9 @@ function process_form(){
 		
 		require 'TableValidateErrors.php';
 
+		global $KeyFeedback; 		$KeyFeedback = 0;
 		global $FormTitulo;		$FormTitulo = "VER CLIENTES";
-		
-		if($_SESSION['Nivel']=='Admin'){ require "UserFormFiltro.php"; }else{ }
+		if($_SESSION['Nivel']=='admin'){ require "UserFormFiltro.php"; }else{ }
 		
 	}	
 

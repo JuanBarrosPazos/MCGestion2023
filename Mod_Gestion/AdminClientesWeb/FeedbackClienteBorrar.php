@@ -37,7 +37,7 @@ function process_form(){
 				</tr>
 				<tr>
 					<th colspan=3 class='BorderInf'>
-						<form name='boton' action='Feedback_ClienteVer.php' method='post' >
+						<form name='boton' action='FeedbackClienteVer.php' method='post' >
 								<input type='submit' value='INCIO FEEDBACK ADMINISTRADORES' />
 								<input type='hidden' name='volver' value=1 />
 						</form>
@@ -131,7 +131,7 @@ function process_form(){
 					// BORRA LA IMAGEN ORIGINAL SI EXISTE ['img_cliente/'.$safe_filename;]
 					unlink("img_cliente/".$_POST['myimg']);
 				} else { }
-		} else { print("<font color='#FF0000'>ERROR L.213:</font>&nbsp;".mysqli_error($db))."</br>";
+		} else { print("<font color='#F1BD2D'>ERROR L.213:</font>&nbsp;".mysqli_error($db))."</br>";
 						show_form ();
 					}
 
@@ -202,9 +202,9 @@ function show_form(){
 				</tr>
 				<tr>
 					<th colspan=3 class='BorderInf' style=\"text-align:right\">
-						<form name='boton' action='Feedback_ClienteVer.php' method='post' >
+						<form name='boton' action='FeedbackClienteVer.php' method='post' >
 								<input type='submit' value='CANCELAR Y VOLVER' />
-								<input type='hidden' name='volver' value=1 />
+								<input type='hidden' name='todo' value=1 />
 						</form>
 					</th>
 				</tr>

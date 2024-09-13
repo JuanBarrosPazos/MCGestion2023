@@ -139,7 +139,7 @@ else{
 /////////////////////////
 
 	if(!$qc){
-			print("<font color='#FF0000'>
+			print("<font color='#F1BD2D'>
 					Se ha producido un error: </font>".mysqli_error($db)."</br></br>");
 		}else{
 			
@@ -147,7 +147,7 @@ else{
 							print ("<table align='center' style=\"border:0px\">
 										<tr>
 											<td align='center'>
-												<font color='#FF0000'>
+												<font color='#F1BD2D'>
 														NINGÚN DATO SE CIÑE A ESTOS CRITERIOS.
 													</br>
 														INTENTELO CON OTROS PARÁMETROS.
@@ -387,11 +387,11 @@ function show_form($errors=[]){
 									);
 										
 	if($errors){
-		print("</br><font color='#FF0000'>
+		print("</br><font color='#F1BD2D'>
 				Solucione estos errores: </font></br>");
 		
 		for($a=0; $c=count($errors), $a<$c; $a++){
-			print("<font color='#FF0000'>* </font>".$errors [$a]."</br>");
+			print("<font color='#F1BD2D'>* </font>".$errors [$a]."</br>");
 			}
 		}
 		
@@ -673,7 +673,7 @@ else{
 /////////////////////////
 
 	if(!$qb){
-			print("<font color='#FF0000'>Se ha producido un error: </font></br>".mysqli_error($db)."</br>");
+			print("<font color='#F1BD2D'>Se ha producido un error: </font></br>".mysqli_error($db)."</br>");
 			
 		}else{
 			
@@ -681,7 +681,7 @@ else{
 							print ("<table align='center'>
 										<tr>
 											<td>
-												<font color='#FF0000'>
+												<font color='#F1BD2D'>
 													NO HAY DATOS
 												</font>
 											</td>
