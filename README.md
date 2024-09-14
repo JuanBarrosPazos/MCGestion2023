@@ -1,7 +1,7 @@
 # ** PROYECTO INICIADO EN EL AÑO 2012 **
 ## * DESCRIPCION GENERAL *
 ### GESTOR DE STOCK, VENTAS, ADMINISTRADORES Y CLIENTES.
-- Está aplicación implementa tres modulos.
+- Esta aplicación implementa tres modulos.
 - Mod_Admin para la gestión de administradores en sus distintos niveles de acceso.
 - Mod_Conta para la gestión de ingresos, gastos, clientes, proveedores y balances.
 - Mod_Gestion para la gestión del flujo de caja y almacén.
