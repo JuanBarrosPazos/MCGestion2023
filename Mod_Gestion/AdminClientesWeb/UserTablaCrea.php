@@ -13,7 +13,7 @@
 					<input type='hidden' name='Nivel' value='".$_POST['Nivel']."' />
 					<input type='hidden' name='Nombre' value='".$_POST['Nombre']."' />
 					<input type='hidden' name='Apellidos' value='".$_POST['Apellidos']."' />
-					<input type='hidden' name='myimg' value='".$_POST['myimg']."' />
+					<input type='hidden' name='myimg' value='".@$_POST['myimg']."' />
 					<input type='hidden' name='doc' value='".$_POST['doc']."' />
 					<input type='hidden' name='dni' value='".$_POST['dni']."' />
 					<input type='hidden' name='ldni' value='".$_POST['ldni']."' />
@@ -23,9 +23,9 @@
 					<input type='hidden' name='Direccion' value='".$_POST['Direccion']."' />
 					<input type='hidden' name='Tlf1' value='".$_POST['Tlf1']."' />
 					<input type='hidden' name='Tlf2' value='".$_POST['Tlf2']."' />
-					<input type='hidden' name='lastin' value='".$_POST['lastin']."' />					
-					<input type='hidden' name='lastout' value='".$_POST['lastout']."' />					
-					<input type='hidden' name='visitadmin' value='".$_POST['visitadmin']."' />";
+					<input type='hidden' name='lastin' value='".@$_POST['lastin']."' />					
+					<input type='hidden' name='lastout' value='".@$_POST['lastout']."' />					
+					<input type='hidden' name='visitadmin' value='".@$_POST['visitadmin']."' />";
 		global $Feedback;
 		if($Feedback == 1){
 			$Action = "ClienteVer.php";

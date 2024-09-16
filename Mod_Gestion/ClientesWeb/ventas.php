@@ -18,7 +18,7 @@ if(($_SESSION['Nivel'] == 'cliente')){
 								if($_POST['todo']){
 										show_form();							
 										ver_todo();
-										log_info_01();
+										log_info();
 										}
 								
 								elseif($_POST['show_formcl']){
@@ -27,7 +27,7 @@ if(($_SESSION['Nivel'] == 'cliente')){
 											show_form($form_errors);
 												}else{
 													process_form();
-													log_info_01();
+													log_info();
 													}
 									}
 									
@@ -81,8 +81,8 @@ function process_form(){
 
 	$fil = "%".$dy1.$dm1.$dd1."%";
 
-	global $orden;
-	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
 	
 	if($_POST['refoper'] == ''){$rop = '~~';}
 	else{$rop = $_POST['refoper'];}
@@ -93,7 +93,7 @@ function process_form(){
 	//$rf ="%".$rf."%";
 
 	require "../config/TablesNames.php";
-	$sqlc =  "SELECT * FROM $VentasShop WHERE `refclient` = '$rf' AND `oper` = '$rop' AND  `datecash` LIKE '$fil' ORDER BY $orden ";
+	$sqlc =  "SELECT * FROM $VentasShop WHERE `refclient` = '$rf' AND `oper` = '$rop' AND  `datecash` LIKE '$fil' ORDER BY $Orden ";
  	
 	$qc = mysqli_query($db, $sqlc);
 	
@@ -326,11 +326,11 @@ function show_form($errors=[]){
 		}
 	elseif($_POST['todo']){
 		$defaults = $_POST;
-		}else{global $ordenar;
+		}else{global $Ordenar;
 				$defaults = array ('nombre' => '',
 								   'refoper' => '',
 								   'refclient' => '',
-								   'Orden' => $ordenar,
+								   'Orden' => $Ordenar,
 								   						);
 
 								   							}
@@ -395,7 +395,7 @@ function show_form($errors=[]){
 			}
 		}
 		
-	$ordenar = array (	'`oper` ASC' => 'Operacion Asc',
+	$Ordenar = array (	'`oper` ASC' => 'Operacion Asc',
 						'`oper` DESC' => 'Operacion Desc',
 						'`clname` ASC' => 'Nombre Cliente Asc',
 						'`clname` DESC' => 'Nombre Cliente Desc',
@@ -429,7 +429,7 @@ function show_form($errors=[]){
 
 						<select name='Orden'>");
 						
-				foreach($ordenar as $option => $label){
+				foreach($Ordenar as $option => $label){
 					
 					print ("<option value='".$option."' ");
 					
@@ -524,7 +524,7 @@ function show_form($errors=[]){
 
 						<select name='Orden'>");
 						
-				foreach($ordenar as $option => $label){
+				foreach($Ordenar as $option => $label){
 					
 					print ("<option value='".$option."' ");
 					
@@ -606,8 +606,8 @@ function show_form($errors=[]){
 
 function ver_todo(){
 		
-	global $orden;
-	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
 
 	if($_POST['dy'] == ''){ $dy1 = '';
 							 $dyt1 = date('Y');	}else{$dy1 = $_POST['dy'];
@@ -628,7 +628,7 @@ function ver_todo(){
 	//$rf ="%".$rf."%";
 
 	require "../config/TablesNames.php";
-	$sqlb =  "SELECT * FROM $VentasShop WHERE `refclient` = '$rf' AND `datecash` LIKE '$fil' ORDER BY $orden ";
+	$sqlb =  "SELECT * FROM $VentasShop WHERE `refclient` = '$rf' AND `datecash` LIKE '$fil' ORDER BY $Orden ";
 	$qb = mysqli_query($db, $sqlb);
 	
 /////////////////////	
@@ -869,10 +869,10 @@ function log_info(){
 	global $nombre;
 	global $apellido;
 	
-	global $orden;
-	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
 	
-	if($_POST['todo']){$nombre = "TODOS LOS USUARIOS ".$orden;}
+	if($_POST['todo']){$nombre = "TODOS LOS USUARIOS ".$Orden;}
 
 	$ActionTime = date('H:i:s');
 

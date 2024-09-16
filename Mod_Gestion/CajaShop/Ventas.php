@@ -185,10 +185,10 @@ function log_info(){
 
 	global $Nombre;		global $apellido;
 	
-	global $orden;
-	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
 	
-	if(isset($_POST['todo'])){ $Nombre = "TODOS LOS USUARIOS ".$orden; }
+	if(isset($_POST['todo'])){ $Nombre = "TODOS LOS USUARIOS ".$Orden; }
 
 	$ActionTime = date('H:i:s');
 

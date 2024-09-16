@@ -1,6 +1,6 @@
 <?php
 
-    global $defaults;       global $ordenar;    	global $ProductoValor;      global $Seccion;
+    global $defaults;       global $Ordenar;    	global $ProductoValor;      global $Seccion;
 
    if($ArraySeccionGeneral == 1){
 

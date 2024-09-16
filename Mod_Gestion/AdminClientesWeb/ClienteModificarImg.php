@@ -86,9 +86,6 @@ function process_form(){
 		}elseif (move_uploaded_file($_FILES['myimg']['tmp_name'], $destination_file)){ LO QUE SEA... }
 	*/
 
-	global $nombre; 		$nombre = $_POST['Nombre'];
-	global $apellido; 		$apellido = $_POST['Apellidos'];
-
 	require "../config/TablesNames.php";
 
 	$sqlc = "UPDATE `$db_name`.$ClientesWeb SET `myimg` = '$imgNewName' WHERE $ClientesWeb.`id` = '$_POST[id]' LIMIT 1 ";
@@ -118,8 +115,7 @@ function process_form(){
 		require '../Inclu/AutoWindowClose.php';
 		global $Redir; 		print ($Redir);
 
-	}else{ print("<font color='#F1BD2D'>
-					* MODIFIQUE L.116 </font>&nbsp;&nbsp;&nbsp;".mysqli_error($db))."</br>";
+	}else{ print("* ERROR SQL L.94 ".mysqli_error($db))."</br>";
 					show_form ();
 	}
 
@@ -132,46 +128,30 @@ function process_form(){
 function show_form($errors=[]){
 	
 	global $rf; 		$rf = $_POST['ref'];
-	global $defaults;	global $img2; 
+	global $img2;
 	if(isset($_POST['oculto2'])){
 		$defaults = array ( 'id' => $_POST['id'],
-							'Nombre' => $_POST['Nombre'],
-							'Apellidos' => $_POST['Apellidos'],
-							'myimg' => $_POST['myimg'],
-							'imgOld' => $_POST['myimg'],
-							'ref' => $_POST['ref'],
-							'Nivel' => $_POST['Nivel'],									
-							'doc' => $_POST['doc'],
-							'dni' => $_POST['dni'],
-							'ldni' => $_POST['ldni'],
+							'Nombre' => $_POST['Nombre'],'Apellidos' => $_POST['Apellidos'],
+							'myimg' => $_POST['myimg'],'imgOld' => $_POST['myimg'],
+							'ref' => $_POST['ref'],'Nivel' => $_POST['Nivel'],									
+							'doc' => $_POST['doc'],'dni' => $_POST['dni'],'ldni' => $_POST['ldni'],
 							'Email' => $_POST['Email'],
-							'Usuario' => $_POST['Usuario'],
-							'Usuario2' => $_POST['Usuario'],
-							'Password' => $_POST['Password'],
-							'Password2' => $_POST['Password'],
+							'Usuario' => $_POST['Usuario'],'Usuario2' => $_POST['Usuario'],
+							'Password' => $_POST['Password'],'Password2' => $_POST['Password'],
 							'Direccion' => $_POST['Direccion'],
-							'Tlf1' => $_POST['Tlf1'],
-							'Tlf2' => $_POST['Tlf2'], );
+							'Tlf1' => $_POST['Tlf1'],'Tlf2' => $_POST['Tlf2'], );
 	}elseif(isset($_POST['imagenmodif'])){
 		$img2 = $_POST['imgOld'];
 		$defaults = array ( 'id' => $_POST['id'],
-							'Nombre' => $_POST['Nombre'],
-							'Apellidos' => $_POST['Apellidos'],
-							'myimg' => $img2,
-							'imgOld' => $_POST['imgOld'],
-							'Nivel' => $_POST['Nivel'],										
-							'ref' => $_POST['ref'],
-							'doc' => $_POST['doc'],
-							'dni' => $_POST['dni'],
-							'ldni' => $_POST['ldni'],
+							'Nombre' => $_POST['Nombre'],'Apellidos' => $_POST['Apellidos'],
+							'myimg' => $img2,'imgOld' => $_POST['imgOld'],
+							'Nivel' => $_POST['Nivel'],'ref' => $_POST['ref'],
+							'doc' => $_POST['doc'],'dni' => $_POST['dni'],'ldni' => $_POST['ldni'],
 							'Email' => $_POST['Email'],
-							'Usuario' => $_POST['Usuario'],
-							'Usuario2' => $_POST['Usuario'],
-							'Password' => $_POST['Password'],
-							'Password2' => $_POST['Password'],
+							'Usuario' => $_POST['Usuario'],'Usuario2' => $_POST['Usuario'],
+							'Password' => $_POST['Password'],'Password2' => $_POST['Password'],
 							'Direccion' => $_POST['Direccion'],
-							'Tlf1' => $_POST['Tlf1'],
-							'Tlf2' => $_POST['Tlf2'],);
+							'Tlf1' => $_POST['Tlf1'],'Tlf2' => $_POST['Tlf2'],);
 	}else{ }
 	
 	require 'TableValidateErrors.php';
@@ -197,7 +177,6 @@ function show_form($errors=[]){
 						<img src='img_cliente/".$defaults['myimg']."' height='120px' width='90px' />
 					</th>
 				</tr>
-				
 				<tr>
 					<td colspan=2 style='color:#F1BD2D;'>SELECCIONE UNA FOTOGRAFIA</td>
 				</tr>
@@ -208,9 +187,9 @@ function show_form($errors=[]){
 		<form name='form_datos' method='post' action='$_SERVER[PHP_SELF]' enctype='multipart/form-data' >
 			<button type='submit' title='MODIFICAR LA IMAGEN' class='botonverde imgButIco SaveBlack' style='display:inline-block; float:right; margin-left: 0.4em;' >
 			</button>
+					<input type='hidden' name='id' value='".$defaults['id']."' />					
 					<input type='file' name='myimg' value='".$defaults['myimg']."' />						
 					<input type='hidden' name='imgOld' value='".$defaults['imgOld']."' />
-					<input type='hidden' name='id' value='".$defaults['id']."' />					
 					<input type='hidden' name='Nombre' value='".$defaults['Nombre']."' />
 					<input type='hidden' name='Apellidos' value='".$defaults['Apellidos']."' />
 					<input type='hidden' name='doc' value='".$defaults['doc']."' />
@@ -267,14 +246,12 @@ function show_form($errors=[]){
 
 function log_info(){
 
-	global $nombre;
-	global $apellido;
 	global $destination_file;	
 
 	$ActionTime = date('H:i:s');
 
 	global $LogText;
-	$LogText = "- ADMIN MODIFICAR IMG ".$ActionTime.". ID:".$_POST['id'].". ".$nombre." ".$apellido." / ".$destination_file;
+	$LogText = "- ADMIN MODIFICAR IMG ".$ActionTime.". ID:".$_POST['id'].". ".$_POST['Nombre']." ".$_POST['Apellidos']." / ".$destination_file;
 
 	require '../logs/LogInfo.php';
 

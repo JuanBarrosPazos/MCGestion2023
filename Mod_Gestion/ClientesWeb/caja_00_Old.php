@@ -2887,7 +2887,7 @@ function show_form(){
 		
 ///////////////////
 	
-	global $ordenar;	global $producto;	global $seccion;
+	global $Ordenar;	global $producto;	global $seccion;
 
 	if(isset($_POST['seccion'])){ $seccion = $_POST['seccion'];
 	}else{ $seccion = ""; }
@@ -2895,14 +2895,14 @@ function show_form(){
 	if(isset($_POST['oculto1'])){
 				$defaults = $_POST;
 				$defaults = array ('seccion' => $seccion,
-								   'Orden' => $ordenar,
+								   'Orden' => $Ordenar,
 								   'producto' => $producto,
 								   );
 		}elseif(isset($_POST['oculto'])){
 				$defaults = $_POST;
 		}else{
 				$defaults = array ('seccion' => $seccion,
-								   'Orden' => $ordenar,
+								   'Orden' => $Ordenar,
 								   'producto' => $producto,
 								   );
 				}

@@ -156,59 +156,11 @@ function show_form($errors=[]){
 	
 	$_SESSION['refcl'] = $_POST['ref'];
 	
-	global $dt;			$dt = $_POST['doc'];
-	global $img; 		$img =	$_POST['myimg'];
-	global $defaults;	global $img2;
-
-	if(isset($_POST['oculto2'])){
-		
-		$defaults = array ( 'id' => $_POST['id'],
-							'refnew' => $_POST['ref'],
-							'Nombre' => $_POST['Nombre'],
-							'Apellidos' => $_POST['Apellidos'],
-							'myimg' => $_POST['myimg'],
-							'Nivel' => $_POST['Nivel'],								
-							'doc' => $dt,
-							'dni' => $_POST['dni'],
-							'ldni' => $_POST['ldni'],
-							'Email' => $_POST['Email'],
-							'Usuario' => $_POST['Usuario'],
-							'Usuario2' => $_POST['Usuario'],
-							'Password' => $_POST['Password'],
-							'Password2' => $_POST['Password'],
-							'Direccion' => $_POST['Direccion'],
-							'Tlf1' => $_POST['Tlf1'],
-							'Tlf2' => $_POST['Tlf2'],
-							'lastin' => "",
-							'lastout' => "",
-							'visitadmin' => "",);
-	}elseif($_POST['modifica']){
-		$img2 = 'untitled.png';
-		$defaults = array ( 'id' => $_POST['id'],
-							'refnew' => $_POST['refnew'],
-							'Nombre' => $_POST['Nombre'],
-							'Apellidos' => $_POST['Apellidos'],
-							'myimg' => $_POST['myimg'],
-							'Nivel' => $_POST['Nivel'],									
-							'doc' => $dt,
-							'dni' => $_POST['dni'],
-							'ldni' => $_POST['ldni'],
-							'Email' => $_POST['Email'],
-							'Usuario' => $_POST['Usuario'],
-							'Usuario2' => $_POST['Usuario2'],
-							'Password' => $_POST['Password'],
-							'Password2' => $_POST['Password2'],
-							'Direccion' => $_POST['Direccion'],
-							'Tlf1' => $_POST['Tlf1'],
-							'Tlf2' => $_POST['Tlf2'],
-							'lastin' => "",
-							'lastout' => "",
-							'visitadmin' => "",);
-	}
-
 	require 'TableValidateErrors.php';
 
-	global $ArrayCliente; 		$ArrayCliente = 1;
+	require 'ArrayTotalVar.php';
+	global $ArrayCliente; 			$ArrayCliente = 1;
+    global $ArrayClienteModif;      $ArrayClienteModif = 1;
 	require "ArrayTotal.php";
 	//require "UserRefCrea.php";
 	require "UserFormModif.php";
@@ -241,8 +193,8 @@ function log_info(){
 	global $rf;				
 	if(isset($_POST['refnew'])){ $rf = $_POST['refnew']; }else{ $rf = $_POST['ref']; }
 		
-	global $orden;
-	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
 
 	$ActionTime = date('H:i:s');
 	

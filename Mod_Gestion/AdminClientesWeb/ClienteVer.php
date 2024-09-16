@@ -23,7 +23,8 @@ session_start();
 				}else{ 	process_form();
 						log_info();
 							}
-		}else{ show_form(); }
+		}else{ 	show_form();
+				ver_todo(); }
 
 	}elseif($_SESSION['Nivel']=='cliente'){	master_index();
 											ver_todo();
@@ -52,10 +53,10 @@ function validate_form(){
 
 function process_form(){
 	
-	global $nombre;		$nombre = $_POST['Nombre'];
-	global $apellido;	$apellido = $_POST['Apellidos'];
-	
 	show_form();
+		
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
 		
 	global $LikeNombre;		$LikeNombre = "`Nombre` LIKE '%".$_POST['Nombre']."%'";
 	global $LikeApellido;	$LikeApellido = "`Apellidos` LIKE '%".$_POST['Apellidos']."%'";
@@ -63,22 +64,19 @@ function process_form(){
 	if(strlen(trim($_POST['Apellidos'])) == 0){ $LikeApellido = $LikeNombre; }else{ }
 	if(strlen(trim($_POST['Nombre'])) == 0){ $LikeNombre = $LikeApellido; }else{ }
 	
-	global $orden;
-	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
-		
 	require "../config/TablesNames.php";
-	//$sqlb =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE '$LikeNombre' OR `Apellidos` LIKE '$LikeApellido' ORDER BY `Nombre` ASC ";
-	$sqlb =  "SELECT * FROM $ClientesWeb WHERE ($LikeNombre OR $LikeApellido) AND `doc` <> 'local' ORDER BY `Nombre` ASC ";
+	$SqlSelectClientesWeb =  "SELECT * FROM $ClientesWeb WHERE ($LikeNombre OR $LikeApellido) AND `doc` <> 'local' ORDER BY $Orden ";
 	
-		$qb = mysqli_query($db, $sqlb);
+	$qb = mysqli_query($db, $SqlSelectClientesWeb);
 	
-		if(!$qb){ print("* ERROR SQL L.70 </font>".mysqli_error($db)."</br>");
-					show_form();	
-		}else{ 	global $KeyBorraUser;		$KeyBorraUser = 1;
-				global $KeyFeedback; 		$KeyFeedback = 0;
-				require "UserWhileTabla.php";
-		} // FIN ELSE WHILE TABLA 
-	} // FIN function process_form()
+	if(!$qb){ 	print("* ERROR SQL L.68 </font>".mysqli_error($db)."</br>");
+				show_form();	
+	}else{ 	global $KeyBorraUser;		$KeyBorraUser = 1;
+			global $KeyFeedback; 		$KeyFeedback = 0;
+			require "UserWhileTabla.php";
+	} // FIN ELSE WHILE TABLA 
+
+} // FIN function process_form()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
@@ -101,7 +99,7 @@ function process_form(){
 		require 'TableValidateErrors.php';
 
 		global $KeyFeedback; 		$KeyFeedback = 0;
-		global $FormTitulo;		$FormTitulo = "VER CLIENTES";
+		global $FormTitulo;			$FormTitulo = "CLIENTES WEB";
 		if($_SESSION['Nivel']=='admin'){ require "UserFormFiltro.php"; }else{ }
 		
 	}	
@@ -112,29 +110,33 @@ function process_form(){
 
 function ver_todo(){
 		
-	global $orden;
-	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
 
-	global $nombre;			$nombre = $_SESSION['Nombre']; 
-	global $apellido;		$apellido = $_SESSION['Apellidos'];
 	global $clref;			$clref = $_SESSION['ref'];
 
+	global $db;		global $db_name;
 	require "../config/TablesNames.php";
 	if($_SESSION['Nivel']=='admin'){
-		//$sqlb =  "SELECT * FROM $ClientesWeb ORDER BY $orden ";
-		$sqlb =  "SELECT * FROM $ClientesWeb WHERE `doc` <> 'local' ORDER BY $orden ";
+		//$SqlSelectClientesWeb =  "SELECT * FROM $ClientesWeb ORDER BY $Orden ";
+		$SqlSelectClientesWeb =  "SELECT * FROM $ClientesWeb WHERE `doc` <> 'local' ORDER BY $Orden ";
 	}elseif($_SESSION['Nivel']=='cliente'){
-		$sqlb =  "SELECT * FROM $ClientesWeb WHERE `ref` = '$clref' LIMIT 1 ";
+		$SqlSelectClientesWeb =  "SELECT * FROM $ClientesWeb WHERE `ref` = '$clref' LIMIT 1 ";
 	}
 
-	$qb = mysqli_query($db, $sqlb);
+	$qb = mysqli_query($db, $SqlSelectClientesWeb);
 	
 	global $KeyIndex;	$KeyIndex = 0;
 	if(!$qb){
-			print("*ERROR SQL L.123 ".mysqli_error($db)."</br>");
+			print("* ERROR SQL L.123/125 ".mysqli_error($db)."</br>");
 	}else{ 	global $KeyBorraUser;	$KeyBorraUser = 1;
 			require "UserWhileTabla.php";
 	} // FIN ELSE WHILE TABLA
+
+	global $RedirUrl;	$RedirUrl = "./ClienteVer.php";
+	global $RedirTime;	$RedirTime = 30000;
+	require '../Inclu/AutoRedirUrl.php';
+	global $Redir; 		print ($Redir);
 
 }
 
@@ -162,10 +164,10 @@ function log_info(){
 
 	global $nombre;			global $apellido;
 
-	global $orden;
-	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
 	
-	if(isset($_POST['todo'])){$nombre = "TODOS LOS USUARIOS ".$orden;}	
+	if(isset($_POST['todo'])){$nombre = "TODOS LOS USUARIOS ".$Orden;}	
 
 	global $LogText;
 	$LogText = "- ADMIN VER ".$nombre." ".$apellido;

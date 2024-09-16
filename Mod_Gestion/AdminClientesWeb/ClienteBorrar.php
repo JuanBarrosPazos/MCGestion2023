@@ -115,8 +115,8 @@ function log_info(){
 	global $apellido;		$apellido = $_POST['Apellidos'];
 	global $rf; 			$rf = $_POST['ref'];
 		
-	global $orden;
-	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
 
 	$ActionTime = date('H:i:s');
 

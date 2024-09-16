@@ -102,7 +102,6 @@ function process_form(){
 	global $Titulo;			$Titulo = "SE HA REGISTRADO COMO CLIENTE";
 	global $rutImg;			$rutImg = "img_cliente/"; 
 	global $safe_filename;	$safe_filename = $imgNewName;
-
 	require "UserTablaCrea.php";
 
 	if(file_exists($destination_file)){
@@ -141,7 +140,7 @@ function process_form(){
 						show_form ();
 						global $texerror;	$texerror = "* SQL ERROR L.93 ".mysqli_error($db)."\n\t";
 		}
-	}
+	} // ELSE NO EXISTE LA IMAGEN
 
 } // FIN function process_form()
 
@@ -151,49 +150,11 @@ function process_form(){
 
 function show_form($errors=[]){
 	
-	global $defaults;
-	if(isset($_POST['oculto'])){
-
-	$defaults = array ( 'Nombre' => $_POST['Nombre'],
-						'Apellidos' => $_POST['Apellidos'],
-						'myimg' => @$_POST['myimg'],	
-						'Nivel' => $_POST['Nivel'],
-						'doc' => $_POST['doc'],
-						'dni' => $_POST['dni'],
-						'ldni' => $_POST['ldni'],
-						'Email' => $_POST['Email'],
-						'Usuario' => $_POST['Usuario'],
-						'Usuario2' => $_POST['Usuario2'],
-						'Password' => $_POST['Password'],
-						'Password2' => $_POST['Password2'],
-						'Direccion' => $_POST['Direccion'],
-						'Tlf1' => $_POST['Tlf1'],
-						'Tlf2' => $_POST['Tlf2'],
-						'Condiciones' => @$_POST['Condiciones'],
-						'Datos' => @$_POST['Datos'],);
-
-	}else{	$defaults = array ( 'Nombre' => '',
-								'Apellidos' => '',
-								'myimg' => '',	
-								'Nivel' => '',
-								'doc' => '',
-								'dni' => '',
-								'ldni' => '',
-								'Email' => '',
-								'Usuario' => '',
-								'Usuario2' => '',
-								'Password' => '',
-								'Password2' => '',
-								'Direccion' => '',
-								'Tlf1' => '',
-								'Tlf2' => '',
-								'Condiciones' => '',
-								'Datos' => '',);
-	}
-	
 		require 'TableValidateErrors.php';
 
-		global $ArrayCliente;		$ArrayCliente = 1;
+		require 'ArrayTotalVar.php';
+		global $ArrayCliente;			$ArrayCliente = 1;
+		global $ArrayClienteCrea;		$ArrayClienteCrea = 1;
 		require "ArrayTotal.php";
 
 		require "UserRefCrea.php";

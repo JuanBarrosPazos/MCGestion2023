@@ -1,7 +1,7 @@
 <?php
 
 	global $LogText;	global $rf;				global $new_name;	
-	global $db;			global $db_name;		global $orden;
+	global $db;			global $db_name;		global $Orden;
 	global $KeyLog;		global $rutaLog;
 
 	global $ActionTime;	$ActionTime = date('H:i:s');

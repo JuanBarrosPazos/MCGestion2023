@@ -33,9 +33,9 @@
 	}else{
 		while($RowVentasShopSeccion = mysqli_fetch_assoc($QryVentasShopSeccion)){
 			// CONSULTA EN SECCIONES CON PRODUCTOS
-			$SplSecciones =  "SELECT * FROM $Secciones WHERE `valor`='$RowVentasShopSeccion[vseccion]' ORDER BY `valor` ASC ";
+			$SqlSecciones =  "SELECT * FROM $Secciones WHERE `valor`='$RowVentasShopSeccion[vseccion]' ORDER BY `valor` ASC ";
 			//$sqlb =  "SELECT * FROM $Secciones ORDER BY `valor` ASC ";
-			$QrySecciones = mysqli_query($db, $SplSecciones);
+			$QrySecciones = mysqli_query($db, $SqlSecciones);
 				// IMPRIME EL SELECT DESPLEGABLE CON LAS SECCIONES
 			if(!$QrySecciones){ print("* ERROR SQL L.2562 ".mysqli_error($db)."</br>");
 			}else{ 	$RowsSecciones = mysqli_fetch_assoc($QrySecciones);

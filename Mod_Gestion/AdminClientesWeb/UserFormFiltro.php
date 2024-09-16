@@ -1,13 +1,15 @@
 <?php
  
     global $FormTitulo;		global $KeyFeedback;		global $accion;
-	global $valor;			global $BotonFeed;			global $BotonIco;
+	global $valor;			
+	global $BotonFeed;			global $BotonIco;		global $BotonRefresca;
 
 	if($KeyFeedback == 1){
 		$accion = "ClienteVer.php";
 		$BotonIco = "PersonsBlack";
 		$valor = "GESTION DE CLIENTES";
 		$BotonFeed = "";
+		$BotonRefresca = "";
 	}else{
 		$accion = "ClienteCrear.php";
 		$BotonIco = "PersonAddBlack";
@@ -17,10 +19,17 @@
 				</button>
 						<input type='hidden' name='todo' value=1 />
 					 </form>";
+		$BotonRefresca = "<form name='todo' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; float:right;'>
+				<button type='submit' title='REFRESCAR VISTA DESPUES DE MODIFICAR DATOS...' class='botonlila imgButIco RestoreWhite'>
+				</button>
+					<input type='hidden' name='todo' value=1 />
+					<input type='hidden' name='Orden' value='".$defaults['Orden']."' />
+			</form>";
+
 	}
 
-    global $ordenar;
-	$ordenar = array (	'`id` ASC' => 'ID Ascendente',
+    global $Ordenar;
+	$Ordenar = array (	'`id` ASC' => 'ID Ascendente',
 						'`id` DESC' => 'ID Descendente',
 						'`Nombre` ASC' => 'Nombre Ascendente',
 						'`Nombre` DESC' => 'Nombre Descendente',
@@ -61,18 +70,14 @@
 				</tr>
 				<tr>
 					<td>
-			<form name='todo' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; float:right;'>
-				<button type='submit' title='REFRESCAR VISTA DESPUES DE MODIFICAR DATOS...' class='botonlila imgButIco RestoreWhite'>
-				</button>
-					<input type='hidden' name='todo' value=1 />
-					<input type='hidden' name='Orden' value='".$defaults['Orden']."' />
-			</form>														
+				".$BotonRefresca."
+
 			<form name='todo' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; float:left;' >
 				<button type='submit' title='CONSULTAR TODOS' class='botonazul imgButIco DetalleBlack'>
 				</button>
 						<input type='hidden' name='todo' value=1 />
 						<select name='Orden' class='botonazul'>");
-				foreach($ordenar as $option => $label){
+				foreach($Ordenar as $option => $label){
 					print ("<option value='".$option."' ");
 					if($option == @$defaults['Orden']){ print ("selected = 'selected'"); }
 													print ("> $label </option>");

@@ -336,16 +336,22 @@ if($_SESSION['Nivel'] == 'cliente'){
 	global $apellido;		$apellido = $_SESSION['Apellidos'];
 		
 	require "config/TablesNames.php";
-	$sqlb =  "SELECT * FROM $ClientesWeb WHERE `Nombre` = '$nombre' AND `Apellidos` = '$apellido' ";
+	$SqlSelectClientesWeb =  "SELECT * FROM $ClientesWeb WHERE `Nombre` = '$nombre' AND `Apellidos` = '$apellido' ";
  	
-	$qb = mysqli_query($db, $sqlb);
+	$qb = mysqli_query($db, $SqlSelectClientesWeb);
 	
-		if(!$qb){ print("<font color='#F1BD2D'>Se ha producido un error: </font>".mysqli_error($db)."</br></br>");
-					show_form();	
-		}else{  global $KeyIndex; 			$KeyIndex = 1;
-				global $KeyBorraUser; 		$KeyBorraUser = 1;
-				require "AdminClientesWeb/UserWhileTabla.php";
-		} /***** Fin de primer else . */
+		global $KeyIndex;	global $KeyBorraUser;
+		if(!$qb){ print("* ERROR SQL L.339 ".mysqli_error($db)."</br>");
+									show_form();	
+		}else{  $KeyIndex = 1; 		$KeyBorraUser = 1;
+				//require "AdminClientesWeb/UserWhileTabla.php";
+		} // FIN PRIMER ELSE
+
+		global $RedirUrl;	$RedirUrl = "AdminClientesWeb/ClienteVer.php";
+		global $RedirTime;	$RedirTime = 10;
+		require 'Inclu/AutoRedirUrl.php';
+		global $Redir; 		print ($Redir);
+		
 	}else{ require "Inclu/AccesoDenegado.php"; }
 				
 }	/* Final process_form(); */

@@ -10,7 +10,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus') || ($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'caja')){
+if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'caja')||($_SESSION['Nivel'] == 'cliente')){
 		if($_POST['data_client']){ process_form(); } 
 		}else{ require "../Inclu/AccesoDenegado.php"; }
 
@@ -40,9 +40,9 @@ function process_form(){
 			$w = "width='".$w1."'px";
 		}
 											
-	print("<table align='center' >
+	print("<table align='center' style='font-size:1.1em !important;' >
 				<tr>
-					<th colspan=2 >DATOS DEL CLIENTE</th>
+					<th colspan=2 style='color:#F1BD2D'>DATOS DEL CLIENTE</th>
 				</tr>
 				<tr>
 					<td colspan=2 align='center'>

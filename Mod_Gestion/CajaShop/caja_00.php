@@ -12,7 +12,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus') || ($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'caja')){
+if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'caja')||($_SESSION['Nivel'] == 'cliente')){
 	master_index();
 	require "../config/TablesNames.php";	
 			
@@ -316,7 +316,7 @@ function pago2($errors=[]){
 					<th colspan=10 class='BorderInf'>SUBTOTAL COMPRA ".$_SESSION['oper']."</th>
 				</tr>
 				<tr style='font-size:10px'>
-					<th class='BorderInfDch'>REF CAJA</th>			
+					<th class='BorderInfDch'>CAJERO</th>			
 					<th class='BorderInfDch'>REF CLIENT</th>
 					<th class='BorderInfDch'>OPER SESION</th>			
 					<th class='BorderInfDch'>FECHA</th>				
@@ -442,7 +442,7 @@ function pago3(){
 						</th>
 					</tr>
 					<tr style='font-size:10px'>
-						<th class='BorderInfDch'>REF CAJA</th>			
+						<th class='BorderInfDch'>CAJERO</th>			
 						<th class='BorderInfDch'>REF CLIENT</th>
 						<th class='BorderInfDch'>OPER SESION</th>		
 						<th class='BorderInfDch'>FECHA</th>				
@@ -523,10 +523,10 @@ function show_formcl($errors=[]){
 	if(isset($_POST['modif_client'])){ $_SESSION['KeyCreaCliente'] = 1; }else{ $_SESSION['KeyCreaCliente'] = 0; }
 	//echo "** KeyCreaCliente = ".$_SESSION['KeyCreaCliente']."<br>";
 	/* SE PASAN LOS VALORES POR DEFECTO Y SE DEVUELVEN LOS QUE HA ESCRITO EL USUARIO */
-	global $orden;
-	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
 	
-	global $ordenar;	global $defaults;
+	global $Ordenar;	global $defaults;
 	if((isset($_POST['selec_client']))||(isset($_POST['init_compra']))||(isset($_POST['recup_compra']))||(isset($_POST['recup_compra2']))){ 
 			$defaults = array ('Nombre' => '',
 								'barra01' => '','barra02' => '',
@@ -546,181 +546,187 @@ function show_formcl($errors=[]){
 								'barra01' => '','barra02' => '',
 								'sala01' => '','sala02' => '',
 								'terraza01' => '','terraza02' => '',
-								'Orden' =>  $orden,
+								'Orden' =>  $Orden,
 								'cnivela' => '','cnivel' => @$_POST['cnivel']);
 	}else{	$defaults = array ('Nombre' => '',
 								'barra01' => '','barra02' => '',
 								'sala01' => '','sala02' => '',
 								'terraza01' => '','terraza02' => '',
-								'Orden' => $orden,
+								'Orden' => $Orden,
 								'cnivela' => '','cnivel' => '',);
 				}
 
-	$ordenar = array ('`id` ASC' => 'ID ASC','`id` DESC' => 'ID DSC',
+	$Ordenar = array ('`id` ASC' => 'ID ASC','`id` DESC' => 'ID DSC',
 					 '`Nombre` ASC' => 'Nombre ASC','`Nombre` DESC' => 'Nombre DSC',
 					 '`Apellidos` ASC' => 'Apellido ASC','`Apellido` DESC' => 'Apellido DSC',);
 
 	require 'TableValidateErrors.php';
 	
-	print("<table align='center' style='border:0px;margin-top:4px;width:max-content;'>
-				<tr>
-					<th colspan=2 class='BorderSup'>
-						SELECCIONE CLIENTE<br>COMPRA: ".$_SESSION['oper']."
-					</th>
-				</tr>
-				<tr>
-					<td style='text-align:right;'>
-			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
-					<input type='checkbox' name='cnivela' value='yes' ");
-					if($defaults['cnivela'] == 'yes'){ print(" checked='checked'"); }
-			print(" />
-					</td>
-					<td>BUSCAR EN ADMINISTRADORES</td>
-				</tr>
-				<tr>
-					<td style='text-align:right; vertical-align: top !important;'>
-			<button type='submit' title='CONSULTAR CLIENTES' class='botonazul imgButIco BuscaBlack'></button>
-						<input type='hidden' name='show_formcl' value=1 />
-					</td>
-					<td>
-						<div style='float:left'>
-					<select name='barra01' style='min-width: 142px; margin: 0.1em !important;' class='botonverde'>
-							<option value=''>BARRA 01</option>");
-			// CONSTRUYE EL SELECT DE CLIENTES BARRA 01
-			$SqlB01 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'barra01%' ORDER BY `ref` ASC ";
-				$qSqlB01 = mysqli_query($db, $SqlB01);
-				if(!$qSqlB01){ print("* ERROR SQL L.643 ".mysqli_error($db)."</br>");
-				}else{ while($rowsb1 = mysqli_fetch_assoc($qSqlB01)){
-								print ("<option value='".$rowsb1['ref']."' ");
-								if($rowsb1['ref'] == $defaults['barra01']){
-													print ("selected = 'selected'");
-											}
-						print (">".ucfirst($rowsb1['Nombre'])." ".ucfirst($rowsb1['Apellidos'])."</option>");
-							}
-				} 
-				print ("</select></div>
-					<div style='float:left'>
-				<select name='barra02' style='min-width: 142px; margin: 0.1em !important;' class='botonverde' >
-							<option value=''>BARRA 02</option>");
-			// CONSTRUYE EL SELECT DE CLIENTES BARRA 02
-			$SqlB02 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'barra02%' ORDER BY `ref` ASC ";
-				$qSqlB02 = mysqli_query($db, $SqlB02);
-					if(!$qSqlB02){ print("* ERROR SQL L.659 ".mysqli_error($db)."</br>");
-					}else{ while($rowsb2 = mysqli_fetch_assoc($qSqlB02)){
-									print ("<option value='".$rowsb2['ref']."' ");
-									if($rowsb2['ref'] == $defaults['barra02']){
+	if($_SESSION['Nivel']=='cliente'){
+
+	}else{
+
+		print("<table align='center' style='border:0px;margin-top:4px;width:max-content;'>
+					<tr>
+						<th colspan=2 class='BorderSup'>
+							SELECCIONE CLIENTE<br>COMPRA: ".$_SESSION['oper']."
+						</th>
+					</tr>
+					<tr>
+						<td style='text-align:right;'>
+				<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
+						<input type='checkbox' name='cnivela' value='yes' ");
+						if($defaults['cnivela'] == 'yes'){ print(" checked='checked'"); }
+				print(" />
+						</td>
+						<td>BUSCAR EN ADMINISTRADORES</td>
+					</tr>
+					<tr>
+						<td style='text-align:right; vertical-align: top !important;'>
+				<button type='submit' title='CONSULTAR CLIENTES' class='botonazul imgButIco BuscaBlack'></button>
+							<input type='hidden' name='show_formcl' value=1 />
+						</td>
+						<td>
+							<div style='float:left'>
+						<select name='barra01' style='min-width: 142px; margin: 0.1em !important;' class='botonverde'>
+								<option value=''>BARRA 01</option>");
+				// CONSTRUYE EL SELECT DE CLIENTES BARRA 01
+				$SqlB01 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'barra01%' ORDER BY `ref` ASC ";
+					$qSqlB01 = mysqli_query($db, $SqlB01);
+					if(!$qSqlB01){ print("* ERROR SQL L.643 ".mysqli_error($db)."</br>");
+					}else{ while($rowsb1 = mysqli_fetch_assoc($qSqlB01)){
+									print ("<option value='".$rowsb1['ref']."' ");
+									if($rowsb1['ref'] == $defaults['barra01']){
 														print ("selected = 'selected'");
-											}
-							print (">".ucfirst($rowsb2['Nombre'])." ".ucfirst($rowsb2['Apellidos'])."</option>");
+												}
+							print (">".ucfirst($rowsb1['Nombre'])." ".ucfirst($rowsb1['Apellidos'])."</option>");
 								}
-							} 
-					print ("</select></div>
-								<div style='clear:both'></div>
-						<div style='float:left'>
-				<select name='sala01' style='min-width: 142px; margin: 0.1em !important;' class='botonnaranja' >
-							<option value=''>SALA 01</option>");
-			// CONSTRUYE EL SELECT DE CLIENTES SALA 01
-			$SqlS01 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'sala01%' ORDER BY `ref` ASC ";
-				$qSqlS01 = mysqli_query($db, $SqlS01);
-					if(!$qSqlS01){ print("* ERROR SQL L.676 ".mysqli_error($db)."</br>");
-					}else{ while($rowss1 = mysqli_fetch_assoc($qSqlS01)){
-									print ("<option value='".$rowss1['ref']."' ");
-									if($rowss1['ref'] == $defaults['sala01']){
-														print ("selected = 'selected'");
-											}
-							print (">".ucfirst($rowss1['Nombre'])." ".ucfirst($rowss1['Apellidos'])."</option>");
-								}
-							} 
+					} 
 					print ("</select></div>
 						<div style='float:left'>
-				<select name='sala02' style='min-width: 142px; margin: 0.1em !important;' class='botonnaranja' >
-							<option value=''>SALA 02</option>");
-			// CONSTRUYE EL SELECT DE CLIENTES SALA 02
-			$SqlS02 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'sala02%' ORDER BY `ref` ASC ";
-				$qSqlS02 = mysqli_query($db, $SqlS02);
-					if(!$qSqlS02){ print("* ERROR SQL L.692 ".mysqli_error($db)."</br>");
-					}else{ while($rowss2 = mysqli_fetch_assoc($qSqlS02)){
-									print ("<option value='".$rowss2['ref']."' ");
-									if($rowss2['ref'] == $defaults['sala02']){
-														print ("selected = 'selected'");
-											}
-							print (">".ucfirst($rowss2['Nombre'])." ".ucfirst($rowss2['Apellidos'])."</option>");
-								}
-							} 
-					print ("</select></div>
-								<div style='clear:both'></div>
-						<div style='float:left'>
-					<select name='terraza01' style='min-width: 142px; margin: 0.1em !important;' class='botonverde' >
-							<option value=''>TERRAZA 01</option>");
-			// CONSTRUYE EL SELECT DE CLIENTES TERRAZA 01
-			$SqlT01 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'terraza01%' ORDER BY `ref` ASC ";
-				$qSqlT01 = mysqli_query($db, $SqlT01);
-					if(!$qSqlT01){ print("* ERROR SQL L.709 ".mysqli_error($db)."</br>");
-					}else{ while($rowst1 = mysqli_fetch_assoc($qSqlT01)){
-									print ("<option value='".$rowst1['ref']."' ");
-									if($rowst1['ref'] == $defaults['terraza01']){
-														print ("selected = 'selected'");
-											}
-							print (">".ucfirst($rowst1['Nombre'])." ".ucfirst($rowst1['Apellidos'])."</option>");
-								}
-							} 
-					print ("</select></div>
-						<div style='float:left'>
-					<select name='terraza02' style='min-width: 142px; margin: 0.1em !important;' class='botonverde' >
-							<option value=''>TERRAZA 02</option>");
-			// CONSTRUYE EL SELECT DE CLIENTES TERRAZA 02
-			$SqlT02 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'terraza02%' ORDER BY `ref` ASC ";
-				$qSqlT02 = mysqli_query($db, $SqlT02);
-					if(!$qSqlT02){ print("* ERROR SQL L.725 ".mysqli_error($db)."</br>");
-					}else{ while($rowst2 = mysqli_fetch_assoc($qSqlT02)){
-									print ("<option value='".$rowst2['ref']."' ");
-									if($rowst2['ref'] == $defaults['terraza02']){
-														print ("selected = 'selected'");
-											}
-							print (">".ucfirst($rowst2['Nombre'])." ".ucfirst($rowst2['Apellidos'])."</option>");
-								}
-							} 
-					print ("</select></div>
-					</td>
-				</tr>
-				<tr>
-					<td style='text-align:right;' class='BorderInf'>NOMBRE</td>
-					<td class='BorderInf'>
-			<input type='text' name='Nombre' size=20 maxlength=10 value='".$defaults['Nombre']."' />
-				</form>
-					</td>
-				</tr>
-				<tr>
-			<!-- *** INICIO CONSULTAR TODOS LOS CLIENTES
-				<tr>
-					<td align='center'>
-				<form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
-						<input type='submit' value='TODOS LOS CLIENTES' />
-						<input type='hidden' name='todocl' value=1 />
-					</td>
-					<td>ORDENAR POR
-						<select name='Orden'>");
-			// CONSTRUYE EL SELECT DE ORDENAR DATOS
-			/*
-			foreach($ordenar as $option => $label){
-				print ("<option value='".$option."' ");
-					if($option == $defaults['Orden']){ print ("selected = 'selected'"); }
-							print ("> $label </option>");
-				}
-			*/
-	print("</select>
-					</td>
-				</tr>
-				<tr>
-					<td align='right'>
-					<input type='checkbox' name='cnivel' value='yes' ");
-					//if($defaults['cnivel'] == 'yes') {print(" checked=\"checked\"");}
-			print(" />
-					</td>
-					<td>BUSCAR EN ADMINISTRADORES</td>
-				</form></tr> 
-			*** FIN OCULTAR VER TODOS LOS CLIENTES --> 
-				</table>"); 
+					<select name='barra02' style='min-width: 142px; margin: 0.1em !important;' class='botonverde' >
+								<option value=''>BARRA 02</option>");
+				// CONSTRUYE EL SELECT DE CLIENTES BARRA 02
+				$SqlB02 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'barra02%' ORDER BY `ref` ASC ";
+					$qSqlB02 = mysqli_query($db, $SqlB02);
+						if(!$qSqlB02){ print("* ERROR SQL L.659 ".mysqli_error($db)."</br>");
+						}else{ while($rowsb2 = mysqli_fetch_assoc($qSqlB02)){
+										print ("<option value='".$rowsb2['ref']."' ");
+										if($rowsb2['ref'] == $defaults['barra02']){
+															print ("selected = 'selected'");
+												}
+								print (">".ucfirst($rowsb2['Nombre'])." ".ucfirst($rowsb2['Apellidos'])."</option>");
+									}
+								} 
+						print ("</select></div>
+									<div style='clear:both'></div>
+							<div style='float:left'>
+					<select name='sala01' style='min-width: 142px; margin: 0.1em !important;' class='botonnaranja' >
+								<option value=''>SALA 01</option>");
+				// CONSTRUYE EL SELECT DE CLIENTES SALA 01
+				$SqlS01 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'sala01%' ORDER BY `ref` ASC ";
+					$qSqlS01 = mysqli_query($db, $SqlS01);
+						if(!$qSqlS01){ print("* ERROR SQL L.676 ".mysqli_error($db)."</br>");
+						}else{ while($rowss1 = mysqli_fetch_assoc($qSqlS01)){
+										print ("<option value='".$rowss1['ref']."' ");
+										if($rowss1['ref'] == $defaults['sala01']){
+															print ("selected = 'selected'");
+												}
+								print (">".ucfirst($rowss1['Nombre'])." ".ucfirst($rowss1['Apellidos'])."</option>");
+									}
+								} 
+						print ("</select></div>
+							<div style='float:left'>
+					<select name='sala02' style='min-width: 142px; margin: 0.1em !important;' class='botonnaranja' >
+								<option value=''>SALA 02</option>");
+				// CONSTRUYE EL SELECT DE CLIENTES SALA 02
+				$SqlS02 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'sala02%' ORDER BY `ref` ASC ";
+					$qSqlS02 = mysqli_query($db, $SqlS02);
+						if(!$qSqlS02){ print("* ERROR SQL L.692 ".mysqli_error($db)."</br>");
+						}else{ while($rowss2 = mysqli_fetch_assoc($qSqlS02)){
+										print ("<option value='".$rowss2['ref']."' ");
+										if($rowss2['ref'] == $defaults['sala02']){
+															print ("selected = 'selected'");
+												}
+								print (">".ucfirst($rowss2['Nombre'])." ".ucfirst($rowss2['Apellidos'])."</option>");
+									}
+								} 
+						print ("</select></div>
+									<div style='clear:both'></div>
+							<div style='float:left'>
+						<select name='terraza01' style='min-width: 142px; margin: 0.1em !important;' class='botonverde' >
+								<option value=''>TERRAZA 01</option>");
+				// CONSTRUYE EL SELECT DE CLIENTES TERRAZA 01
+				$SqlT01 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'terraza01%' ORDER BY `ref` ASC ";
+					$qSqlT01 = mysqli_query($db, $SqlT01);
+						if(!$qSqlT01){ print("* ERROR SQL L.709 ".mysqli_error($db)."</br>");
+						}else{ while($rowst1 = mysqli_fetch_assoc($qSqlT01)){
+										print ("<option value='".$rowst1['ref']."' ");
+										if($rowst1['ref'] == $defaults['terraza01']){
+															print ("selected = 'selected'");
+												}
+								print (">".ucfirst($rowst1['Nombre'])." ".ucfirst($rowst1['Apellidos'])."</option>");
+									}
+								} 
+						print ("</select></div>
+							<div style='float:left'>
+						<select name='terraza02' style='min-width: 142px; margin: 0.1em !important;' class='botonverde' >
+								<option value=''>TERRAZA 02</option>");
+				// CONSTRUYE EL SELECT DE CLIENTES TERRAZA 02
+				$SqlT02 =  "SELECT * FROM $ClientesWeb WHERE `Nombre` LIKE 'terraza02%' ORDER BY `ref` ASC ";
+					$qSqlT02 = mysqli_query($db, $SqlT02);
+						if(!$qSqlT02){ print("* ERROR SQL L.725 ".mysqli_error($db)."</br>");
+						}else{ while($rowst2 = mysqli_fetch_assoc($qSqlT02)){
+										print ("<option value='".$rowst2['ref']."' ");
+										if($rowst2['ref'] == $defaults['terraza02']){
+															print ("selected = 'selected'");
+												}
+								print (">".ucfirst($rowst2['Nombre'])." ".ucfirst($rowst2['Apellidos'])."</option>");
+									}
+								} 
+						print ("</select></div>
+						</td>
+					</tr>
+					<tr>
+						<td style='text-align:right;' class='BorderInf'>NOMBRE</td>
+						<td class='BorderInf'>
+				<input type='text' name='Nombre' size=20 maxlength=10 value='".$defaults['Nombre']."' />
+					</form>
+						</td>
+					</tr>
+					<tr>
+				<!-- *** INICIO CONSULTAR TODOS LOS CLIENTES
+					<tr>
+						<td align='center'>
+					<form name='todo' method='post' action='$_SERVER[PHP_SELF]' >
+							<input type='submit' value='TODOS LOS CLIENTES' />
+							<input type='hidden' name='todocl' value=1 />
+						</td>
+						<td>ORDENAR POR
+							<select name='Orden'>");
+				// CONSTRUYE EL SELECT DE ORDENAR DATOS
+				/*
+				foreach($Ordenar as $option => $label){
+					print ("<option value='".$option."' ");
+						if($option == $defaults['Orden']){ print ("selected = 'selected'"); }
+								print ("> $label </option>");
+					}
+				*/
+		print("</select>
+						</td>
+					</tr>
+					<tr>
+						<td align='right'>
+						<input type='checkbox' name='cnivel' value='yes' ");
+						//if($defaults['cnivel'] == 'yes') {print(" checked=\"checked\"");}
+				print(" />
+						</td>
+						<td>BUSCAR EN ADMINISTRADORES</td>
+					</form></tr> 
+				*** FIN OCULTAR VER TODOS LOS CLIENTES --> 
+					</table>");
+
+	} // ELSE NIVEL USUARIO NO ES CLIENTE
 
 	// DATOS LOG			
 	global $LogText;
@@ -806,8 +812,8 @@ function selec_client(){
 	global $db;			global $db_name;
 	require "../config/TablesNames.php";
 	
-	global $orden;
-	if(!isset($_POST['Orden'])){ $orden = "`id` ASC"; }else{ $orden = $_POST['Orden']; }
+	global $Orden;
+	if(!isset($_POST['Orden'])){ $Orden = "`id` ASC"; }else{ $Orden = $_POST['Orden']; }
 
 	global $ZonLocValue;	global $CountZonLoc;	$CountZonLoc = 1;
 	switch (true) {
@@ -831,7 +837,7 @@ function selec_client(){
 							$CountNomPost = strlen(trim($CountNomPost));
 	global $NomSql;	global $ZonLocSql;	global $OperSql;	global $LogText;
 
-	if ($CountZonLoc < 1){ $ZonLocSql = "";	$LogText = $LogText.'';
+	if($CountZonLoc < 1){ $ZonLocSql = "";	$LogText = $LogText.'';
 	}else{ 	$ZonLocSql = " `ref` LIKE '%".$ZonLocValue."%' "; 
 			$LogText = $LogText."* ZONA DEL LOCAL ".strtoupper($ZonLocValue)."\n\t\t\t\t\t\t";
 		}
@@ -890,8 +896,8 @@ function selec_client2(){
 	require "../config/TablesNames.php";
 
 	global $ruta;
-	if (($_POST['Nivel'] == 'admin') || ($_POST['Nivel'] == 'plus') || ($_POST['Nivel'] == 'user') || ($_POST['Nivel'] == 'caja')){ $ruta = '../Admin/img_admin/'; }
-	if ($_POST['Nivel'] == 'cliente'){ $ruta = '../AdminClientesWeb/img_cliente/'; }
+	if(($_POST['Nivel'] == 'admin')||($_POST['Nivel'] == 'plus')||($_POST['Nivel'] == 'user')||($_POST['Nivel'] == 'caja')){ $ruta = '../Admin/img_admin/'; }
+	if($_POST['Nivel'] == 'cliente'){ $ruta = '../AdminClientesWeb/img_cliente/'; }
 
 	$_SESSION['nclient'] = $_POST['Nivel'];
 	global $tabla;
@@ -970,17 +976,17 @@ function ver_todocl(){
 	// ESTÁ ANULADA EN function show_formcl($errors=[])
 	global $db;		global $db_name;	
 	require "../config/TablesNames.php";
-	$orden = $_POST['Orden'];
+	$Orden = $_POST['Orden'];
 	global $doc;
 	if(isset($_POST['doc'])){ $doc = $_POST['doc']; }else{ $doc = ''; }
 		
 		global $LogText;	
 	if(!isset($_POST['cnivel'])){
-		$sqlb =  "SELECT * FROM $ClientesWeb ORDER BY $orden ";
+		$sqlb =  "SELECT * FROM $ClientesWeb ORDER BY $Orden ";
 			$qb = mysqli_query($db, $sqlb);
 			$LogText = $LogText."* CONSLUTAR TODO TABLA CLIENTES =>\t* SESSION OPER ".$_SESSION['oper']."\n";
 	}elseif(isset($_POST['cnivel'])){
-		$sqlb =  "SELECT * FROM $Admin ORDER BY $orden ";
+		$sqlb =  "SELECT * FROM $Admin ORDER BY $Orden ";
 			$qb = mysqli_query($db, $sqlb);
 			$LogText = $LogText."* CONSLUTAR TODO TABLA ADMIN =>\t* SESSION OPER ".$_SESSION['oper']."\n";
 	}else{ }
@@ -1044,7 +1050,7 @@ function init_compra(){
 	global $db;		global $db_name;
 	require "../config/TablesNames.php";
 
-	$refcaja = $_SESSION['ref'];
+	global $refcaja;	$refcaja = $_SESSION['ref'];
 	$refcj2 = substr($refcaja,2,2);
 	global $RefOperShop;	$RefOperShop = $refcj2.date('ymd').date('His');
 	$_SESSION['oper'] = $RefOperShop;
@@ -1053,22 +1059,35 @@ function init_compra(){
 	global $date;		$date = date('Y-m-d');
 	global $ATime;		$ATime = date('H:i:s');
 	global $datecash;	$datecash = $date."/".$ATime;
-	
-	$SqlCajaShopKgCash =  "SELECT * FROM $CajaShop WHERE `kgcash` = '0.00'";
-		$QrySqlCajaShopKgCash = mysqli_query($db, $SqlCajaShopKgCash);
-		$RowSqlCajaShopKgCash = mysqli_fetch_assoc($QrySqlCajaShopKgCash);
 	global $LogText;
+	
+	global $CajaShopName;		$CajaShopName = $_SESSION['Nombre']." ".$_SESSION['Apellidos'];
+	global $ClienteName;		global $ClienteRef;		global $FiltroNivelCliente;
+	if($_SESSION['Nivel'] == 'cliente'){
+		$ClienteName = $CajaShopName; 		$ClienteRef = $refcaja;
+		$FiltroNivelCliente = " AND `refclient`= '$refcaja' ";
+	}else{
+		$ClienteName = ""; 		$ClienteRef = "";
+		$FiltroNivelCliente = "";
+	}
+
+	$SqlCajaShopKgCash =  "SELECT * FROM $CajaShop WHERE `kgcash` = '0.00' $FiltroNivelCliente ";
+	// echo "** ".$SqlCajaShopKgCash."<br>";
+		$QrySqlCajaShopKgCash = mysqli_query($db, $SqlCajaShopKgCash);
+
 	if(mysqli_num_rows($QrySqlCajaShopKgCash) >= 1){
-		$SqlDeleteCajaShop =  "DELETE FROM $CajaShop WHERE `kgcash` = '0.00' AND `refcaja` = '$refcaja' ";
+		$RowSqlCajaShopKgCash = mysqli_fetch_assoc($QrySqlCajaShopKgCash);
+		$SqlDeleteCajaShop =  "DELETE FROM $CajaShop WHERE `kgcash` = '0.00' AND `refcaja` = '$refcaja' $FiltroNivelCliente ";
+		// echo "** ".$SqlDeleteCajaShop."<br>";
 		if(mysqli_query($db, $SqlDeleteCajaShop)){ }else{ print("* ERROR SQL L.1115 ".mysqli_error($db)."<br>"); }
 		$LogText = $LogText."* CANCEL COMPRA AUTO Kg 0,00. SESSION OPER: ".$RowSqlCajaShopKgCash['oper']."\t* CAJA REF ".$RowSqlCajaShopKgCash['refcaja']."\t* CAJA NAME ".$RowSqlCajaShopKgCash['cname']."\t* CAJA DATE W.".$RowSqlCajaShopKgCash['nsemana']." / D.".$RowSqlCajaShopKgCash['datecash']."\n\t";
 	}else{ }
 
 	global $IniKey;	$IniKey = 1;
 	global $DateTime;	$DateTime =" Time: ".date('y.m.d')."/".date('H.i.s')."<br>";
-	$CajaShopName = $_SESSION['Nombre']." ".$_SESSION['Apellidos'];
 	$Comentarios = "* Init Caja: ".$CajaShopName." / ".$refcaja.$DateTime;
-	$SqlInsertCajaShop = "INSERT INTO `$db_name`.$CajaShop (`ini`,`cname`, `refcaja`, `clname`, `refclient`, `oper`, `nsemana`, `datecash`, `vseccion`, `producto`, `proname`, `kgcash`, `psiva`, `iva`, `ivae`, `pvp`, `pvptot`, `coment`) VALUES ('$IniKey', '$CajaShopName', '$refcaja', '', '', '$RefOperShop', '$semana', '$datecash', '', '', '', 0.00, 0.00, 0, 0.00, 0.00, 0.00, '$Comentarios')";
+
+	$SqlInsertCajaShop = "INSERT INTO `$db_name`.$CajaShop (`ini`,`cname`, `refcaja`, `clname`, `refclient`, `oper`, `nsemana`, `datecash`, `vseccion`, `producto`, `proname`, `kgcash`, `psiva`, `iva`, `ivae`, `pvp`, `pvptot`, `coment`) VALUES ('$IniKey', '$CajaShopName', '$refcaja', '$ClienteName', '$ClienteRef', '$RefOperShop', '$semana', '$datecash', '', '', '', 0.00, 0.00, 0, 0.00, 0.00, 0.00, '$Comentarios')";
 			
 	if(mysqli_query($db, $SqlInsertCajaShop)){
 		$LogText = $LogText."\t* INIT COMPRA NEW. SESSION OPER: ".$RefOperShop."\t* CAJA REF ".$refcaja."\t* CAJA NAME ".$CajaShopName."\t* CAJA DATE W.".$semana." / D.".$datecash."\n";
@@ -1100,7 +1119,7 @@ function cancel_compra(){
 				</th>
 			</tr>
 			<tr style='font-size:10px'>
-				<th class='BorderInfDch'>REF CAJA</th>				
+				<th class='BorderInfDch'>CAJERO</th>				
 				<th class='BorderInfDch'>REF CLIENT</th>
 				<th class='BorderInfDch'>OPER SESION</th>					
 				<th class='BorderInfDch ocultatd440'>FECHA</th>				
@@ -1195,7 +1214,7 @@ function cancel_compra2(){
 				</th>
 			</tr>
 			<tr style='font-size:10px'>
-				<th class='BorderInfDch'>REF CAJA</th>
+				<th class='BorderInfDch'>CAJERO</th>
 				<th class='BorderInfDch'>REF CLIENT</th>
 				<th class='BorderInfDch'>OPER SESION</th>
 				<th class='BorderInfDch'>FECHA</th>
@@ -1322,11 +1341,18 @@ function recup_compra(){
 
 	unset($_SESSION['oper']);
 
-	$SqlCajaShopIni0 = "SELECT * FROM $CajaShop WHERE `ini` > '0' ";
+	global $refcaja;	$refcaja = $_SESSION['ref'];
+	global $FiltroNivelCliente;
+	if($_SESSION['Nivel']=='cliente'){
+		$FiltroNivelCliente = " AND `refclient`= '$refcaja' ";
+	}else{
+		$FiltroNivelCliente = "";
+	}
+	$SqlCajaShopIni0 = "SELECT * FROM $CajaShop WHERE `ini` > '0' $FiltroNivelCliente ";
 		$QrySqlCajaShopIni0 = mysqli_query($db, $SqlCajaShopIni0);
 		$CountSqlCajaShopIni0 = mysqli_num_rows($QrySqlCajaShopIni0);
 		
-		if($CountSqlCajaShopIni0 < 1){
+	if($CountSqlCajaShopIni0 < 1){
 			print("<div align='center' style='margin-bottom:120px;margin-top:120px; color:#F1BD2D;' >
 						NO HAY COMPRAS PENDIENTES
 					</div>");
@@ -1337,7 +1363,7 @@ function recup_compra(){
 						</tr>
 						<tr style='font-size:12px'>
 							<th class='BorderInfDch'>CAJERO</th>
-							<th class='BorderInfDch ocultatd440'>REF CAJA</th>
+							<th class='BorderInfDch ocultatd440'>CAJERO</th>
 							<th class='BorderInfDch'>OPER SESION</th>		
 							<th class='BorderInfDch ocultatd440'>FECHA</th>
 							<th class='BorderInfDch'>CLIENTE</th>										
@@ -1406,7 +1432,7 @@ function subtotal(){
 			<th colspan=7 class='BorderInf muestratd440 ocultatd740' >SUBTOTAL COMPRA ".$_SESSION['oper']."</th>
 					</tr>
 					<tr style='font-size:10px'>
-						<th class='BorderInfDch ocultatd440'>REF CAJA</th>		
+						<th class='BorderInfDch ocultatd440'>CAJERO</th>		
 						<th class='BorderInfDch'>CLIENT</th>
 						<th class='BorderInfDch ocultatd740 ocultatd440'>FECHA</th>
 						<th class='BorderInfDch ocultatd440'>SECCION</th>
@@ -1557,7 +1583,7 @@ function subtotal(){
 		global $CssHeight;
 		if($RefOperShop == ''){
 		}elseif($ClientRef != ''){
-			if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){ 
+			if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){ 
 					$CssHeight = 'height=530px';
 			}else{ 	$CssHeight = 'height=290px'; }
 	
@@ -1986,7 +2012,7 @@ function modif_pro($errors=[]){
 					</th>
 				</tr>
 				<tr style='font-size:10px'>
-					<th class='BorderInfDch'>REF CAJA</th>
+					<th class='BorderInfDch'>CAJERO</th>
 					<th class='BorderInfDch'>REF CLIENT</th>
 					<th class='BorderInfDch'>OPER SESION</th>
 					<th class='BorderInfDch'>FECHA</th>	
@@ -2238,7 +2264,7 @@ function elim_pro(){
 				</th>
 			</tr>
 			<tr style='font-size:10px'>
-				<th class='BorderInfDch'>REF CAJA</th>					
+				<th class='BorderInfDch'>CAJERO</th>					
 				<th class='BorderInfDch'>REF CLIENT</th>
 				<th class='BorderInfDch'>OPER SESION</th>					
 				<th class='BorderInfDch'>FECHA</th>					
@@ -2417,21 +2443,22 @@ function elim_pro2(){
 				 ////////////////////				  ///////////////////
 
 function show_form(){
+
 	global $db;		global $db_name;
 	require "../config/TablesNames.php";
 
 	if(!isset($_SESSION['oper'])){ $_SESSION['oper'] = $_SESSION['ref']; }else{ }
 
-	global $ordenar;		global $producto;
+	global $Ordenar;		global $producto;
 	if(isset($_POST['oculto1'])){
 		$defaults = $_POST;
 		$defaults = array ('seccion' => $_POST['seccion'],
-							'Orden' => $ordenar,
+							'Orden' => $Ordenar,
 							'producto' => $producto,);
 	}elseif(isset($_POST['oculto'])){
 			$defaults = $_POST;
 	}else{	$defaults = array ('seccion' => @$_POST['seccion'],
-								'Orden' => $ordenar,
+								'Orden' => $Ordenar,
 								'producto' => $producto, );
 				}
 
@@ -2445,7 +2472,7 @@ function show_form(){
 				<button type='submit' title='NUEVA COMPRA' class='botonverde imgButIco AddBlack'></button>
 						<input type='hidden' name='init_compra' value=1 />
 			</form>	
-			<form name='recup_compra' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
+			<form name='recup_compra' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; margin-left: -0.2em;'>
 				<button type='submit' title='RECUPERAR COMPRAS' class='botonazul imgButIco CachedBlack'></button>
 						<input type='hidden' name='recup_compra' value=1 />
 			</form>");
@@ -2461,11 +2488,19 @@ function show_form(){
 
 	global $RefOperShop;		global $KeyShowFormCl;		global $KeySubTotal;
 	if((isset($_POST['init_compra']))||(isset($_POST['recup_compra2']))||(isset($_POST['cancel_compra']))||(isset($_POST['selec_client']))||(isset($_POST['selec_pro']))||(isset($_POST['subtotal']))||(isset($_POST['modif_pro2']))||(isset($_POST['modif_pro']))||(isset($_POST['elim_pro']))||(isset($_POST['elim_pro2']))||(isset($_POST['selec_client2']))||(isset($_POST['oculto1']))||(isset($_POST['oculto']))||(isset($_POST['todocl']))||(isset($_POST['show_formcl']))/*||(isset($_POST['pago']))*/){
-		print("<form name='selec_client' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
-			<button type='submit' title='SELECCIONAR CLIENTE' class='botonazul imgButIco PersonsBlack'></button>
+
+		// OCULTO EL BOTON SELECCIONAR CLIENTE
+		if($_SESSION['Nivel']=='cliente'){
+			$BotonSelecCliente = "";
+		}else{
+			$BotonSelecCliente = "<form name='selec_client' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
+				<button type='submit' title='SELECCIONAR CLIENTE' class='botonazul imgButIco PersonsBlack'>
+				</button>
 						<input type='hidden' name='selec_client' value=1 />
-					</form>	
-					<form name='subtotal' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
+					</form>";
+		}
+
+		print($BotonSelecCliente."<form name='subtotal' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
 			<button type='submit' title='CONTINUAR COMPRA' class='botonazul imgButIco CarroBlack'></button>
 						<input type='hidden' name='subtotal' value=1 />
 					</form>	
@@ -2487,7 +2522,12 @@ function show_form(){
 										show_formcl();	$KeySubTotal = 1;
 		}elseif(($KeyShowFormCl<1)&&(!isset($_POST['init_compra']))&&($sqlClNumsRow<1)){
 			$KeySubTotal = 0;
-			print("<table align='center' style='border:0px;margin-top:4px;' >
+
+		// SELECCIONA SIN REPETICION, EL VALOR DE LAS SECCIONES CON PRODUCTOS EN LA TABLA PRODUCTOS
+		$SqlProductoSeccion =  "SELECT DISTINCT $Productos.`vseccion` FROM $Productos WHERE `stock`>'0' ORDER BY `vseccion` ASC ";
+			$QryProductoSeccion = mysqli_query($db, $SqlProductoSeccion);
+
+		print("<table align='center' style='border:0px;margin-top:4px;' >
 				<tr>
 					<td style='text-align:center'>
 			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
@@ -2496,26 +2536,27 @@ function show_form(){
 		<select name='seccion' style='vertical-align: top !important; margin: 0.2em 0.2em 0.1em 0.2em; min-width:10.0em;' class='botonverde'>
 				<option value=''>SECCIONES</option>");
 
-		// SELECCIONA SIN REPETICION, EL VALOR DE LAS SECCIONES CON PRODUCTOS EN LA TABLA PRODUCTOS
-		$SqlProductoSeccion =  "SELECT DISTINCT $Productos.`vseccion` FROM $Productos WHERE `stock`>'0' ORDER BY `vseccion` ASC ";
-			$QryProductoSeccion = mysqli_query($db, $SqlProductoSeccion);
 		if(!$SqlProductoSeccion){ 
-				print("* ERROR SQL L.2555 ".mysqli_error($db)."</br>");
+				print("* ERROR SQL L.2527 ".mysqli_error($db)."</br>");
 		}else{
 			while($RowProductoSeccion = mysqli_fetch_assoc($QryProductoSeccion)){
 			// CONSULTA EN SECCIONES CON PRODUCTOS
-	$SplSecciones =  "SELECT * FROM $Secciones WHERE `valor`='$RowProductoSeccion[vseccion]' ORDER BY `valor` ASC ";
-			//$sqlb =  "SELECT * FROM $Secciones ORDER BY `valor` ASC ";
-			$QrySecciones = mysqli_query($db, $SplSecciones);
+	$SqlSecciones = "SELECT * FROM $Secciones WHERE `valor`='$RowProductoSeccion[vseccion]' ORDER BY `valor` ASC ";
+	//$SqlSecciones =  "SELECT * FROM $Secciones ORDER BY `valor` ASC ";
+			$QrySecciones = mysqli_query($db, $SqlSecciones);
 				// IMPRIME EL SELECT DESPLEGABLE CON LAS SECCIONES
-				if(!$QrySecciones){ print("* ERROR SQL L.2562 ".mysqli_error($db)."</br>");
+				if(!$QrySecciones){ 
+					print("* ERROR SQL L.2562 ".mysqli_error($db)."</br>");
 				}else{
-					$RowsSecciones = mysqli_fetch_assoc($QrySecciones);
-						print ("<option value='".$RowsSecciones['valor']."' ");
-						if($RowsSecciones['valor'] == $defaults['seccion']){ print ("selected = 'selected'"); }
+					while($RowsSecciones = mysqli_fetch_assoc($QrySecciones)){
+							print ("<option value='".$RowsSecciones['valor']."' ");
+								if($RowsSecciones['valor'] == $defaults['seccion']){
+													print ("selected = 'selected'");
+										}
 							print ("> ".$RowsSecciones['nombre']." </option>");
+					} // FIN WHILE CONSTRUYE SELECT
 				}
-			} // FIN PRIMER WHILE
+			} // FIN PRIMER WHILE CONSULTA EN SECCIONES CON PRODUCTOS
 		} // FIN ELSE CONSULTA $SqlProductoSeccion
 
 			print ("</select></form></td></tr>");	

@@ -12,8 +12,8 @@
 		$FormBoton = "CachedBlack";
     }
 
-    global $ordenar; 
-	$ordenar = array ('`id` ASC' => 'ID Ascendente','`id` DESC' => 'ID Descendente',
+    global $Ordenar; 
+	$Ordenar = array ('`id` ASC' => 'ID Ascendente','`id` DESC' => 'ID Descendente',
 						'`nombre` ASC' => 'Nombre Ascendente','`nombre` DESC' => 'Nombre Descendente',
 						'`valor` ASC' => 'Valor Ascenedente','`valor` DESC' => 'Valor Descendente',
 																);
@@ -40,7 +40,7 @@
 						<input type='hidden' name='todo' value=1 />
 			<select name='Orden' class='botonazul' >
 				<option value='`id` ASC' >ORDENAR POR</option>");
-					foreach($ordenar as $option => $label){ print ("<option value='".$option."' ");
+					foreach($Ordenar as $option => $label){ print ("<option value='".$option."' ");
 						if($option == @$defaults['Orden']){ print ("selected = 'selected'"); }
 										print ("> $label </option>");
 													}	

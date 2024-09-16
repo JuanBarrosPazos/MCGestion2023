@@ -8,10 +8,11 @@
 	}
 
 	print("<table align='center' border=0>
+	".$TrAlert."
 				<tr>
 					<th colspan=2 style='color:#F1BD2D;'>
 					<div style='display:inline-block; vertical-align:top; margin: 1.1em 0.2em 0.1em 0.2em;'>
-						DATOS DEL USUARIO A RECUPERAR
+						DATOS DEL USUARIO
 					</div>
 						<img src='img_cliente/".$defaults['myimg']."' height='44px' width='33px' />
 					</th>
@@ -19,8 +20,8 @@
 				<tr>
 					<th colspan=2>
 						<form name='boton' action='FeedbackClienteVer.php' method='post' ".$estilo." >
-							<button type='submit' title='INICIO FEEDBACK' class='botonverde imgButIco CachedBlack' >
-							</button>
+					<button type='submit' title='INICIO FEEDBACK' class='botonverde imgButIco CachedBlack' >
+					</button>
 							<input type='hidden' name='todo' value=1 />
 						</form>
 
@@ -93,25 +94,25 @@
 							<input type='hidden' name='Nombre'value='".$defaults['Nombre']."' />
 							<input type='hidden' name='Apellidos' value='".$defaults['Apellidos']."' />
 							<input type='hidden' name='myimg' value='".$defaults['myimg']."' />
-							<input type='hidden' name='lastin' value='".$defaults['lastin']."' />					
-							<input type='hidden' name='lastout' value='".$defaults['lastout']."' />					
-							<input type='hidden' name='visitadmin' value='".$defaults['visitadmin']."' />
 							<input type='hidden' name='doc' value='".$defaults['doc']."' />
 							<input type='hidden' name='dni' value='".$defaults['dni']."' />
 							<input type='hidden' name='ldni' value='".$defaults['ldni']."' />
 							<input type='hidden' name='Email' value='".$defaults['Email']."' />
 							<input type='hidden' name='Nivel' value='".$defaults['Nivel']."' />
 							<input type='hidden' name='Usuario' value='".$defaults['Usuario']."' />
-							<input type='hidden' name='Usuario2' value='".$defaults['Usuario2']."' />
+							<input type='hidden' name='Usuario2' value='".@$defaults['Usuario2']."' />
 							<input type='hidden' name='Password' value='".$defaults['Password']."' />
-							<input type='hidden' name='Password2' value='".$defaults['Password2']."' />
+							<input type='hidden' name='Password2' value='".@$defaults['Password2']."' />
 							<input type='hidden' name='Direccion' value='".$defaults['Direccion']."' />
 							<input type='hidden' name='Tlf1' value='".$defaults['Tlf1']."' />
 							<input type='hidden' name='Tlf2' value='".$defaults['Tlf2']."' />
+							<input type='hidden' name='lastin' value='".$defaults['lastin']."' />
+							<input type='hidden' name='lastout' value='".$defaults['lastout']."' />
+							<input type='hidden' name='visitadmin' value='".$defaults['visitadmin']."' />
 
-							<button type='submit' title='RECUPERAR ESTOS DATOS' class='botonverde imgButIco RestoreBlack'>
+							<button type='submit' title='".$Title."' class='".$BotonClass."'>
 							</button>
-							<input type='hidden' name='modifica' value=1 />
+							<input type='hidden' name='".$InputName."' value=1 />
 						</form>														
 					</td>
 				</tr>

@@ -10,7 +10,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus') || ($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'caja')){
+if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'caja')||($_SESSION['Nivel'] == 'cliente')){
 		if($_POST['coment_client']){ process_form(); } 
 }else{ require "../Inclu/AccesoDenegado.php"; }
 

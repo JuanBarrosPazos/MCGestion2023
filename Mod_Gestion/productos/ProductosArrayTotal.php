@@ -1,6 +1,6 @@
 <?php
 
-    global $defaults;       global $ordenar;    	global $ProductoValor;      global $Seccion;
+    global $defaults;       global $Ordenar;    	global $ProductoValor;      global $Seccion;
 
     if($ArrayProductosVer == 1){
 
@@ -136,15 +136,15 @@
 
         if((isset($_POST['oculto1']))||(isset($_POST['oculto2']))){
             $defaults = array ('seccion' => @$_POST['seccion'],
-                                'Orden' => $ordenar,);
+                                'Orden' => $Ordenar,);
         }elseif(isset($_POST['oculto'])){
             $defaults = $_POST;
         }elseif(isset($_GET['seccion'])){	
             $defaults = array ('seccion' => $_GET['seccion'],
-                                'Orden' => $ordenar,);
+                                'Orden' => $Ordenar,);
         }else{	
             $defaults = array ('seccion' => '',
-                                'Orden' => $ordenar,);
+                                'Orden' => $Ordenar,);
         }
     
     }elseif($ArrayProductosRecuperarFeed == 1){

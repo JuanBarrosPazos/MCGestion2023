@@ -17,13 +17,13 @@
 
 	global $FiltroFecha;	$FiltroFecha = "`datecash` LIKE '%".$dy1.$dm1.$dd1."%'";
 
-	global $orden;
-	if((!isset($_POST['Orden']))||($_POST['Orden']=='')){ $orden = "`datecash` ASC"; }else{ $orden = $_POST['Orden']; }
+	global $Orden;
+	if((!isset($_POST['Orden']))||($_POST['Orden']=='')){ $Orden = "`datecash` ASC"; }else{ $Orden = $_POST['Orden']; }
 
 	// ASIGNA CONSULTAS SQL
 	require "../config/TablesNames.php";
 
-	global $SqlOrdenar;			$SqlOrdenar = " ORDER BY $orden";
+	global $SqlOrdenar;			$SqlOrdenar = " ORDER BY $Orden";
 	global $SqlOrden;			// $SqlOrden = "";
 	global $SelectSum;			$SelectSum = "SELECT SUM(`pvptot`) AS ";
 	global $SelectSumFrom;		$SelectSumFrom = "FROM $VentasShop WHERE `pago` = ";

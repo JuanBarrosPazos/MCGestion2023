@@ -61,20 +61,20 @@ function show_form(){
 	
 	global $db;		global $db_name;
 	require "../config/TablesNames.php";
-	global $ordenar;
+	global $Ordenar;
 	
 	global $defaults;
 	if(isset($_GET['seccion'])){	
 		$defaults = array ('seccion' => $_GET['seccion'],
-							'Orden' => $ordenar,);
+							'Orden' => $Ordenar,);
 	}elseif((isset($_POST['oculto1']))||(isset($_POST['oculto2']))){
 		$defaults = array ('seccion' => $_POST['seccion'],
-							'Orden' => $ordenar,);
+							'Orden' => $Ordenar,);
 	}elseif(isset($_POST['oculto'])){
 		$defaults = $_POST;
 	}else{	
 		$defaults = array ('seccion' => '',
-							'Orden' => $ordenar,);
+							'Orden' => $Ordenar,);
 	}
 
 	global $SecNameName;	
