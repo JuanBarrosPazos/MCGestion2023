@@ -1,7 +1,9 @@
 <?php
 
 	global $LogText;	global $RowLogText;	global $titut;	global $datos;
-	if(!$QrySqlCajaShopOper){print("* ERROR SQL ".$LError." ".mysqli_error($db).".</br>");
+	
+	if(!$QrySqlCajaShopOper){
+		print("* ERROR SQL ".$LError." ".mysqli_error($db).".</br>");
         $LogText = "";
 	}else{
 		$QryLogText = mysqli_query($db, $SqlCajaShopOper);

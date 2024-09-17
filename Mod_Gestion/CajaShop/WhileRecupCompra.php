@@ -12,14 +12,14 @@
 		if($RowCajaShopIni0['ini'] == 1){
 			print("<div style='float:left;'>
 				<form name='recup_compra2' method='post' action='$_SERVER[PHP_SELF]'>
-					<input name='cname' type='hidden' value='".$RowCajaShopIni0['cname']."' />
-					<input name='refcaja' type='hidden' value='".$RowCajaShopIni0['refcaja']."' />
-					<input name='oper' type='hidden' value='".$RowCajaShopIni0['oper']."' />
-					<input name='datecash' type='hidden' value='".$RowCajaShopIni0['datecash']."' />
-					<input name='refclient' type='hidden' value='".$RowCajaShopIni0['refclient']."' />
-					<input name='vseccion' type='hidden' value='".$RowCajaShopIni0['vseccion']."' />
-					<input name='producto' type='hidden' value='".$RowCajaShopIni0['producto']."' />
-					<input name='kgcash' type='hidden' value='".$RowCajaShopIni0['kgcash']."' />
+					<input type='hidden' name='cname' value='".$RowCajaShopIni0['cname']."' />
+					<input type='hidden' name='refcaja' value='".$RowCajaShopIni0['refcaja']."' />
+					<input type='hidden' name='oper' value='".$RowCajaShopIni0['oper']."' />
+					<input type='hidden' name='datecash' value='".$RowCajaShopIni0['datecash']."' />
+					<input type='hidden' name='refclient' value='".$RowCajaShopIni0['refclient']."' />
+					<input type='hidden' name='vseccion' value='".$RowCajaShopIni0['vseccion']."' />
+					<input type='hidden' name='producto' value='".$RowCajaShopIni0['producto']."' />
+					<input type='hidden' name='kgcash' value='".$RowCajaShopIni0['kgcash']."' />
 				<button type='submit' title='RECUPERAR ESTA COMPRA' class='botonverde imgButIco CachedBlack' style='vertical-align:top;' ></button>
 						<input type='hidden' name='recup_compra2' value=1 />
 				</form>

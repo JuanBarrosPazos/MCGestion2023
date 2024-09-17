@@ -5,6 +5,7 @@
     global $RefOperShop;	$RefOperShop = $_SESSION['oper'];
     global $SqlCajaShopOper;    
     $SqlCajaShopOper =  "SELECT * FROM $CajaShop WHERE `oper` = '$RefOperShop' ";
+	
     global $QrySqlCajaShopOper;
     $QrySqlCajaShopOper = mysqli_query($db, $SqlCajaShopOper);
     $CountSqlCajaShopOper = mysqli_num_rows($QrySqlCajaShopOper);

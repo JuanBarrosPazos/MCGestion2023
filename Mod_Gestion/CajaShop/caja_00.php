@@ -22,6 +22,7 @@ if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['
 											  log_info();
 /*#2* ok*/	}elseif(isset($_POST['oculto'])){ show_form();
 											  process_form();
+											  
 											  subtotal();
 			}elseif(isset($_POST['selec_pro'])){		
 					if($form_errors = validate_form()){
@@ -128,7 +129,9 @@ if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['
 			}elseif(isset($_POST['pago3'])){ show_form();
 											 pago3();	
 											 log_info();													
-			}else {	show_form(); }
+			}else {	show_form();
+					recup_compra();
+			}
 
 		}else{ require "../Inclu/AccesoDenegado.php"; }
 
@@ -317,7 +320,7 @@ function pago2($errors=[]){
 				</tr>
 				<tr style='font-size:10px'>
 					<th class='BorderInfDch'>CAJERO</th>			
-					<th class='BorderInfDch'>REF CLIENT</th>
+					<th class='BorderInfDch'>CLIENTE</th>
 					<th class='BorderInfDch'>OPER SESION</th>			
 					<th class='BorderInfDch'>FECHA</th>				
 					<th class='BorderInfDch'>SECCION</th>										
@@ -443,7 +446,7 @@ function pago3(){
 					</tr>
 					<tr style='font-size:10px'>
 						<th class='BorderInfDch'>CAJERO</th>			
-						<th class='BorderInfDch'>REF CLIENT</th>
+						<th class='BorderInfDch'>CLIENTE</th>
 						<th class='BorderInfDch'>OPER SESION</th>		
 						<th class='BorderInfDch'>FECHA</th>				
 						<th class='BorderInfDch'>SECCION</th>										
@@ -1120,7 +1123,7 @@ function cancel_compra(){
 			</tr>
 			<tr style='font-size:10px'>
 				<th class='BorderInfDch'>CAJERO</th>				
-				<th class='BorderInfDch'>REF CLIENT</th>
+				<th class='BorderInfDch'>CLIENTE</th>
 				<th class='BorderInfDch'>OPER SESION</th>					
 				<th class='BorderInfDch ocultatd440'>FECHA</th>				
 				<th class='BorderInfDch'>SECCION</th>										
@@ -1215,7 +1218,7 @@ function cancel_compra2(){
 			</tr>
 			<tr style='font-size:10px'>
 				<th class='BorderInfDch'>CAJERO</th>
-				<th class='BorderInfDch'>REF CLIENT</th>
+				<th class='BorderInfDch'>CLIENTE</th>
 				<th class='BorderInfDch'>OPER SESION</th>
 				<th class='BorderInfDch'>FECHA</th>
 				<th class='BorderInfDch'>SECCION</th>										
@@ -1420,6 +1423,7 @@ function subtotal(){
 
 	global $LError;			$LError = "L.1447";
 	require 'SumarIvaTot.php';
+	//echo "** ".$SqlCajaShopOper."<br>";
 
 	global $LError;			$LError = "L.1451";
 	global $LogTextKey;		$LogTextKey = 4;
@@ -1433,7 +1437,7 @@ function subtotal(){
 					</tr>
 					<tr style='font-size:10px'>
 						<th class='BorderInfDch ocultatd440'>CAJERO</th>		
-						<th class='BorderInfDch'>CLIENT</th>
+						<th class='BorderInfDch'>CLIENTE</th>
 						<th class='BorderInfDch ocultatd740 ocultatd440'>FECHA</th>
 						<th class='BorderInfDch ocultatd440'>SECCION</th>
 						<th class='BorderInfDch'>PRODUCTO</th>
@@ -1554,7 +1558,9 @@ function subtotal(){
 				</tr>
 				<tr>
 					<td colspan=2 class='BorderInf'>");
-										
+			
+			global $SqlCajaShopOper;	global $db;		global $db_name;
+			//echo "** ".$SqlCajaShopOper."<br>";
 			$QrySqlCajaShopOper2 = mysqli_query($db, $SqlCajaShopOper);
 			$RowSqlCajaShopOper2 = mysqli_fetch_assoc($QrySqlCajaShopOper2);
 			$ClientRef = $RowSqlCajaShopOper2['refclient'];
@@ -1670,7 +1676,7 @@ function selec_pro(){
 		$RowSqlSeccionesValor = mysqli_fetch_assoc($QrySqlSeccionesValor);
 	global $_SecName;		$_SecName = $RowSqlSeccionesValor['nombre'];
 	global $_SecValue;		$_SecValue = $RowSqlSeccionesValor['valor'];
-	global $RefOperShop; 			$RefOperShop = $_SESSION['oper'];
+	global $RefOperShop; 	$RefOperShop = $_SESSION['oper'];
 	
 	// SELECCIONO LOS VALORES DE LA OPERACION
 	$SqlCajaShopOper = "SELECT * FROM $CajaShop WHERE `oper` = '$RefOperShop' ";
@@ -1981,7 +1987,7 @@ function modif_pro($errors=[]){
 	$stock1 = substr($_POST['stock'],0,$nstock);
 	$stock2 = substr($_POST['stock'],-2,2);
 	$stock1Max = $stock1+$kgcash1x;
-	echo "** ".$stock1Max."<br>";
+	//echo "** ".$stock1Max."<br>";
 
 	$_SESSION['modif1e'] = $kgcash1x;		$_SESSION['modif1d'] = $kgcash2x;
 	unset ($_SESSION['modif2e']);			unset ($_SESSION['modif2d']);
@@ -2013,7 +2019,7 @@ function modif_pro($errors=[]){
 				</tr>
 				<tr style='font-size:10px'>
 					<th class='BorderInfDch'>CAJERO</th>
-					<th class='BorderInfDch'>REF CLIENT</th>
+					<th class='BorderInfDch'>CLIENTE</th>
 					<th class='BorderInfDch'>OPER SESION</th>
 					<th class='BorderInfDch'>FECHA</th>	
 					<th class='BorderInfDch'>SECCION</th>										
@@ -2265,7 +2271,7 @@ function elim_pro(){
 			</tr>
 			<tr style='font-size:10px'>
 				<th class='BorderInfDch'>CAJERO</th>					
-				<th class='BorderInfDch'>REF CLIENT</th>
+				<th class='BorderInfDch'>CLIENTE</th>
 				<th class='BorderInfDch'>OPER SESION</th>					
 				<th class='BorderInfDch'>FECHA</th>					
 				<th class='BorderInfDch'>SECCION</th>										
@@ -2447,7 +2453,14 @@ function show_form(){
 	global $db;		global $db_name;
 	require "../config/TablesNames.php";
 
-	if(!isset($_SESSION['oper'])){ $_SESSION['oper'] = $_SESSION['ref']; }else{ }
+	if((!isset($_SESSION['oper']))&&(isset($_POST['oper']))){ 
+			$_SESSION['oper'] = $_POST['oper']; 
+	}else{
+			$SqlSelectCajaShopOper = "SELECT * FROM $CajaShop WHERE `refcaja` = '$_SESSION[ref]' LIMIT 1 ";
+			$QrySelectCajaShopOper = mysqli_query($db, $SqlSelectCajaShopOper);
+			$RowSelectCajaShopOper = mysqli_fetch_assoc($QrySelectCajaShopOper);
+			$_SESSION['oper'] = $RowSelectCajaShopOper['oper'];
+	}
 
 	global $Ordenar;		global $producto;
 	if(isset($_POST['oculto1'])){
@@ -2460,7 +2473,7 @@ function show_form(){
 	}else{	$defaults = array ('seccion' => @$_POST['seccion'],
 								'Orden' => $Ordenar,
 								'producto' => $producto, );
-				}
+	}
 
 	print("<table align='center' style='border:0px; margin-top:0.1em;'>
 			<tr>
@@ -2529,12 +2542,17 @@ function show_form(){
 
 		print("<table align='center' style='border:0px;margin-top:4px;' >
 				<tr>
+					<td style='text-align:center; color:#F1BD2D;' >
+					SELECCIONE UNA SECCION <br> Y LUEGO UN PRODUCTO
+					</td>
+				</tr>
+				<tr>
 					<td style='text-align:center'>
 			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
 		<button type='submit' title='CONSULTAR SECCIONES' class='botonverde imgButIco BuscaBlack'></button>
 				<input type='hidden' name='oculto1' value=1 />
 		<select name='seccion' style='vertical-align: top !important; margin: 0.2em 0.2em 0.1em 0.2em; min-width:10.0em;' class='botonverde'>
-				<option value=''>SECCIONES</option>");
+				<option value='' >SECCIONES</option>");
 
 		if(!$SqlProductoSeccion){ 
 				print("* ERROR SQL L.2527 ".mysqli_error($db)."</br>");
@@ -2568,7 +2586,8 @@ function show_form(){
 			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;' >
 		<button type='submit' title='CONSULTAR PRODUCTOS' class='botonazul imgButIco BuscaBlack' style='margin-top: -0.2em;' ></button>
 				<input type='hidden' name='oculto' value=1 />
-				<input name='seccion' type='hidden' value='".$_POST['seccion']."' />
+				<input type='hidden' name='seccion' value='".$_POST['seccion']."' />
+				<input type='hidden' name='oper' value='".$_SESSION['oper']."' />
 		<select name='producto'style='vertical-align: top !important; margin: -0.2em 0.2em 0.1em 0.2em; min-width:10.0em;' class='botonazul' >
 			<option value=''>PRODUCTOS</option>");
 				//$sqlp = "SELECT * FROM $Productos ORDER BY `valor` ASC ";
