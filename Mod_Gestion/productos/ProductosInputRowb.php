@@ -17,7 +17,6 @@
             <input type='hidden' name='kgbad' value='".$rowb['kgbad']."' />
             <input type='hidden' name='datekgbad' value='".$rowb['datekgbad']."' />
             <input type='hidden' name='kgcash' value='".$rowb['kgcash']."' />
-            <input type='hidden' name='pvptot' value='".$rowb['pvptot']."' />
             <input type='hidden' name='datecash' value='".$rowb['datecash']."' />
             <input type='hidden' name='stock' value='".$rowb['stock']."' />
             <input type='hidden' name='myimg1' value='".$rowb['myimg1']."' />

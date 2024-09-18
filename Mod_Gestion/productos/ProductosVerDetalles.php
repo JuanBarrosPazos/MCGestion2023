@@ -112,10 +112,6 @@ function process_form(){
 					<td>".$RowSelectDat['pvp']." €</td>
 				</tr>				
 				<tr>
-					<td style='text-align:right;' >TOTAL CASH </td>
-					<td>".$RowSelectDat['pvptot']." €</td>
-				</tr>
-				<tr>
 					<td style='text-align:right; color:#F1BD2D;' class='BorderSup' >PERECEDEROS DATE </td>
 					<td class='BorderSup'>".$RowSelectDat['datekgbad']."</td>
 				</tr>

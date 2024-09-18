@@ -60,7 +60,7 @@ function process_form(){
 	/*CREAMOS LAS IMAGENES EN LA IMG PRO SECCION */
 	require 'ProductosCreaImg.php';
 	require '../config/TablesNames.php';
-	$sql = "INSERT INTO `$db_name`.$Productos (`vseccion`, `valor`, `nombre`, `ref`, `psiva`, `iva`, `ivae`, `pvp`, `kgin`, `datekgin`, `nsemana`, `kgbad`, `datekgbad`, `kgcash`, `pvptot`, `datecash`, `stock`, `myimg1`, `myimg2`, `myimg3`, `myimg4`, `coment`) VALUES ('$_POST[seccion]', '$ProductoValor', '$_POST[nombre]', '$_POST[ref]', '$psiva', '$_POST[iva]', '$ivae', '$pvp', '$kgin',  '$date', '$semana', '$kgbad', '$_POST[datekgbad]', '$kgcash', '$pvptot', '$date', '$diferencia', '$new_name1', '$new_name2', '$new_name3', '$new_name4', '$_POST[coment]')";
+	$sql = "INSERT INTO `$db_name`.$Productos (`vseccion`, `valor`, `nombre`, `ref`, `psiva`, `iva`, `ivae`, `pvp`, `kgin`, `datekgin`, `nsemana`, `kgbad`, `datekgbad`, `kgcash`, `datecash`, `stock`, `myimg1`, `myimg2`, `myimg3`, `myimg4`, `coment`) VALUES ('$_POST[seccion]', '$ProductoValor', '$_POST[nombre]', '$_POST[ref]', '$psiva', '$_POST[iva]', '$ivae', '$pvp', '$kgin',  '$date', '$semana', '$kgbad', '$_POST[datekgbad]', '$kgcash', '$date', '$diferencia', '$new_name1', '$new_name2', '$new_name3', '$new_name4', '$_POST[coment]')";
 		
 	if(mysqli_query($db, $sql)){ 
 		require 'ProductosBotonera.php';

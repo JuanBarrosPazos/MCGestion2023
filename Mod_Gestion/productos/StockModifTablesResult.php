@@ -70,10 +70,6 @@
 					<td>".$date."</td>
 				</tr>
 				<tr>
-					<td style='text-align:right;'>CAJA TOT €</td>
-					<td>".$pvptot." €</td>
-				</tr>
-				<tr>
 					<td colspan=2 style='text-align:center;'>COMENTARIOS</td>
 				</tr>
 				<tr>

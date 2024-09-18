@@ -25,7 +25,7 @@
                                 'datekgin' => '', 'kgin1' => '0','kgin2' => '00',
                                 'pvp1' => '0','pvp2' => '00',
                                 'iva' =>  '21','psiva' => '0.00',
-                                'pvp' => '0.00','pvptot' => '0.00',
+                                'pvp' => '0.00',
                                 'datekgbad' => '','kgbad1' => '0','kgbad2' => '00',
                                 'datecash' => $date,'kgcash1' => '0','kgcash2' => '00',
                                 'coment' => '',
@@ -38,7 +38,7 @@
                                 'kgin1' => $_POST['kgin1'],'kgin2' => $_POST['kgin2'],
                                 'pvp1' => $_POST['pvp1'],'pvp2' => $_POST['pvp2'],
                                    'iva' =>  $_POST['iva'],
-                                   'psiva' => $psiva,'pvp' => $pvp,'pvptot' => $pvptot,
+                                   'psiva' => $psiva,'pvp' => $pvp,
                                 'datekgbad' => $_POST['datekgbad'],'kgbad1' => '0','kgbad2' => '00',
                                 'datecash' => $date,'kgcash1' => '0','kgcash2' => '00',
                                 'coment' => $_POST['coment'],
@@ -49,7 +49,7 @@
                                     'datekgin' => '','kgin1' => '0','kgin2' => '00',
                                     'pvp1' => '0','pvp2' => '00',
                                     'iva' =>  '21','psiva' => '0.00',
-                                    'pvp' => '0.00','pvptot' => '0.00',
+                                    'pvp' => '0.00',
                                     'datekgbad' => '','kgbad1' => '0','kgbad2' => '00',
                                     'datecash' => $date,'kgcash1' => '0','kgcash2' => '00',
                                     'coment' => '',
@@ -232,16 +232,13 @@
 			$pvp = $_POST['pvp'];
 			$pvp = floatval($pvp);	    			$pvp = number_format($pvp,2,".","");
 
-			$pvptot = $_POST['pvptot'];
-			$pvptot = floatval($pvptot);	    	$pvptot = number_format($pvptot,2,".","");
-
 			$defaults = array ( 'seccion' => $_POST['seccion'],'id' => $_POST['id'],
 								'nsemana' => $_POST['nsemana'],
 								'producto' => $_POST['producto'],'proname' => $_POST['proname'],
 								'pvp1' => $pvp1,'pvp2' => $pvp2,
 							   	'psiva' =>  $_POST['psiva'],
 							   	'iva' =>  $_POST['iva'],'ivae' =>  $_POST['ivae'],
-								'pvp' => $pvp,'pvptot' => $pvptot,
+								'pvp' => $pvp,
 								'kgin1' => $kgin1,'kgin2' => $kgin2,
 								'datekgin' => $_POST['datekgin'],
 								'kgbad1' => $kgbad1,'kgbad2' => $kgbad2,
@@ -254,7 +251,6 @@
                     require 'FormatNumber.php';
                     $defaults = $_POST;
                     $defaults['stock'] = $diferencia;
-                    $defaults['pvptot'] = $pvptot;
         }else{ }
 	
         $iva = array ( '' => 'IVA','21' => '21 %','10' => '10 %','4' => '4 %',);
@@ -271,9 +267,6 @@
 	
 			$pvp = $RowSelectProductos['pvp'];
 			$pvp = floatval($pvp);	    			$pvp = number_format($pvp,2,".","");
-
-			$pvptot = $RowSelectProductos['pvptot'];
-			$pvptot = floatval($pvptot);	    	$pvptot = number_format($pvptot,2,".","");
 
 			$defaults = array ( 'seccion' => $_POST['seccion'],
 								'id' => $_POST['id'],

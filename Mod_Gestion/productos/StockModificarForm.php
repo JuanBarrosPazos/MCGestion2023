@@ -82,12 +82,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td style='text-align:right;'>TOT CASH €</td>
-					<td>						
-		<input name='pvptot' type='hidden' value='".$defaults['pvptot']."' />".$defaults['pvptot']."
-					</td>
-				</tr>
-				<tr>
 					<td style='text-align:right;'>DATE CASH</td>
 					<td>
 		<input name='datecash' type='hidden' value='".$defaults['datecash']."' />".$_POST['datecash']."

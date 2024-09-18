@@ -18,7 +18,8 @@ if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['
 			
 /*#1* ok*/	if(isset($_POST['init_compra'])){ init_compra();
 											  show_form();
-											  subtotal();
+											  //subtotal();
+											  recup_compra();
 											  log_info();
 /*#2* ok*/	}elseif(isset($_POST['oculto'])){ show_form();
 											  process_form();
@@ -235,10 +236,10 @@ function pago2($errors=[]){
 			
 			if($ClientRef != ''){
 				if($_SESSION['nclient'] == 'cliente'){
-					$dtcl =  "SELECT * FROM $ClientesWeb WHERE `ref` = '$ClientRef' ORDER BY `Nombre` ASC LIMIT 1 ";
+					$dtcl =  "SELECT * FROM $ClientesWeb WHERE `ref` = '$ClientRef' LIMIT 1 ";
 						$qdtcl = mysqli_query($db, $dtcl);
 				}elseif(($_SESSION['nclient']=='admin')||($_SESSION['nclient']=='plus')||($_SESSION['nclient']=='user')||($_SESSION['nclient']=='caja')){
-					$dtcl =  "SELECT * FROM $Admin WHERE `ref` = '$ClientRef' ORDER BY `Nombre` ASC LIMIT 1 ";
+					$dtcl =  "SELECT * FROM $Admin WHERE `ref` = '$ClientRef' LIMIT 1 ";
 						$qdtcl = mysqli_query($db, $dtcl);
 				}
 
@@ -505,7 +506,8 @@ function pago3(){
 
 	if($KeyFor<1){
 		$SqlDeleteCajaShop =  "DELETE FROM `$db_name`.$CajaShop WHERE `oper` = '$RefOperShop' ";
-		if(mysqli_query($db, $SqlDeleteCajaShop)){ print("* COMPRA PAGADA<br>");
+		if(mysqli_query($db, $SqlDeleteCajaShop)){ 
+				//print("* COMPRA PAGADA<br>");
 		}else{ print("* ERROR SQL L.557 ".mysqli_error($db)."<br>");}	
 	}else{
 		print("* NO SE HAN BORRADO LOS REGISTROS EN ".$CajaShop."<br> * ERROR SQL L.557 ".mysqli_error($db)."<br>");
@@ -1116,7 +1118,7 @@ function cancel_compra(){
 				</th>
 				<th colspan=2 class='BorderInf' >
 			<form name='subtotal' method='post' action='$_SERVER[PHP_SELF]'>
-		<button type='submit' title='CANCELAR ELIMINAR' class='botonverde imgButIco CarroBlack'></button>
+		<button type='submit' title='CONTINUAR COMPRA' class='botonverde imgButIco CarroBlack'></button>
 				<input type='hidden' name='subtotal' value=1 />
 			</form>	
 				</th>
@@ -1208,7 +1210,7 @@ function cancel_compra2(){
 							
 	print ("<table align='center'>
 			<tr style='font-size:14px'>
-				<th colspan=9 class='BorderInf'>HA CANCELADO LA COMPRA ".$_SESSION['oper']."</th>
+				<th colspan=8 class='BorderInf'>HA CANCELADO LA COMPRA ".$_SESSION['oper']."</th>
 				<th colspan=2 class='BorderInf' >
 		<form name='init_compra' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
 			<button type='submit' title='NUEVA COMPRA' class='botonazul imgButIco InicioBlack'></button>
@@ -1226,8 +1228,7 @@ function cancel_compra2(){
 				<th class='BorderInfDch'>CARRO</th>
 				<th class='BorderInfDch'>IVA€</th>
 				<th class='BorderInfDch'>PVP</th>
-				<th class='BorderInfDch'>SUBT</th>
-				<th class='BorderInf'></th>
+				<th class='BorderInf'>SUBT</th>
 			</tr>");
 
 	while($RowSqlCajaShopOper = mysqli_fetch_assoc($QrySqlCajaShopOper)){
@@ -1242,19 +1243,18 @@ function cancel_compra2(){
 					<td class='BorderInfDch' align='right'>".$RowSqlCajaShopOper['kgcash']."</td>
 					<td class='BorderInfDch' align='right'>".$RowSqlCajaShopOper['ivae']."</td>
 					<td class='BorderInfDch' align='right'>".$RowSqlCajaShopOper['pvp']."</td>
-					<td class='BorderInfDch' align='right'>".$RowSqlCajaShopOper['pvptot']."</td>
-					<td class='BorderInf' align='right'></td>
+					<td class='BorderInf' align='right'>".$RowSqlCajaShopOper['pvptot']."</td>
 				</tr>");
 	} // FIN WHILE
 						
 	print("<tr>
-			<td colspan='11' class='BorderInf'></td>
+			<td colspan='10' class='BorderInf'></td>
 		</tr>
 			<td colspan='3' class='BorderInf'></td>
 			<td colspan='2' class='BorderInf' align='right'>TOTAL IVA</td>
 			<td colspan='2' class='BorderInfDch' align='left'>".$sumaivae." €</td>
 			<td colspan='2' class='BorderInf' align='right'>TOTAL €</td>
-			<td class='BorderInfDch' align='right'>".$sumapvptot."</td>
+			<td class='BorderInf' align='right'>".$sumapvptot."</td>
 		</table>");
 	} // FIN function cancel_compra2()
 
@@ -1294,13 +1294,12 @@ function cancel_compra2(){
 					$cuadrakgcash = floatval($cuadrakgcash);	$cuadrakgcash = number_format($cuadrakgcash,2,".","");
 				$cuadrastock = $RowSqlProductosValor['stock'] + $RowSqlCajaShopOper['kgcash'];
 					$cuadrastock = floatval($cuadrastock);	$cuadrastock = number_format($cuadrastock,2,".","");
-				$cuadrapvptot = $RowSqlProductosValor['pvptot'] - $RowSqlCajaShopOper['pvptot'];
-					$cuadrapvptot = floatval($cuadrapvptot);	$cuadrapvptot = number_format($cuadrapvptot,2,".","");
 
-				$SqlCajaShopUpdate = "UPDATE `$db_name`.$Productos SET `ivae` = $cuadraiva, `kgcash` = '$cuadrakgcash', `stock` = '$cuadrastock', `pvptot` = '$cuadrapvptot' WHERE $Productos.`valor` = '$RowSqlCajaShopOper[producto]' AND `stock` > 0  LIMIT 1 ";
+				// $SqlCajaShopUpdate = "UPDATE `$db_name`.$Productos SET `ivae` = $cuadraiva, `kgcash` = '$cuadrakgcash', `stock` = '$cuadrastock', `pvptot` = '$cuadrapvptot' WHERE $Productos.`valor` = '$RowSqlCajaShopOper[producto]' AND `stock` > 0  LIMIT 1 ";
+				$SqlCajaShopUpdate = "UPDATE `$db_name`.$Productos SET `kgcash` = '$cuadrakgcash', `stock` = '$cuadrastock' WHERE $Productos.`valor` = '$RowSqlCajaShopOper[producto]' AND `stock` > 0  LIMIT 1 ";
 
 				if(mysqli_query($db, $SqlCajaShopUpdate)){
-					print( "* ACTUALIZADO STOCK ".$seccx." / ".$Productos."</br>" );
+					//print( "* ACTUALIZADO STOCK ".$seccx." / ".$Productos."</br>" );
 					$LogText = $LogText."\n* FCANCEL 1 ACTUALIZADO STOCK ".$seccx." ".$Productos.".";
 				}else{ print("* ERROR SQL L.1329 ".mysqli_error($db));
 							}
@@ -1428,12 +1427,24 @@ function subtotal(){
 	global $LError;			$LError = "L.1451";
 	global $LogTextKey;		$LogTextKey = 4;
 	require 'RowLogText.php';
-			
+		
+		global $BotonContinuaCompra;
+		if(isset($_POST['init_compra'])){
+			$BotonContinuaCompra = "<form name='subtotal' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block; vertical-align:inherit !important;'>
+					<button type='submit' title='CONTINUAR COMPRA' class='botonverde imgButIco CarroBlack'>
+					</button>
+						<input type='hidden' name='subtotal' value=1 />
+				</form>";
+		}else{ $BotonContinuaCompra = ""; }
+		global $Cabecera;
+		$Cabecera = "<div style='display:inline-block; margin-top: 0.6em; '>
+					SUBTOTAL COMPRA ".$_SESSION['oper']."</div> ".$BotonContinuaCompra."";
+
 		print("<table align='center'> 
 					<tr style='font-size:12px'>
-			<th colspan=11 class='BorderInf ocultatd740 ocultatd440'>SUBTOTAL COMPRA ".$_SESSION['oper']."</th>
-			<th colspan=10 class='BorderInf muestratd740 ocultatd440'>SUBTOTAL COMPRA ".$_SESSION['oper']."</th>
-			<th colspan=7 class='BorderInf muestratd440 ocultatd740' >SUBTOTAL COMPRA ".$_SESSION['oper']."</th>
+			<th colspan=11 class='BorderInf ocultatd740 ocultatd440'>".$Cabecera."</th>
+			<th colspan=10 class='BorderInf muestratd740 ocultatd440'>".$Cabecera."</th>
+			<th colspan=7 class='BorderInf muestratd440 ocultatd740' >".$Cabecera."</th>
 					</tr>
 					<tr style='font-size:10px'>
 						<th class='BorderInfDch ocultatd440'>CAJERO</th>		
@@ -1710,6 +1721,11 @@ function selec_pro(){
 	$pvp = floatval($pvp);				$pvp = number_format($pvp,2,".","");
 	$pvptot = $kgcash * $pvp ;
 	$pvptot = floatval($pvptot);		$pvptot = number_format($pvptot,2,".","");
+
+	$pvp = $_POST['pvp'];
+	$pvp = floatval($pvp);				$pvp = number_format($pvp,2,".","");
+	$pvptot = $kgcash * $pvp ;
+	$pvptot = floatval($pvptot);		$pvptot = number_format($pvptot,2,".","");
 	
 	$ivaop = $_POST['iva'];
 	$ivae = $_POST['psiva']*($ivaop/100);
@@ -1750,9 +1766,6 @@ function selec_pro(){
 			$cuadrakgcash = $RowSqlProductosValor['kgcash'] + $kgcash;
 				$cuadrakgcash = floatval($cuadrakgcash);
 				$cuadrakgcash = number_format($cuadrakgcash,2,".","");
-			$cuadrapvptot = $RowSqlProductosValor['pvptot'] + $pvptot;
-				$cuadrapvptot = floatval($cuadrapvptot);
-				$cuadrapvptot = number_format($cuadrapvptot,2,".","");
 			$cuadrastock = $RowSqlProductosValor['stock'] - $kgcash;
 				$cuadrastock = floatval($cuadrastock);
 				$cuadrastock = number_format($cuadrastock,2,".","");
@@ -1760,7 +1773,8 @@ function selec_pro(){
 				$cuadraiva = floatval($cuadraiva);
 				$cuadraiva = number_format($cuadraiva,2,".","");
 		// ACTUALIZA LOS VALORES DE LA TABLA PRODUCTOS
-		$SqlUpdateProductos = "UPDATE `$db_name`.$Productos SET `ivae` = $cuadraiva, `kgcash` = '$cuadrakgcash', `stock` = '$cuadrastock', `pvptot` = '$cuadrapvptot', `datecash` = '$datecash' WHERE $Productos.`valor` = '$refpro' AND `stock` > 0  LIMIT 1 ";
+		//$SqlUpdateProductos = "UPDATE `$db_name`.$Productos SET `ivae` = $cuadraiva, `kgcash` = '$cuadrakgcash', `stock` = '$cuadrastock', `pvptot` = '$cuadrapvptot', `datecash` = '$datecash' WHERE $Productos.`valor` = '$refpro' AND `stock` > 0  LIMIT 1 ";
+		$SqlUpdateProductos = "UPDATE `$db_name`.$Productos SET `kgcash` = '$cuadrakgcash', `stock` = '$cuadrastock', `datecash` = '$datecash' WHERE $Productos.`valor` = '$refpro' AND `stock` > 0  LIMIT 1 ";
 		//echo "*L.1782 ".$SqlUpdateProductos."<br>";
 		global $LogText;		global $seccx2;
 		if(mysqli_query($db, $SqlUpdateProductos)){
@@ -1784,7 +1798,7 @@ function selec_pro(){
 		
 	}elseif((@$RowSqlCajaShopOperProducto['producto'] == $_POST['valor'])){
 
-		$SqlUpdateCajaShop = "UPDATE `$db_name`.$CajaShop SET `datecash` = '$datecash', `kgcash` = '$cuadrakgcash', `psiva` = '$_POST[psiva]', `ivae` = '$cuadraiva', `pvp` = '$_POST[pvp]', `pvptot` = '$cuadrapvptot' WHERE `oper` = '$RefOperShop' AND `producto` = '$_POST[valor]'  LIMIT 1 ";
+		$SqlUpdateCajaShop = "UPDATE `$db_name`.$CajaShop SET `datecash` = '$datecash', `kgcash` = '$cuadrakgcash', `psiva` = '$_POST[psiva]', `ivae` = '$cuadraiva', `pvp` = '$_POST[pvp]', `pvptot` = '$pvptot' WHERE `oper` = '$RefOperShop' AND `producto` = '$_POST[valor]'  LIMIT 1 ";
 		//echo "*2169 ".$SqlUpdateCajaShop."<br>";
 		if(mysqli_query($db, $SqlUpdateCajaShop)){ 
 			print($tabla);
@@ -1856,7 +1870,7 @@ function process_form($errors=[]){
 
 	$SqlProductosValor =  "SELECT * FROM $Productos WHERE `valor` $fil ";
 		$QrySqlProductosValor = mysqli_query($db, $SqlProductosValor);
-	echo "**".$SqlProductosValor."<br>";
+	//echo "**".$SqlProductosValor."<br>";
 
 	$SqlSeccionesValor =  "SELECT * FROM $Secciones WHERE `valor` = '$_POST[seccion]'";
 		$QrySqlSeccionesValor = mysqli_query($db, $SqlSeccionesValor);
@@ -2120,39 +2134,39 @@ function modif_pro2(){
 	switch (true) {
 		case (($_SESSION['modif2e'] == $_SESSION['modif1e'])&&($_SESSION['modif2d'] == $_SESSION['modif1d'])):
 				$mdf = $kgcash - $kgcashold;
-				print("* IGUAL COMPRA QUE ANTES ".$kgcash." - ".$kgcashold." = ".$mdf."</br>");
+				//print("* IGUAL COMPRA QUE ANTES ".$kgcash." - ".$kgcashold." = ".$mdf."</br>");
 			break;
 		case (($_SESSION['modif2e'] > $_SESSION['modif1e'])&&($_SESSION['modif2d'] > $_SESSION['modif1d'])):
 				$mdf = $kgcash - $kgcashold;
-				print("* MAS COMPRA QUE ANTES ".$kgcash." > ".$kgcashold." = ".$mdf."</br>");
+				//print("* MAS COMPRA QUE ANTES ".$kgcash." > ".$kgcashold." = ".$mdf."</br>");
 			break;
 		case (($_SESSION['modif2e'] > $_SESSION['modif1e'])&&($_SESSION['modif2d'] < $_SESSION['modif1d'])):
 				$mdf = $kgcash - $kgcashold;
-				print("* MAS COMPRA QUE ANTES ".$kgcash." > ".$kgcashold." = ".$mdf."</br>");
+				//print("* MAS COMPRA QUE ANTES ".$kgcash." > ".$kgcashold." = ".$mdf."</br>");
 			break;
 		case (($_SESSION['modif2e'] == $_SESSION['modif1e'])&&($_SESSION['modif2d'] > $_SESSION['modif1d'])):
 				$mdf = $kgcash - $kgcashold;
-				print("* MAS COMPRA QUE ANTES ".$kgcash." > ".$kgcashold." = ".$mdf."</br>");
+				//print("* MAS COMPRA QUE ANTES ".$kgcash." > ".$kgcashold." = ".$mdf."</br>");
 			break;
 		case (($_SESSION['modif2e'] > $_SESSION['modif1e'])&&($_SESSION['modif2d'] == $_SESSION['modif1d'])):
 				$mdf = $kgcash - $kgcashold;
-				print("* MAS COMPRA QUE ANTES ".$kgcash." > ".$kgcashold." = ".$mdf."</br>");
+				//print("* MAS COMPRA QUE ANTES ".$kgcash." > ".$kgcashold." = ".$mdf."</br>");
 			break;
 		case (($_SESSION['modif2e'] < $_SESSION['modif1e'])&&($_SESSION['modif2d'] < $_SESSION['modif1d'])):
 				$mdf = $kgcash - $kgcashold;
-				print("* MENOS COMPRA QUE ANTES ".$kgcash." < ".$kgcashold." = ".$mdf."</br>");
+				//print("* MENOS COMPRA QUE ANTES ".$kgcash." < ".$kgcashold." = ".$mdf."</br>");
 			break;
 		case (($_SESSION['modif2e'] < $_SESSION['modif1e'])&&($_SESSION['modif2d'] > $_SESSION['modif1d'])):
 				$mdf = $kgcash - $kgcashold;
-				print("* MENOS COMPRA QUE ANTES ".$kgcash." < ".$kgcashold." = ".$mdf."</br>");
+				//print("* MENOS COMPRA QUE ANTES ".$kgcash." < ".$kgcashold." = ".$mdf."</br>");
 			break;
 		case (($_SESSION['modif2e'] == $_SESSION['modif1e'])&&($_SESSION['modif2d'] < $_SESSION['modif1d'])):
 				$mdf = $kgcash - $kgcashold;
-				print("* MENOS COMPRA QUE ANTES ".$kgcash." < ".$kgcashold." = ".$mdf."</br>");
+				//print("* MENOS COMPRA QUE ANTES ".$kgcash." < ".$kgcashold." = ".$mdf."</br>");
 			break;
 		case (($_SESSION['modif2e'] < $_SESSION['modif1e'])&&($_SESSION['modif2d'] == $_SESSION['modif1d'])):
 				$mdf = $kgcash - $kgcashold;
-				print("* MENOS COMPRA QUE ANTES ".$kgcash." < ".$kgcashold." = ".$mdf."</br>");
+				//print("* MENOS COMPRA QUE ANTES ".$kgcash." < ".$kgcashold." = ".$mdf."</br>");
 			break;
 		default:
 				print("* NO SE CUMPLE EL SWITCH L.2143</br>");
@@ -2166,9 +2180,6 @@ function modif_pro2(){
 	$_SESSION['pvptotold'] = $_POST['pvptot'];
 	$pvptotold = $_POST['pvptot'];			$pvptotold = trim($pvptotold);		
 	$pvptotold = floatval($pvptotold);		$pvptotold = number_format($pvptotold,2,".","");
-	
-	$cuadrapvptot = $pvptot - $pvptotold;
-	$cuadrapvptot  = floatval($cuadrapvptot);	$cuadrapvptot  = number_format($cuadrapvptot,2,".","");
 	
 	$ivaop = $_POST['iva'];		$ivaop  = floatval($ivaop);		$ivaop  = number_format($ivaop ,2,".","");
 	$ivae = $_POST['psiva'] * ($ivaop / 100);
@@ -2222,12 +2233,11 @@ function modif_pro2(){
 	if(mysqli_num_rows($QrySqlProductosValor) > 0){
 	/* SUMA O RESTA AL STOCK EL CARRO MODIFICADO */
 		$cuadrastock = $RowSqlProductosValor['kgcash'] + $mdf;
-		$cuadrapvptot = $RowSqlProductosValor['pvptot'] + $cuadrapvptot;
 		$cuadrastock1 = $RowSqlProductosValor['stock'] - $mdf;
 	/* ACTUALIZO TABLA DE PRODUCTOS */
-		$SqlUpdateProductos = "UPDATE `$db_name`.$Productos SET `ivae` = '$ivav', `kgcash` = '$cuadrastock', `stock` = '$cuadrastock1', `pvptot` = '$cuadrapvptot' WHERE $Productos.`valor` = '$refpro' AND `stock` > 0  LIMIT 1 ";
+		$SqlUpdateProductos = "UPDATE `$db_name`.$Productos SET `ivae` = '$ivav', `kgcash` = '$cuadrastock', `stock` = '$cuadrastock1' WHERE $Productos.`valor` = '$refpro' AND `stock` > 0  LIMIT 1 ";
 		if(mysqli_query($db, $SqlUpdateProductos)){
-			print("* MODIF PRO 2 ACTUALIZADO STOCK ".$seccx." ".$Productos."</br>" );
+			//print("* MODIF PRO 2 ACTUALIZADO STOCK ".$seccx." ".$Productos."</br>" );
 			$LogText = $LogText."\t* MODIF PRO 2 ACTUALIZADO STOCK ".$seccx." ".$Productos.".\n";
 		}else{ print("* ERROR SQL L.2251 ".mysqli_error($db)."<br>"); }
 	}else{ }
@@ -2429,11 +2439,10 @@ function elim_pro2(){
 		if(mysqli_num_rows($QrySqlProductosValor) > 0){
 			/* SUMA AL STOCK AL CARRO CANCELADO */
 			$cuadrakgcash = $RowSqlProductosValor['kgcash'] - $kgcash;
-			$cuadrapvptot = $RowSqlProductosValor['pvptot'] - $_POST['pvptot'];
 			$cuadrastock = $RowSqlProductosValor['stock'] + $kgcash;
 			$cuadraivae = $RowSqlProductosValor['ivae'] - $ivav;
 		/* ACTUALIZO TABLA DE PRODUCTOS */
-		$SqlUpdateProductos = "UPDATE `$db_name`.$Productos SET `ivae` = '$cuadraivae', `kgcash` = '$cuadrakgcash', `stock` = '$cuadrastock', `pvptot` = '$cuadrapvptot' WHERE $Productos.`valor` = '$refpro' AND `stock` > 0  LIMIT 1 ";
+		$SqlUpdateProductos = "UPDATE `$db_name`.$Productos SET `ivae` = '$cuadraivae', `kgcash` = '$cuadrakgcash', `stock` = '$cuadrastock' WHERE $Productos.`valor` = '$refpro' AND `stock` > 0  LIMIT 1 ";
 
 			if(mysqli_query($db, $SqlUpdateProductos)){
 				print( "* ELIM PRO 2 ACTUALIZADO STOCK ".$Productos." ".$Productos." ".$cuadrastock."</br>" );
@@ -2453,13 +2462,46 @@ function show_form(){
 	global $db;		global $db_name;
 	require "../config/TablesNames.php";
 
-	if((!isset($_SESSION['oper']))&&(isset($_POST['oper']))){ 
-			$_SESSION['oper'] = $_POST['oper']; 
+	switch (true) {
+		case (isset($_POST['init_compra'])):
+				$_SESSION['oper']="";
+			break;
+		case (isset($_POST['oper'])):
+				$_SESSION['oper'] = $_POST['oper'];
+			break;
+		case ((!isset($_SESSION['oper']))&&(isset($_POST['oper']))):
+				$_SESSION['oper'] = $_POST['oper'];
+			break;
+		default:
+				$SqlSelectCajaShopOper = "SELECT * FROM $CajaShop WHERE `refcaja` = '$_SESSION[ref]' LIMIT 1 ";
+				$QrySelectCajaShopOper = mysqli_query($db, $SqlSelectCajaShopOper);
+				$RowSelectCajaShopOper = mysqli_fetch_assoc($QrySelectCajaShopOper);
+				$CountSelectCajaShopOper = mysqli_num_rows($QrySelectCajaShopOper);
+				if($CountSelectCajaShopOper>0){
+					$_SESSION['oper'] = $RowSelectCajaShopOper['oper'];
+				}else{
+					unset($_SESSION['oper']);
+				}
+			break;
+	}
+
+
+	if(isset($_POST['init_compra'])){
+		$_SESSION['oper']="";
+	}elseif(isset($_POST['oper'])){
+		$_SESSION['oper'] = $_POST['oper']; 
+	}elseif((!isset($_SESSION['oper']))&&(isset($_POST['oper']))){ 
+		$_SESSION['oper'] = $_POST['oper']; 
 	}else{
-			$SqlSelectCajaShopOper = "SELECT * FROM $CajaShop WHERE `refcaja` = '$_SESSION[ref]' LIMIT 1 ";
-			$QrySelectCajaShopOper = mysqli_query($db, $SqlSelectCajaShopOper);
-			$RowSelectCajaShopOper = mysqli_fetch_assoc($QrySelectCajaShopOper);
+		$SqlSelectCajaShopOper = "SELECT * FROM $CajaShop WHERE `refcaja` = '$_SESSION[ref]' LIMIT 1 ";
+		$QrySelectCajaShopOper = mysqli_query($db, $SqlSelectCajaShopOper);
+		$RowSelectCajaShopOper = mysqli_fetch_assoc($QrySelectCajaShopOper);
+		$CountSelectCajaShopOper = mysqli_num_rows($QrySelectCajaShopOper);
+		if($CountSelectCajaShopOper>0){
 			$_SESSION['oper'] = $RowSelectCajaShopOper['oper'];
+		}else{
+			unset($_SESSION['oper']);
+		}
 	}
 
 	global $Ordenar;		global $producto;

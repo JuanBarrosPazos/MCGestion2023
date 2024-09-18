@@ -4,7 +4,7 @@
 
     global $RefOperShop;	$RefOperShop = $_SESSION['oper'];
     global $SqlCajaShopOper;    
-    $SqlCajaShopOper =  "SELECT * FROM $CajaShop WHERE `oper` = '$RefOperShop' ";
+    $SqlCajaShopOper =  "SELECT * FROM $CajaShop WHERE `oper` = '$RefOperShop' ORDER BY `vseccion` ASC, `producto` ASC ";
 	
     global $QrySqlCajaShopOper;
     $QrySqlCajaShopOper = mysqli_query($db, $SqlCajaShopOper);

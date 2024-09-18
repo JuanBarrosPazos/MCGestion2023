@@ -11,7 +11,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if(($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='plus')){
+	if(($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='plus')||($_SESSION['Nivel']=='cliente')){
 		master_index();
 
 		if(isset($_POST['show_formcl'])){

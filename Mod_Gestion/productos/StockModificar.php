@@ -103,7 +103,7 @@ function process_form(){
 
 	if(($entrada - $perecedero) < 0){ $diferencia = '-' .$diferencia;}
 
-	$SqlUpdateProductos = "UPDATE `$db_name`.$Productos SET `psiva` = '$psiva', `iva` = '$_POST[iva]', `ivae` = '$ivae', `pvp` = '$pvp', `kgin` = '$kgin', `datekgin` = '$_POST[datekgin]', `datekgbad` = '$datekgbad', `pvptot` = '$pvptot', `datecash` = '$date', `stock` = '$diferencia', `coment` = '$_POST[coment]' WHERE $Productos.`id` = '$_POST[id]' LIMIT 1 ";
+	$SqlUpdateProductos = "UPDATE `$db_name`.$Productos SET `psiva` = '$psiva', `iva` = '$_POST[iva]', `ivae` = '$ivae', `pvp` = '$pvp', `kgin` = '$kgin', `datekgin` = '$_POST[datekgin]', `datekgbad` = '$datekgbad', `datecash` = '$date', `stock` = '$diferencia', `coment` = '$_POST[coment]' WHERE $Productos.`id` = '$_POST[id]' LIMIT 1 ";
 
 	global $Redir;
 	if(mysqli_query($db, $SqlUpdateProductos)){
