@@ -12,16 +12,24 @@
 					'18' => '18','19' => '19','20' => '20','21' => '21','22' => '22','23' => '23',
 					'24' => '24','25' => '25','26' => '26','27' => '27','28' => '28','29' => '29',
 					'30' => '30','31' => '31',);
-	global $Ordenar;									
-	$Ordenar = array ('' => 'ORDENAR',
-					  '`oper` ASC' => 'Operacion Asc',
-					  '`oper` DESC' => 'Operacion Desc',
-					  '`clname` ASC' => 'Nombre Cliente Asc',
-					  '`clname` DESC' => 'Nombre Cliente Desc',
-					  '`refclient` ASC' => 'Ref Cliente Asc',
-					  '`refclient` DESC' => 'Ref Cliente Desc',
-					  '`refcaja` ASC' => 'Ref Caja Asc',
-					  '`refcaja` DESC' => 'Ref Caja Desc',);
+	global $Ordenar;
+	if($_SESSION['Nivel']=='cliente'){
+		$Ordenar = array ('' => 'ORDENAR',
+						'`oper` ASC' => 'Operacion Asc',
+						'`oper` DESC' => 'Operacion Desc',
+						'`refcaja` ASC' => 'Ref Caja Asc',
+						'`refcaja` DESC' => 'Ref Caja Desc',);
+	}else{
+		$Ordenar = array ('' => 'ORDENAR',
+						'`oper` ASC' => 'Operacion Asc',
+						'`oper` DESC' => 'Operacion Desc',
+						'`clname` ASC' => 'Nombre Cliente Asc',
+						'`clname` DESC' => 'Nombre Cliente Desc',
+						'`refclient` ASC' => 'Ref Cliente Asc',
+						'`refclient` DESC' => 'Ref Cliente Desc',
+						'`refcaja` ASC' => 'Ref Caja Asc',
+						'`refcaja` DESC' => 'Ref Caja Desc',);
+	}									
 
 	global $ZonaLocal;
 	$ZonaLocal = array( 'todo' => 'VER TODO',

@@ -11,8 +11,14 @@ $SqlVentasShopSeccion =  "SELECT DISTINCT $VentasShop.`vseccion` FROM $VentasSho
 echo "**** ".$SqlVentasShopSeccion."<br>";
 */
 
-print("<table align='center' style=\"border:0px;margin-top:4px\">
-			<tr>
+print("<table align='center' style=\"border:0px;margin-top:4px\">");
+
+if($_SESSION['Nivel']=='cliente'){
+			//if(($_POST['zonaseccion']==1)||(isset($_POST['show_formcl']))){
+					require 'VentasShowFormZona.php';
+			//}else{ }
+}else{
+		print("<tr>
 				<td colspan=2 style='text-align:center;'>
 		<form name='init_compra' method='post' action='caja_00.php' style='display:inline-block;'>
 				<button type='submit' title='NUEVA COMPRA' class='botonverde imgButIco AddBlack'></button>
@@ -44,7 +50,7 @@ print("<table align='center' style=\"border:0px;margin-top:4px\">
 		</form>	
 			</td>
 		</tr>");
-            
+
     if(((isset($_POST['zonaseccion']))&&($_POST['zonaseccion']!=''))||(isset($_POST['show_formcl']))){
 
 			if(($_POST['zonaseccion']==1)||(isset($_POST['show_formcl']))){
@@ -60,4 +66,6 @@ print("<table align='center' style=\"border:0px;margin-top:4px\">
                 </tr>");
     }
 
+	} // FIN ELSE SI NO SON CLIENTES 
+	         
 ?>

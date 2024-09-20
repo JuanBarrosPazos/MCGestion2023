@@ -1,5 +1,13 @@
 <?php
 
+	global $TdIvaSopor;		global $TdPersonal;
+	if($_SESSION['Nivel']=='admin'){
+		$TdIvaSopor = "IVA SOPORTADO ".number_format($sumaivasoportado,2,".",",")." €";
+		$TdPersonal = "PERSONAL ".$sumapersonal." €";
+	}else{
+		$TdIvaSopor = "";	$TdPersonal = "";
+	}
+
 			print ("<table align='center'>
 					<tr>
 						<th colspan=11 class='BorderInf'>".mysqli_num_rows($qc)." RESULTADOS</th>
@@ -82,11 +90,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td style='text-align:right; color:#F1BD2D;'>
-						IVA SOPORTADO ".number_format($sumaivasoportado,2,".",",")." €
-                    </td>
-					<td style='text-align:right; color:#DD92FD;'>SIN PAGAR ".$sumasinpagar."</td>
-					<td colspan='2' style='text-align:right; color:#DD92FD;'>PERSONAL ".$sumapersonal." €</td>
+					<td style='text-align:right; color:#F1BD2D;'>".$TdIvaSopor." </td>
+					<td style='text-align:right; color:#DD92FD;'>".$TdPersonal."</td>
+					<td colspan='2'  style='text-align:right; color:#DD92FD;'>SIN PAGAR ".$sumasinpagar."</td>
 					<td colspan='3' style='text-align:right; color:#DD92FD;'>INVITACIONES ".$sumainvita." €</td>
 					<td colspan='4' style='text-align:right; color:#DD92FD;'>
 						NO COBRADO ".number_format($TotalInvita,2,".",",")." €

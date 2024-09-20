@@ -34,7 +34,12 @@
 	global $SqlSumaTarjeta;		$SqlSumaTarjeta = "$SelectSum 'sumatarjeta' $SelectSumFrom 'tarjeta' ";
 	global $SqlSumaBizum;		$SqlSumaBizum = "$SelectSum 'sumabizum' $SelectSumFrom 'bizum' ";
 
-	if(isset($_POST['show_formcl'])){
+	if($_SESSION['Nivel']=='cliente'){
+
+				$RefClient = $_SESSION['ref'];
+				$SqlOrden = " `refclient` = '$RefClient' AND $FiltroFecha  ";
+
+	}elseif(isset($_POST['show_formcl'])){
 		switch (true) {
 			case (($_POST['zonalocal']=='todo')&&(strlen(trim($_POST['Nombre']))<1)): 
 				$SqlOrden = " $FiltroFecha ";

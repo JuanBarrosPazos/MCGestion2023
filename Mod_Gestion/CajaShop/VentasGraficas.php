@@ -71,6 +71,8 @@
         if($sumaivasoportado>0){
     		$PorcentIvaSop = ($sumaivasoportado*100)/$sumapvptot;
         }else{ $PorcentIvaSop = 0.00; }
+
+		if($_SESSION['Nivel']=='admin'){
 		print("<li>
 					<a href='#' title='IVA SOPORTADO ".$sumaivasoportado." €'>
 				<span class='label'>".$sumaivasoportado."</span>
@@ -78,6 +80,8 @@
 				<span class='labelTit'>IVA SOPORT</span>
 					</a>
 			</li>");
+		}else{ }
+		
         if($sumaivarepercutido>0){
     		$PorcentIvaRep = ($sumaivarepercutido*100)/$sumapvptot;
         }else{ $PorcentIvaRep = 0.00; }
@@ -108,6 +112,8 @@
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
+
+	if($_SESSION['Nivel']=='admin'){
 
     // GRAFICA CONSULTA NO COBRADO
 	print ("<div style='clear:both'></div>
@@ -164,6 +170,10 @@
             </tr>
         </table>");
 
+	}else{	print ("<div style='clear:both'></div>
+					<div class='divTablaIndex' >");
+	}
+	
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
@@ -213,7 +223,9 @@
 		print("<li>
 					<a href='#' title='TOTAL COBROS ".$TotalCobrado." €'>
 			<span class='label'>".$TotalCobrado."</span>
-			<span class='count bgcolorVerde' style='height: ".$PorcentTotalCobrado."%'>(".$PorcentTotalCobrado.")</span>
+			<span class='count bgcolorVerde' style='height: ".$PorcentTotalCobrado."%'>
+				(".$PorcentTotalCobrado.")
+			</span>
 			<span class='labelTit'>TOTAL</span>
 			</a>
 			</li>

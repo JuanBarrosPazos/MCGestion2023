@@ -11,9 +11,9 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if(($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='plus')||($_SESSION['Nivel']=='cliente')){
-		master_index();
+	if(($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='plus')){
 
+		master_index();
 		if(isset($_POST['show_formcl'])){
 				if($form_errors = validate_form()){
 								show_form($form_errors);
@@ -21,10 +21,14 @@ session_start();
 						log_info();
 							}
 		}elseif((isset($_POST['formproducto']))||(isset($_POST['formseccion']))){
+			show_form();
 			process_form();
-		}
-		else{ show_form(); }
+		}else{ show_form(); }
 
+	}elseif($_SESSION['Nivel']=="cliente"){
+			master_index();
+			show_form();
+			process_form();
 	}else{ require "../Inclu/AccesoDenegado.php"; }
 
 				   ////////////////////				   ////////////////////
@@ -51,14 +55,16 @@ session_start();
 	function process_form(){
 		
 		global $db;		global $db_name;
+		require "../config/TablesNames.php";
 		
-		show_form();
+		//show_form();
 
 		require 'VentasSql.php';
 
 		if(!$qc){
-				print("* ERROR SQL L.120 QC ".mysqli_error($db)."</br></br>");
+				print("* ERROR SQL L.62 QC ".mysqli_error($db)."</br></br>");
 		}else{
+
 			if(mysqli_num_rows($qc)== 0){
 				print ("<table align='center' style=\"border:0px\">
 							<tr>
@@ -67,11 +73,12 @@ session_start();
 								</td>
 							</tr>
 						</table>");
-			}elseif(((isset($_POST['formseccion']))&&($_POST['seccion']!=''))||((isset($_POST['formproducto']))&&($_POST['producto']!=''))||(isset($_POST['show_formcl']))){
+			}elseif(((isset($_POST['formseccion']))&&($_POST['seccion']!=''))||((isset($_POST['formproducto']))&&($_POST['producto']!=''))||(isset($_POST['show_formcl']))||($_SESSION['Nivel']=='cliente')){
 					require 'VentasCalculos.php';
 					require 'VentasTabla.php';
 					require 'VentasGraficas.php';
 			}else{  } // FIN SEGUNDO ELSE ANIDADO
+
 		} // FIN PRIMER ELSE
 
 	} // FINAL process_form();
@@ -108,7 +115,11 @@ session_start();
 		global $Producto;
 		if(isset($_POST['producto'])){ $Producto = $_POST['producto']; }else{ $Producto = ""; }
 		global $ZonaSec;
-		if(isset($_POST['zonaseccion'])){ $ZonaSec = $_POST['zonaseccion']; }else{ $ZonaSec = ""; }
+
+		if($_SESSION['Nivel']=='cliente'){ $ZonaSec = 1;
+		}elseif(isset($_POST['zonaseccion'])){ $ZonaSec = $_POST['zonaseccion']; 
+		}else{ $ZonaSec = ""; }
+
 		global $ZonaLocal;
 		if(isset($_POST['zonalocal'])){ $ZonaLocal = $_POST['zonalocal']; }else{ $ZonaLocal = ""; }
 
