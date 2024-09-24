@@ -10,7 +10,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'caja')||($_SESSION['Nivel'] == 'cliente')){
+if(($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='plus')||($_SESSION['Nivel']=='user')||($_SESSION['Nivel']=='caja')||($_SESSION['Nivel']=='cliente')){
 		if($_POST['data_client']){ process_form(); } 
 		}else{ require "../Inclu/AccesoDenegado.php"; }
 
@@ -23,8 +23,8 @@ function process_form(){
 	global $nombre;		$nombre = $_POST['Nombre'];
 	global $apellido;	$apellido = $_POST['Apellidos'];
 	
-	if(($_POST['Nivel'] == 'admin')||($_POST['Nivel'] == 'plus')||($_POST['Nivel'] == 'user')||($_POST['Nivel'] == 'caja')){ $ruta = "../../Mod_Admin/Users/".$_POST['ref']."/img_admin/";
-	}elseif($_POST['Nivel'] == 'cliente'){ $ruta = "../AdminClientesWeb/img_cliente/"; }
+	if(($_POST['Nivel']=='admin')||($_POST['Nivel']=='plus')||($_POST['Nivel']=='user')||($_POST['Nivel']=='caja')){ $ruta = "../../Mod_Admin/Users/".$_POST['ref']."/img_admin/";
+	}elseif($_POST['Nivel']=='cliente'){ $ruta = "../AdminClientesWeb/img_cliente/"; }
 	$_SESSION['nclient'] = $_POST['Nivel'];
 
 	if((($_SESSION['nclient']=='cliente')||($_SESSION['Nivel']=='admin'))&&($_POST['doc']!='local')){ 

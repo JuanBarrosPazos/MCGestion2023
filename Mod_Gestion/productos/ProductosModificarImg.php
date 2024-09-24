@@ -62,28 +62,18 @@ function validate_form(){
 
 		if($_FILES['myimg']['size'] == 0){
 			$errors [] = "SELECCIONE UN FOTOGRAFÍA";
-		}
-		 
-		elseif(!$ext_correcta){
+		}elseif(!$ext_correcta){
 			$errors [] = "EXTENSIÓN NO PERMITIDA ".$_FILES['myimg']['name'];
-			}
-
-		elseif(!$tipo_correcto){
+		}elseif(!$tipo_correcto){
 			$errors [] = "TIPO DE ARCHIVO NO PERMITIDO ".$_FILES['myimg']['name'];
-			}
-
-	elseif ($_FILES['myimg']['size'] > $limite){
-	$tamanho = $_FILES['myimg']['size'] / 1024;
-	$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
-			}
-		
-			elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_PARTIAL){
+		}elseif ($_FILES['myimg']['size'] > $limite){
+			$tamanho = $_FILES['myimg']['size'] / 1024;
+			$errors [] = "El archivo".$_FILES['myimg']['name']." es mayor de 500 KBytes. ".$tamanho." KB";
+		}elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_PARTIAL){
 				$errors [] = "CARGA DE ARCHIVO INTERRUMPIDA";
-				}
-				
-				elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_NO_FILE){
+		}elseif ($_FILES['myimg']['error'] == UPLOAD_ERR_NO_FILE){
 					$errors [] = "ARCHIVO NO SE HA CARGADO";
-					}
+		}
 					
 		return $errors;
 

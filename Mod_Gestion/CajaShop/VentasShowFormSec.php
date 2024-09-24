@@ -28,7 +28,7 @@
 
 	print("<select name='seccion' style='vertical-align: top !important; margin: 0.2em 0.2em 0.1em 0.2em; min-width:10.0em;' class='botonverde'>
 				<option value=''>SECCIONES</option>");
-	if(!$SqlVentasShopSeccion){ 
+	if(!$QryVentasShopSeccion){ 
 				print("* ERROR SQL L.9 ".mysqli_error($db)."</br>");
 	}else{
 		while($RowVentasShopSeccion = mysqli_fetch_assoc($QryVentasShopSeccion)){

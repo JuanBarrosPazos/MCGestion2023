@@ -3,7 +3,7 @@
 	global $Inclu_Menu;
 
 	print("<div style='clear:both'></div>
-			<div class='MenuVertical'>
+			<div class='MenuVertical PrintNone'>
 					<!-- *************************** -->
 							<!-- INICIO MENU -->
 					<!-- *************************** -->

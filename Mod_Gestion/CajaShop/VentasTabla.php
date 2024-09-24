@@ -8,23 +8,30 @@
 		$TdIvaSopor = "";	$TdPersonal = "";
 	}
 
-			print ("<table align='center'>
-					<tr>
-						<th colspan=11 class='BorderInf'>".mysqli_num_rows($qc)." RESULTADOS</th>
-					</tr>
-					<tr>
-						<th class='BorderInfDch'>CAJERO</th>	
-						<th class='BorderInfDch'>ZONA / CLIENTE</th>
-						<th class='BorderInfDch'>OPER SESION</th>	
-						<th class='BorderInfDch'>FECHA</th>	
-						<th class='BorderInfDch'>SECCION</th>
-						<th class='BorderInfDch'>PRODUCTO</th>
-						<th class='BorderInfDch'>CARRO</th>
-						<th class='BorderInfDch'>IVA€</th>
-						<th class='BorderInfDch'>PVP</th>
-						<th class='BorderInfDch'>SUBT</th>
-						<th class='BorderInf'>PAGO</th>
-					</tr>");
+		print ("<table align='center'>
+				<tr>
+					<th colspan=11 class='BorderInf'>
+					<div style='display:inline-block; margin-top: 0.4em;'>
+						".mysqli_num_rows($qc)." RESULTADOS
+					</div>
+				<form action='' method='get' style='display:inline-block; float:right'> 
+					<input type='button' name='imprimir' title='IMPRIMIR COMPROBANTE' class='botonverde imgButIco PrintBlack' onClick='window.print();'>
+				</form>
+					</th>
+				</tr>
+				<tr>
+					<th class='BorderInfDch'>CAJERO</th>	
+					<th class='BorderInfDch'>ZONA / CLIENTE</th>
+					<th class='BorderInfDch'>OPER SESION</th>	
+					<th class='BorderInfDch'>FECHA</th>	
+					<th class='BorderInfDch'>SECCION</th>
+					<th class='BorderInfDch'>PRODUCTO</th>
+					<th class='BorderInfDch'>CARRO</th>
+					<th class='BorderInfDch'>IVA€</th>
+					<th class='BorderInfDch'>PVP</th>
+					<th class='BorderInfDch'>SUBT</th>
+					<th class='BorderInf'>PAGO</th>
+				</tr>");
 			global $Color;
 			while($rowc = mysqli_fetch_assoc($qc)){
 				

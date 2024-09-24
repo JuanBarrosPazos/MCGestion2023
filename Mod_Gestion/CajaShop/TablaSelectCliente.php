@@ -16,7 +16,7 @@
  			
 	if(($rowb['Nivel']=='admin')||($rowb['Nivel']=='plus')||($rowb['Nivel']=='user')||($rowb['Nivel']=='caja')){ 
 		$ruta = '../../Mod_Admin/Users/'.$rowb['ref']."/img_admin/";
-	}elseif($rowb['Nivel'] == 'cliente'){ 
+	}elseif($rowb['Nivel']=='cliente'){ 
 		$ruta = '../AdminClientesWeb/img_cliente/'; }
 
 			print (	"<tr align='center'>

@@ -15,7 +15,7 @@
                 </script>";
     */
 
-    global $Redir;  global $RedirUrl;   global $RedirUrl;
+    global $Redir;
     $Redir = "<script type='text/javascript'>
                     function redir(){ window.close(); }
                     setTimeout('redir()',12000); /* microsegundos */

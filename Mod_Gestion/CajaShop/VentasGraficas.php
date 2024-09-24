@@ -10,7 +10,7 @@
 	
 	print ("<div style='clear:both'></div>
 			<div class='divTablaIndex' >
-				<table class='tablac'>
+				<table class='tablac PrintNone'>
 				<tr>
 					<th class='resultadosi'>GRAFICA TOTALES</th>
 				</tr>
@@ -118,7 +118,7 @@
     // GRAFICA CONSULTA NO COBRADO
 	print ("<div style='clear:both'></div>
             <div class='divTablaIndex' >
-			    <table class='tablac' >
+			    <table class='tablac PrintNone' >
 				<tr>
 					<th class='resultadosi'>GRAFICA GRATIS</th>
 				</tr>
@@ -179,7 +179,7 @@
 				 ////////////////////				  ///////////////////
 
     //  GRAFICA CONSULTA COBRADO
-	print ("<table class='tablac'>
+	print ("<table class='tablac PrintNone'>
 				<tr>
 					<th class='resultadosi'>GRAFICA COBRADO</th>
 				</tr>

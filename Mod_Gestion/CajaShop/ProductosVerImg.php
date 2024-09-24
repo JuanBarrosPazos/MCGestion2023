@@ -27,7 +27,7 @@ function MM_showHideLayers() { //v9.0
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
-if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus') || ($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'caja')||($_SESSION['Nivel'] == 'cliente')){
+if (($_SESSION['Nivel']=='admin') || ($_SESSION['Nivel']=='plus') || ($_SESSION['Nivel']=='user') || ($_SESSION['Nivel']=='caja')||($_SESSION['Nivel']=='cliente')){
 				
 	//global $nombre;			$nombre = $_POST['Nombre'];
 	//global $apellido;		$apellido = $_POST['Apellidos'];

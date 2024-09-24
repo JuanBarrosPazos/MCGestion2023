@@ -28,7 +28,7 @@
 									* ERRORES ".$errors [$a]."\t\n";
 				}elseif($KeyErrors == 2){
 					$RefOperShop = $_SESSION['oper'];
-					if($_POST['producto'] == ''){ $tpro = 'TODOS LOS PRODUCTOS';}
+					if($_POST['producto']==''){ $tpro = 'TODOS LOS PRODUCTOS';}
 					else{$tpro = $_POST['producto'];}
 					$LogTextcarro = "	* SELECT PRO ERRORS =>\t
 									* SESSION OPER ".$RefOperShop."\t
@@ -37,7 +37,7 @@
 									* ERROR ".$errors [$a]."\n";
 				}elseif($KeyErrors == 3){
 					$RefOperShop = $_SESSION['oper'];
-					if($_POST['producto'] == ''){ $tpro = 'TODOS LOS PRODUCTOS';}
+					if($_POST['producto']==''){ $tpro = 'TODOS LOS PRODUCTOS';}
 					else{$tpro = $_POST['producto'];}
 					$LogTextcarro = "	* MODIF PRO ERRORES =>\t
 									* SESSION OPER ".$RefOperShop."\t

@@ -36,8 +36,13 @@
 
 	if($_SESSION['Nivel']=='cliente'){
 
+		if(strlen(trim(@$_POST['Nombre']))>0){
+				$LikeOperNum = " AND `oper` LIKE '%".$_POST['Nombre']."%'";
+		}else{
+				$LikeOperNum = "";
+		}
 				$RefClient = $_SESSION['ref'];
-				$SqlOrden = " `refclient` = '$RefClient' AND $FiltroFecha  ";
+				$SqlOrden = " `refclient` = '$RefClient' $LikeOperNum AND $FiltroFecha  ";
 
 	}elseif(isset($_POST['show_formcl'])){
 		switch (true) {
@@ -81,6 +86,7 @@
 					$SqlOrden = " $FiltroFecha ";
 				break;
 		} // FIN SWITCH
+
 	}else{ }
 
 	$SqlSelectVentasShop =  "SELECT * FROM $VentasShop WHERE $SqlOrden $SqlOrdenar";

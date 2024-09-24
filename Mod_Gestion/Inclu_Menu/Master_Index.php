@@ -171,7 +171,7 @@ print("<ul id='MenuBar1' class='MenuBarVertical'>
 				<button href='#' title='MENU APP' class='botonverde imgButIco MenuListBlack' style='width:2.4em !important; height:2.4em !important;' ></button>
     		<ul>
 				<li><a href='".$AdminClientesWeb."ClienteVer.php'>MIS DATOS</a></li>
-				<li><a href='".$caja."caja_00.php'>TIENDA</a></li>
+				<li><a href='".$caja."caja_00.php?tienda=1'>TIENDA</a></li>
 				<li><a href='".$caja."Ventas.php'>MIS COMPRAS</a></li>  
 			</ul>
 		</li>

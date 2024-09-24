@@ -68,7 +68,7 @@ $StyleText = "style='display:inline-block; width:96%;'";
 
     require '../Inclu/Inclu_Footer.php';
 
-    global $Redir;  global $RedirUrl;   global $RedirUrl;
+    global $Redir;
     $Redir = "<script type='text/javascript'>
                     function redir(){ window.close(); }
                     setTimeout('redir()',120000); /* microsegundos */

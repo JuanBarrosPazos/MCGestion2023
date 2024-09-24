@@ -12,7 +12,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'caja')||($_SESSION['Nivel'] == 'cliente')){
+if(($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='plus')||($_SESSION['Nivel']=='user')||($_SESSION['Nivel']=='caja')||($_SESSION['Nivel']=='cliente')){
 	master_index();
 	require "../config/TablesNames.php";	
 			
@@ -23,7 +23,6 @@ if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['
 											  log_info();
 /*#2* ok*/	}elseif(isset($_POST['oculto'])){ show_form();
 											  process_form();
-											  
 											  subtotal();
 			}elseif(isset($_POST['selec_pro'])){		
 					if($form_errors = validate_form()){
@@ -130,8 +129,8 @@ if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')||($_SESSION['
 			}elseif(isset($_POST['pago3'])){ show_form();
 											 pago3();	
 											 log_info();													
-			}else {	show_form();
-					recup_compra();
+			}else{	show_form();
+					if(isset($_GET['tienda'])){ recup_compra(); }
 			}
 
 		}else{ require "../Inclu/AccesoDenegado.php"; }
@@ -235,7 +234,7 @@ function pago2($errors=[]){
 					$_SESSION['nclient'] = $RowSqlClientesWebClientesWeb['Nivel'];
 			
 			if($ClientRef != ''){
-				if($_SESSION['nclient'] == 'cliente'){
+				if($_SESSION['nclient']=='cliente'){
 					$dtcl =  "SELECT * FROM $ClientesWeb WHERE `ref` = '$ClientRef' LIMIT 1 ";
 						$qdtcl = mysqli_query($db, $dtcl);
 				}elseif(($_SESSION['nclient']=='admin')||($_SESSION['nclient']=='plus')||($_SESSION['nclient']=='user')||($_SESSION['nclient']=='caja')){
@@ -272,9 +271,9 @@ function pago2($errors=[]){
 
 	global $ClientRef;
 	if($ClientRef != ''){ 
-		print("<table align='center'>
+		print("<table align='center' class='PrintNone'>
 				<tr>
-					<td align='center' colspan='6' class='BorderInf' style='color:#F1BD2D;'>
+					<td align='center' colspan='6' style='color:#F1BD2D;'>
 						FORMA DE PAGO
 					</td>
 				</tr>
@@ -316,8 +315,16 @@ function pago2($errors=[]){
 				</table>");
 	}else{ } // FIN if($ClientRef != '')
 		print("<table align='center'>
-				<tr style='font-size:14px'>
-					<th colspan=10 class='BorderInf'>SUBTOTAL COMPRA ".$_SESSION['oper']."</th>
+				<tr>
+					<th style='font-size:14px' colspan=10 class='BorderInf'>
+						<div style='display:inline-block; margin-top: 0.4em;'>
+							SUBTOTAL COMPRA ".$_SESSION['oper']."
+						</div>
+
+				<form action='' method='get' > 
+					<input type='button' name='imprimir' title='IMPRIMIR COMPROBANTE' class='botonverde imgButIco PrintBlack' onClick='window.print();' style='display:inline-block; float:right !important;'>
+				</form>
+					</th>
 				</tr>
 				<tr style='font-size:10px'>
 					<th class='BorderInfDch'>CAJERO</th>			
@@ -400,7 +407,7 @@ function pago3(){
 	require 'SumarIvaTot.php';
 
 	global $LogText;
-	if($_POST['producto'] == ''){ $LogText = $LogText.'TODOS LOS PRODUCTOS';
+	if($_POST['producto']==''){ $LogText = $LogText.'TODOS LOS PRODUCTOS';
 	}else{ $LogText = $LogText.$_POST['producto']; }
 
 	global $LError;		$LError = "L.399";
@@ -426,10 +433,10 @@ function pago3(){
 
 		print("<table align='center'>
 				<tr>
-					<td align='center' style='color:#F1BD2D;' >
-						FORMA DE PAGO
-					</td>
-					<td>".strtoupper($Pago)."</td>
+					<td style='text-align:center; color:#F1BD2D;' >COMPRA PAGADA</td>
+				</tr>
+				<tr>
+					<td style='text-align:center; color:#F1BD2D;' >FORMA DE PAGO ".strtoupper($Pago)."</td>
 				</tr>");
 
 		print ("<table align='center'>
@@ -438,11 +445,12 @@ function pago3(){
 							COMPRA ".$_SESSION['oper']."
 						</th>
 						<th colspan=2 class='BorderInf' >
-				<div style='float:right'>
-					<form action='' method='get'> 
+					<form action='' method='get' style='display:inline-block; float:right'> 
 						<input type='button' name='imprimir' title='IMPRIMIR COMPROBANTE' class='botonverde imgButIco PrintBlack' onClick='window.print();'>
 					</form>
-				</div>	
+							<a href='ClienteVer.php' style='display:inline-block; float:right;'>
+					<button type='button' title='INICIO CLIENTE' class='botonazul imgButIco InicioBlack' style='vertical-align:top;' ></button>
+							</a>
 						</th>
 					</tr>
 					<tr style='font-size:10px'>
@@ -500,15 +508,26 @@ function pago3(){
 	for($i=0; $i<$CountSqlCajaShopOper2; $i++){
 		$RowSqlCajaShopOper2 = mysqli_fetch_assoc($QrySqlCajaShopOper2);
 		$SqlInsertVentasShop = "INSERT INTO `$db_name`.$VentasShop (`ini`, `cname`, `refcaja`, `clname`, `refclient`, `oper`, `nsemana`, `datecash`, `vseccion`, `producto`, `proname`, `kgcash`, `psiva`, `iva`, `ivae`, `pvp`, `pvptot`, `pago`, `coment` ) VALUES ('$RowSqlCajaShopOper2[ini]', '$RowSqlCajaShopOper2[cname]', '$RowSqlCajaShopOper2[refcaja]', '$RowSqlCajaShopOper2[clname]', '$RowSqlCajaShopOper2[refclient]',  '$RowSqlCajaShopOper2[oper]', '$RowSqlCajaShopOper2[nsemana]', '$datecash', '$RowSqlCajaShopOper2[vseccion]', '$RowSqlCajaShopOper2[producto]', '$RowSqlCajaShopOper2[proname]', '$RowSqlCajaShopOper2[kgcash]', '$RowSqlCajaShopOper2[psiva]', '$RowSqlCajaShopOper2[iva]', '$RowSqlCajaShopOper2[ivae]', '$RowSqlCajaShopOper2[pvp]', '$RowSqlCajaShopOper2[pvptot]', '$Pago', '$RowSqlCajaShopOper2[coment]')";
-		if(mysqli_query($db, $SqlInsertVentasShop)){ $KeyFor = 0;
-		}else{ $KeyFor = 1;	print("* ERROR SQL L.551 ".mysqli_error($db)."<br>"); }
+		if(mysqli_query($db, $SqlInsertVentasShop)){ 
+			$KeyFor = 0;
+		}else{ 
+			$KeyFor = 1;
+			print("* ERROR SQL L.501 ".mysqli_error($db)."<br>"); 
+		}
 	} /* FIN DEL FOR */
 
 	if($KeyFor<1){
 		$SqlDeleteCajaShop =  "DELETE FROM `$db_name`.$CajaShop WHERE `oper` = '$RefOperShop' ";
 		if(mysqli_query($db, $SqlDeleteCajaShop)){ 
-				//print("* COMPRA PAGADA<br>");
-		}else{ print("* ERROR SQL L.557 ".mysqli_error($db)."<br>");}	
+			//print("* COMPRA PAGADA<br>");
+			global $RedirUrl;	$RedirUrl = "ClienteVer.php";
+			global $RedirTime;	$RedirTime = 120000;
+			require '../Inclu/AutoRedirUrl.php';
+			global $Redir;      print ($Redir);
+		}else{ 
+			print("* ERROR SQL L.557 ".mysqli_error($db)."<br>");
+		}	
+
 	}else{
 		print("* NO SE HAN BORRADO LOS REGISTROS EN ".$CajaShop."<br> * ERROR SQL L.557 ".mysqli_error($db)."<br>");
 	}
@@ -581,7 +600,7 @@ function show_formcl($errors=[]){
 						<td style='text-align:right;'>
 				<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]'>
 						<input type='checkbox' name='cnivela' value='yes' ");
-						if($defaults['cnivela'] == 'yes'){ print(" checked='checked'"); }
+						if($defaults['cnivela']=='yes'){ print(" checked='checked'"); }
 				print(" />
 						</td>
 						<td>BUSCAR EN ADMINISTRADORES</td>
@@ -723,7 +742,7 @@ function show_formcl($errors=[]){
 					<tr>
 						<td align='right'>
 						<input type='checkbox' name='cnivel' value='yes' ");
-						//if($defaults['cnivel'] == 'yes') {print(" checked=\"checked\"");}
+						//if($defaults['cnivel']=='yes') {print(" checked=\"checked\"");}
 				print(" />
 						</td>
 						<td>BUSCAR EN ADMINISTRADORES</td>
@@ -741,17 +760,17 @@ function show_formcl($errors=[]){
 			break;
 		case ($defaults['Nombre'] != ''): $LogText = $LogText."* REF CLIENTE ".$defaults['Nombre']."\t\t\t";
 			break;
-		case ($defaults['barra01'] == ''): $LogText = $LogText."* SECCION ".$defaults['barra01']."\t\t\t";
+		case ($defaults['barra01']==''): $LogText = $LogText."* SECCION ".$defaults['barra01']."\t\t\t";
 			break;
-		case ($defaults['barra02'] == ''): $LogText = $LogText."* SECCION ".$defaults['barra02']."\t\t\t";
+		case ($defaults['barra02']==''): $LogText = $LogText."* SECCION ".$defaults['barra02']."\t\t\t";
 			break;
-		case ($defaults['sala01'] == ''): $LogText = $LogText."* SECCION ".$defaults['sala01']."\t\t\t";
+		case ($defaults['sala01']==''): $LogText = $LogText."* SECCION ".$defaults['sala01']."\t\t\t";
 			break;
-		case ($defaults['sala02'] == ''): $LogText = $LogText."* SECCION ".$defaults['sala02']."\t\t\t";
+		case ($defaults['sala02']==''): $LogText = $LogText."* SECCION ".$defaults['sala02']."\t\t\t";
 			break;
-		case ($defaults['terraza01'] == ''): $LogText = $LogText."* SECCION ".$defaults['terraza01']."\t\t\t";
+		case ($defaults['terraza01']==''): $LogText = $LogText."* SECCION ".$defaults['terraza01']."\t\t\t";
 			break;
-		case ($defaults['terraza02'] == ''): $LogText = $LogText."* SECCION ".$defaults['terraza02']."\t\t\t";
+		case ($defaults['terraza02']==''): $LogText = $LogText."* SECCION ".$defaults['terraza02']."\t\t\t";
 			break;
 		default: $LogText = $LogText."";
 			break;
@@ -794,7 +813,7 @@ function show_formcl($errors=[]){
 		
 		$errors = array();
 
-		if((strlen(trim($_POST['Nombre'])) == 0)&&($_POST['barra01'] == '')&&($_POST['barra02'] == '')&&($_POST['sala01'] == '')&&($_POST['sala02'] == '')&&($_POST['terraza01'] == '')&&($_POST['terraza02'] == '')){
+		if((strlen(trim($_POST['Nombre'])) == 0)&&($_POST['barra01']=='')&&($_POST['barra02']=='')&&($_POST['sala01']=='')&&($_POST['sala02']=='')&&($_POST['terraza01']=='')&&($_POST['terraza02']=='')){
 			$errors [] = " UNO DE LOS CAMPOS ES OBLIGATORIO";
 		}elseif($CountInput > 1){
 			$errors [] = " SÓLO UNA ZONA DEL LOCAL";
@@ -901,8 +920,8 @@ function selec_client2(){
 	require "../config/TablesNames.php";
 
 	global $ruta;
-	if(($_POST['Nivel'] == 'admin')||($_POST['Nivel'] == 'plus')||($_POST['Nivel'] == 'user')||($_POST['Nivel'] == 'caja')){ $ruta = '../Admin/img_admin/'; }
-	if($_POST['Nivel'] == 'cliente'){ $ruta = '../AdminClientesWeb/img_cliente/'; }
+	if(($_POST['Nivel']=='admin')||($_POST['Nivel']=='plus')||($_POST['Nivel']=='user')||($_POST['Nivel']=='caja')){ $ruta = '../Admin/img_admin/'; }
+	if($_POST['Nivel']=='cliente'){ $ruta = '../AdminClientesWeb/img_cliente/'; }
 
 	$_SESSION['nclient'] = $_POST['Nivel'];
 	global $tabla;
@@ -1068,7 +1087,7 @@ function init_compra(){
 	
 	global $CajaShopName;		$CajaShopName = $_SESSION['Nombre']." ".$_SESSION['Apellidos'];
 	global $ClienteName;		global $ClienteRef;		global $FiltroNivelCliente;
-	if($_SESSION['Nivel'] == 'cliente'){
+	if($_SESSION['Nivel']=='cliente'){
 		$ClienteName = $CajaShopName; 		$ClienteRef = $refcaja;
 		$FiltroNivelCliente = " AND `refclient`= '$refcaja' ";
 	}else{
@@ -1154,7 +1173,7 @@ function cancel_compra(){
 			<td class='BorderInfDch' align='right'>".$RowSqlCajaShopOper['pvptot']."</td>
 			<td style='text-align:right;' class='BorderInf'>");
 
-		if($RowSqlCajaShopOper['ini'] == '1'){
+		if($RowSqlCajaShopOper['ini']=='1'){
 				print("<form name='cancel_compra2'  action='$_SERVER[PHP_SELF]' method='POST'>
 					<input name='id' type='hidden' value='".$RowSqlCajaShopOper['id']."' />
 					<input name='cname' type='hidden' value='".$RowSqlCajaShopOper['cname']."' />
@@ -1355,7 +1374,7 @@ function recup_compra(){
 		$CountSqlCajaShopIni0 = mysqli_num_rows($QrySqlCajaShopIni0);
 		
 	if($CountSqlCajaShopIni0 < 1){
-			print("<div align='center' style='margin-bottom:120px;margin-top:120px; color:#F1BD2D;' >
+			print("<div align='center' style='margin-bottom:80px;margin-top:80px; color:#F1BD2D;' >
 						NO HAY COMPRAS PENDIENTES
 					</div>");
 	}else{	print ("<table align='center'>
@@ -1438,7 +1457,10 @@ function subtotal(){
 		}else{ $BotonContinuaCompra = ""; }
 		global $Cabecera;
 		$Cabecera = "<div style='display:inline-block; margin-top: 0.6em; '>
-					SUBTOTAL COMPRA ".$_SESSION['oper']."</div> ".$BotonContinuaCompra."";
+					SUBTOTAL COMPRA ".$_SESSION['oper']."</div> ".$BotonContinuaCompra."
+				<form action='' method='get'> 
+					<input type='button' name='imprimir' title='IMPRIMIR COMPROBANTE' class='botonverde imgButIco PrintBlack' onClick='window.print();' style='display:inline-block; float:right'>
+				</form>";
 
 		print("<table align='center'> 
 					<tr style='font-size:12px'>
@@ -1511,6 +1533,7 @@ function subtotal(){
 					<input name='cname' type='hidden' value='".$RowSqlCajaShopOper['cname']."' />
 					<input name='refclient' type='hidden' value='".$RowSqlCajaShopOper['refclient']."' />
 					<input name='vseccion' type='hidden' value='".$RowSqlCajaShopOper['vseccion']."' />
+					<input name='seccion' type='hidden' value='".$RowSqlCajaShopOper['vseccion']."' />
 					<input name='proname' type='hidden' value='".$RowSqlCajaShopOper['proname']."' />
 					<input name='producto' type='hidden' value='".$RowSqlCajaShopOper['producto']."' />
 					<input name='psiva' type='hidden' value='".$RowSqlCajaShopOper['psiva']."' />
@@ -1575,7 +1598,7 @@ function subtotal(){
 			$QrySqlCajaShopOper2 = mysqli_query($db, $SqlCajaShopOper);
 			$RowSqlCajaShopOper2 = mysqli_fetch_assoc($QrySqlCajaShopOper2);
 			$ClientRef = $RowSqlCajaShopOper2['refclient'];
-		if(($RowSqlCajaShopOper2['oper']!="")&&($RowSqlCajaShopOper2['refclient']!="")&&($RowSqlCajaShopOper2['kgcash']>0)){
+		if(($RowSqlCajaShopOper2['oper']!="")&&($RowSqlCajaShopOper2['refclient']!="")&&($RowSqlCajaShopOper2['kgcash']>0)&&($_SESSION['Nivel']!='cliente')){
 		print("<form name='selec_client' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
 						<input name='refclient' type='hidden' value='".$RowSqlCajaShopOper2['refclient']."' />
 			<button type='submit' title='MODIFICAR CLIENTE' class='botonnaranja imgButIco PersonAddBlack'></button>
@@ -1600,12 +1623,12 @@ function subtotal(){
 		global $CssHeight;
 		if($RefOperShop == ''){
 		}elseif($ClientRef != ''){
-			if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){ 
+			if(($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='plus')){ 
 					$CssHeight = 'height=530px';
 			}else{ 	$CssHeight = 'height=290px'; }
 	
 			global $SqlClientesWebClientRef2;
-			if($_SESSION['nclient'] == 'cliente'){
+			if($_SESSION['nclient']=='cliente'){
 				$SqlClientesWebClientRef2 =  "SELECT * FROM $ClientesWeb WHERE `ref` = '$ClientRef' ORDER BY `Nombre` ASC ";
 					$CssHeight = 'height=530px';
 			}elseif(($_SESSION['nclient']=='admin')||($_SESSION['nclient']=='plus')||($_SESSION['nclient']== 'user')||($_SESSION['nclient']=='caja')){
@@ -1733,7 +1756,7 @@ function selec_pro(){
 	$ivav = $ivae * $kgcash;
 	$ivav = floatval($ivav);			$ivav = number_format($ivav,2,".","");
 	global $tabla;
-	$tabla = "<table align='center' style='margin-top:10px'>
+	$tabla = "<table align='center' style='margin-top:10px' class='PrintNone'>
 				<tr>
 					<th colspan=4 >HA SELECCIONADO SECCION ".$RowSqlSeccionesValor['nombre']."</th>
 				</tr>
@@ -1877,7 +1900,7 @@ function process_form($errors=[]){
 		$RowSqlSeccionesValor = mysqli_fetch_assoc($QrySqlSeccionesValor);
 
 	if(mysqli_num_rows($QrySqlSeccionesValor)== 0){ 
-		print("<table align='center' style=\"margin-top:20px;margin-bottom:20px\">
+		print("<table align='center' style='margin-top:20px; margin-bottom:20px;' class='PrintNone'>
 				<tr align='center'>
 					<td style='color:#F1BD2D;'>SELECCIONE UNA SECCION</td>
 				</tr>
@@ -2025,7 +2048,7 @@ function modif_pro($errors=[]){
 		//$QrySqlSeccionesValor = mysqli_query($db, $SqlSeccionesValor);
 		//$RowSqlSeccionesValor = mysqli_fetch_assoc($QrySqlSeccionesValor);
 
-		print ("<table align='center'>
+		print ("<table align='center' class='PrintNone'>
 				<tr style='font-size:14px'>
 					<th colspan=12 class='BorderInf'>
 							MODIFICAR PEDIDO CAJA SESION ".$_SESSION['oper']." 
@@ -2058,34 +2081,35 @@ function modif_pro($errors=[]){
 					<td class='BorderInfDch' align='right'>".$_POST['stock']."</td>
 					<td class='BorderInfDch' align='right'>
 			<form name='modifica'  action='$_SERVER[PHP_SELF]' method='POST'>
-				<input name='id' type='hidden' value='".$_POST['id']."' />
-				<input name='cname' type='hidden' value='".$_POST['cname']."' />
-				<input name='proname' type='hidden' value='".$_POST['proname']."' />
-				<input name='psiva' type='hidden' value='".$_POST['psiva']."' />
-				<input name='iva' type='hidden' value='".$_POST['iva']."' />
-				<input name='refcaja' type='hidden' value='".$_POST['refcaja']."' />
-				<input name='refclient' type='hidden' value='".$_POST['refclient']."' />
-				<input name='oper' type='hidden' value='".$_POST['oper']."' />
-				<input name='nsemana' type='hidden' value='".$_POST['nsemana']."' />
-				<input name='datecash' type='hidden' value='".$_POST['datecash']."' />
-				<input name='vseccion' type='hidden' value='".$_POST['vseccion']."' />
-				<input name='producto' type='hidden' value='".$_POST['producto']."' />
-				<input name='stock' type='hidden' value='".$_POST['stock']."' />
-				<input name='stock1' type='hidden' value='".$stock1."' />
-				<input name='stock2' type='hidden' value='".$stock2."' />
-				<input name='kgcashx' type='hidden' value='".$_POST['kgcashx']."' />
-				<input name='kgcash1' type='number' min='00' max='".$stock1Max."' size='6' maxlength='2' value='".$defaults['kgcash1']."' style='text-align:right' />
+				<input type='hidden' name='id' value='".$_POST['id']."' />
+				<input type='hidden' name='cname' value='".$_POST['cname']."' />
+				<input type='hidden' name='proname' value='".$_POST['proname']."' />
+				<input type='hidden' name='psiva' value='".$_POST['psiva']."' />
+				<input type='hidden' name='iva' value='".$_POST['iva']."' />
+				<input type='hidden' name='refcaja' value='".$_POST['refcaja']."' />
+				<input type='hidden' name='refclient' value='".$_POST['refclient']."' />
+				<input type='hidden' name='oper' value='".$_POST['oper']."' />
+				<input type='hidden' name='nsemana' value='".$_POST['nsemana']."' />
+				<input type='hidden' name='datecash' value='".$_POST['datecash']."' />
+				<input type='hidden' name='vseccion' value='".$_POST['vseccion']."' />
+				<input type='hidden' name='seccion' value='".$_POST['vseccion']."' />
+				<input type='hidden' name='producto' value='".$_POST['producto']."' />
+				<input type='hidden' name='stock' value='".$_POST['stock']."' />
+				<input type='hidden' name='stock1' value='".$stock1."' />
+				<input type='hidden' name='stock2' value='".$stock2."' />
+				<input type='hidden' name='kgcashx' value='".$_POST['kgcashx']."' />
+				<input type='number' name='kgcash1' min='00' max='".$stock1Max."' size='6' maxlength='2' value='".$defaults['kgcash1']."' style='text-align:right' />
 				,
-				<input name='kgcash2' type='number' min='00' max='99' size='6' maxlength='2' value='".$defaults['kgcash2']."' />
+				<input type='number' name='kgcash2' min='00' max='99' size='6' maxlength='2' value='".$defaults['kgcash2']."' />
 					</td>
 					<td class='BorderInfDch' align='right'>
-				<input name='ivae' type='hidden' value='".$_POST['ivae']."' />".$_POST['ivae']."
+				<input type='hidden' name='ivae' value='".$_POST['ivae']."' />".$_POST['ivae']."
 					</td>
 					<td class='BorderInfDch' align='right'>
-				<input name='pvp' type='hidden' value='".$_POST['pvp']."' />".$_POST['pvp']."
+				<input type='hidden' name='pvp' value='".$_POST['pvp']."' />".$_POST['pvp']."
 					</td>
 					<td class='BorderInfDch' align='right'>
-				<input name='pvptot' type='hidden' value='".$_POST['pvptot']."' />".$_POST['pvptot']."
+				<input type='hidden' name='pvptot' value='".$_POST['pvptot']."' />".$_POST['pvptot']."
 					</td>
 					<td colspan=2 align='center' class='BorderInf'>
 						<div style='float:left;margin-right:6px'>
@@ -2097,7 +2121,7 @@ function modif_pro($errors=[]){
 			</tr>");
 		subtotal();
 		
-		if($_POST['producto'] == ''){ $LogText = $LogText.'TODOS LOS PRODUCTOS';}
+		if($_POST['producto']==''){ $LogText = $LogText.'TODOS LOS PRODUCTOS';}
 		else{ $LogText = $LogText.$_POST['producto']; }
 		$LogText = $LogText."* MODIF PRO =>\t* SESSION OPER ".$_SESSION['oper']."\t* REF CLIENTE ".$_POST['refclient']."\t* SECCION ".$_POST['vseccion']."\t* PRODUCTO ".$_POST['producto']."\t	* UNIT CAJA ".$_POST['kgcashx']."\t* PVP ".$_POST['pvp']."\t* PVPTOT ".$_POST['pvptot']."\n";
 		print("</table>");
@@ -2188,7 +2212,7 @@ function modif_pro2(){
 
 	$tabla = "<table align='center' style='margin-top:10px'>
 				<tr>
-					<th colspan=4 > SECCION: ".strtoupper($secc2)."</th>
+					<th colspan=4 >SECCION: ".strtoupper($secc2)."</th>
 				</tr>
 				<tr>
 					<td style='text-align:right'>NAME</td><td>".$_POST['proname']."</td>
@@ -2215,7 +2239,7 @@ function modif_pro2(){
 	global $LogText;
 	if(mysqli_query($db, $SqlUpdateCajaShop)){ 
 		print( $tabla );
-		if($_POST['producto'] == ''){ $LogText = $LogText.'TODOS LOS PRODUCTOS';
+		if($_POST['producto']==''){ $LogText = $LogText.'TODOS LOS PRODUCTOS';
 		}else{ $LogText = $LogText.$_POST['producto'];}
 		$LogText = $LogText."* MODIF PRO 2 =>\t* SESSION OPER ".$_SESSION['oper']."\t* REF CLIENTE ".$_POST['refclient']."\t* SECCION ".$_POST['vseccion']."\t	* PRODUCTO ".$_POST['producto']."\t	* UNIT CAJA ".$kgcash."\t* PVP ".$_POST['pvp']."\t* PVPTOT ".$pvptot."\n";
 
@@ -2344,7 +2368,7 @@ function elim_pro(){
 				</tr>");
 
 		global $LogText;
-		if($_POST['producto'] == ''){ $LogText = $LogText.'TODOS LOS PRODUCTOS';
+		if($_POST['producto']==''){ $LogText = $LogText.'TODOS LOS PRODUCTOS';
 		}else{ $LogText = $LogText.$_POST['producto'];}
 		$LogText = $LogText."* ELIMINAR PRO 01 =>* SESSION OPER ".$_SESSION['oper']."\t* REF CLIENTE ".$_POST['refclient']."\t* SECCION ".$_POST['vseccion']."\t* PRODUCTO ".$_POST['producto']."\t* UNIT CAJA ".$_POST['kgcash']."\t* PVP ".$_POST['pvp']."\t* PVPTOT ".$_POST['pvptot']."\n";
 
@@ -2425,7 +2449,7 @@ function elim_pro2(){
 	global $LogText;
 	if(mysqli_query($db, $SqlDeleteCajaShop)){
 		print( $tabla );
-		if($_POST['producto'] == ''){ $LogText = $LogText.'TODOS LOS PRODUCTOS';
+		if($_POST['producto']==''){ $LogText = $LogText.'TODOS LOS PRODUCTOS';
 		}else{ $LogText = $LogText.$_POST['producto'];}
 		$LogText = $LogText."* ELIMINAR PRO 02 =>* SESSION OPER ".$_SESSION['oper']."\t* REF CLIENTE ".$_POST['refclient']."\t* SECCION ".$_POST['vseccion']."\t* PRODUCTO ".$_POST['producto']."\t* UNIT CAJA ".$_POST['kgcash']."\t* PVP ".$_POST['pvp']."\t* PVPTOT ".$_POST['pvptot']."\n";
 	}else{ print("* ERROR SQL L.2436 ".mysqli_error($db)."</br>"); }
@@ -2480,44 +2504,26 @@ function show_form(){
 				if($CountSelectCajaShopOper>0){
 					$_SESSION['oper'] = $RowSelectCajaShopOper['oper'];
 				}else{
-					unset($_SESSION['oper']);
+					//unset($_SESSION['oper']);
+					$_SESSION['oper']="";
 				}
 			break;
 	}
 
-
-	if(isset($_POST['init_compra'])){
-		$_SESSION['oper']="";
-	}elseif(isset($_POST['oper'])){
-		$_SESSION['oper'] = $_POST['oper']; 
-	}elseif((!isset($_SESSION['oper']))&&(isset($_POST['oper']))){ 
-		$_SESSION['oper'] = $_POST['oper']; 
-	}else{
-		$SqlSelectCajaShopOper = "SELECT * FROM $CajaShop WHERE `refcaja` = '$_SESSION[ref]' LIMIT 1 ";
-		$QrySelectCajaShopOper = mysqli_query($db, $SqlSelectCajaShopOper);
-		$RowSelectCajaShopOper = mysqli_fetch_assoc($QrySelectCajaShopOper);
-		$CountSelectCajaShopOper = mysqli_num_rows($QrySelectCajaShopOper);
-		if($CountSelectCajaShopOper>0){
-			$_SESSION['oper'] = $RowSelectCajaShopOper['oper'];
-		}else{
-			unset($_SESSION['oper']);
-		}
-	}
-
-	global $Ordenar;		global $producto;
+	global $Ordenar;
 	if(isset($_POST['oculto1'])){
-		$defaults = $_POST;
+		//$defaults = $_POST;
 		$defaults = array ('seccion' => $_POST['seccion'],
 							'Orden' => $Ordenar,
-							'producto' => $producto,);
+							'producto' => @$_POST['producto'],);
 	}elseif(isset($_POST['oculto'])){
 			$defaults = $_POST;
 	}else{	$defaults = array ('seccion' => @$_POST['seccion'],
 								'Orden' => $Ordenar,
-								'producto' => $producto, );
+								'producto' => @$_POST['producto'], );
 	}
 
-	print("<table align='center' style='border:0px; margin-top:0.1em;'>
+	print("<table align='center' style='border:0px; margin-top:0.1em;' class='PrintNone'>
 			<tr>
 				<td align='center'>* CAJA SESION ".$_SESSION['oper']."</td>
 			</tr>
@@ -2582,7 +2588,7 @@ function show_form(){
 		$SqlProductoSeccion =  "SELECT DISTINCT $Productos.`vseccion` FROM $Productos WHERE `stock`>'0' ORDER BY `vseccion` ASC ";
 			$QryProductoSeccion = mysqli_query($db, $SqlProductoSeccion);
 
-		print("<table align='center' style='border:0px;margin-top:4px;' >
+		print("<table align='center' style='border:0px;margin-top:4px;' class='PrintNone' >
 				<tr>
 					<td style='text-align:center; color:#F1BD2D;' >
 					SELECCIONE UNA SECCION <br> Y LUEGO UN PRODUCTO
@@ -2596,7 +2602,7 @@ function show_form(){
 		<select name='seccion' style='vertical-align: top !important; margin: 0.2em 0.2em 0.1em 0.2em; min-width:10.0em;' class='botonverde'>
 				<option value='' >SECCIONES</option>");
 
-		if(!$SqlProductoSeccion){ 
+		if(!$QryProductoSeccion){
 				print("* ERROR SQL L.2527 ".mysqli_error($db)."</br>");
 		}else{
 			while($RowProductoSeccion = mysqli_fetch_assoc($QryProductoSeccion)){
@@ -2621,18 +2627,27 @@ function show_form(){
 
 			print ("</select></form></td></tr>");	
 
-			if((isset($_POST['oculto1']))||(isset($_POST['oculto']))){
-				if($_POST['seccion']!=''){
+		if((isset($_POST['oculto1']))||(isset($_POST['oculto']))||(isset($_POST['selec_pro'])||(isset($_POST['modif_pro']))||(isset($_POST['modif_pro2'])))){
+
+		if((!isset($_POST['seccion']))||(strlen(trim($_POST['seccion']<1)))){
+			print("<table align='center' style='margin:-0.6em auto 0.8em auto;' class='PrintNone' >
+					<tr align='center'>
+						<td style='color:#F1BD2D;'>SELECCIONE UNA SECCION</td>
+					</tr>
+				</table>");
+		}elseif(isset($_POST['seccion'])){
 					print("<tr>
 							<td style='text-align:center;' >
 			<form name='form_tabla' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;' >
-		<button type='submit' title='CONSULTAR PRODUCTOS' class='botonazul imgButIco BuscaBlack' style='margin-top: -0.2em;' ></button>
-				<input type='hidden' name='oculto' value=1 />
-				<input type='hidden' name='seccion' value='".$_POST['seccion']."' />
-				<input type='hidden' name='oper' value='".$_SESSION['oper']."' />
+				<button type='submit' title='CONSULTAR PRODUCTOS' class='botonazul imgButIco BuscaBlack' style='margin-top: -0.2em;' >
+				</button>
+					<input type='hidden' name='oculto' value=1 />
+					<input type='hidden' name='seccion' value='".$_POST['seccion']."' />
+					<input type='hidden' name='oper' value='".$_SESSION['oper']."' />
 		<select name='producto'style='vertical-align: top !important; margin: -0.2em 0.2em 0.1em 0.2em; min-width:10.0em;' class='botonazul' >
 			<option value=''>PRODUCTOS</option>");
-				//$sqlp = "SELECT * FROM $Productos ORDER BY `valor` ASC ";
+				//$sqlp = "SELECT * FROM $Productos ORDER BY `valor` ASC "; 
+				//$sqlp = "SELECT * FROM $Productos WHERE `vseccion` = '$_SecValue' ORDER BY `valor` ASC";
 				$sqlp = "SELECT * FROM $Productos WHERE `vseccion` = '$_SecValue' ORDER BY `valor` ASC";
 				$qp = mysqli_query($db, $sqlp);
 					if(!$qp){
@@ -2646,21 +2661,14 @@ function show_form(){
 					} 
 					print ("</select></form></td></tr></table>");
 
-				}elseif($_POST['seccion']==''){
-					print("<table align='center' style='margin:-0.6em auto 0.8em auto;'>
-							<tr align='center'>
-								<td style='color:#F1BD2D;'>SELECCIONE UNA SECCION</td>
-							</tr>
-						</table>");
-						
-				}else{ } // FIN if($_POST['seccion']!=''){
+			}else{ } // FIN if($_POST['seccion']!=''){
 
 					if(!isset($_POST['producto'])){ subtotal(); }else{ }
-				} // FIN IF OCULTO1 OCULTO2
-			} // FIN IF VER FORMULARIO SECCIONES
-		}else{ print("</td></tr></table>"); } // FIN PRIMER if((isset($_POST['init_compra']))||....
+			} // FIN IF OCULTO1 OCULTO2
+		} // FIN IF VER FORMULARIO SECCIONES
+	}else{ print("</td></tr></table>"); } // FIN PRIMER if((isset($_POST['init_compra']))||....
 
-	} // FIN function show_form()
+} // FIN function show_form()
 
 				   ////////////////////				   ////////////////////
 ////////////////////				////////////////////				////////////////////

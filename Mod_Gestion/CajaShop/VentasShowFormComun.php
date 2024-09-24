@@ -11,7 +11,7 @@ $SqlVentasShopSeccion =  "SELECT DISTINCT $VentasShop.`vseccion` FROM $VentasSho
 echo "**** ".$SqlVentasShopSeccion."<br>";
 */
 
-print("<table align='center' style=\"border:0px;margin-top:4px\">");
+print("<table align='center' style='border:0px; margin-top:4px;' class='PrintNone' >");
 
 if($_SESSION['Nivel']=='cliente'){
 			//if(($_POST['zonaseccion']==1)||(isset($_POST['show_formcl']))){

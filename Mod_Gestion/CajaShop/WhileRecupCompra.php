@@ -20,7 +20,7 @@
 					<input type='hidden' name='vseccion' value='".$RowCajaShopIni0['vseccion']."' />
 					<input type='hidden' name='producto' value='".$RowCajaShopIni0['producto']."' />
 					<input type='hidden' name='kgcash' value='".$RowCajaShopIni0['kgcash']."' />
-				<button type='submit' title='RECUPERAR ESTA COMPRA' class='botonverde imgButIco CachedBlack' style='vertical-align:top;' ></button>
+				<button type='submit' title='RECUPERAR ESTA COMPRA' class='botonverde imgButIco RestoreBlack' style='vertical-align:top;' ></button>
 						<input type='hidden' name='recup_compra2' value=1 />
 				</form>
 					</div>
@@ -44,12 +44,12 @@
 				$RowSqlClientesWebClient = mysqli_fetch_assoc($QrySqlClientesWebRef);
 				$_SESSION['nclient'] = $RowSqlClientesWebClient['Nivel'];
         
-		if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'plus')){ 
+		if(($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='plus')){ 
 				$CssHeight = 'height=530px'; 
 		}else { $CssHeight = 'height=290px'; }
 
 		global $SqlClientesWebRef;
-		if($_SESSION['nclient'] == 'cliente'){
+		if($_SESSION['nclient']=='cliente'){
 			$SqlClientesWebRef =  "SELECT * FROM $ClientesWeb WHERE `ref` = '$ClientRef' ORDER BY `Nombre` ASC ";
 			$CssHeight = 'height=530px';
 		}elseif(($_SESSION['nclient']=='admin')||($_SESSION['nclient']=='plus')||($_SESSION['nclient']=='user')||($_SESSION['nclient']=='caja')){

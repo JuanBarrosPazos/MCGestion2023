@@ -1047,4 +1047,14 @@ img { border-radius: 0.8em; }
 
 } /* FIN @media screen and (max-width:440px) */
 
-
+@media print {
+	.PrintNone {
+	  display: none !important;
+	  visibility: hidden !important;
+	  border: none !important;
+	  width: 0.0em !important;
+	  height: 0.0em !important;
+	  margin: 0.0em !important;
+	}
+}
+  
