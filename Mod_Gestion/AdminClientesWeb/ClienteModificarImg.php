@@ -10,7 +10,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'cliente')){
+if (($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='cliente')){
  	
 	if (isset($_POST['oculto2'])){ show_form();}
 			elseif(isset($_POST['imagenmodif'])){

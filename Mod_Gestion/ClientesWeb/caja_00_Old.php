@@ -12,7 +12,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if ($_SESSION['Nivel'] == 'cliente'){
+if ($_SESSION['Nivel']=='cliente'){
 	
 		master_index();
 			
@@ -675,7 +675,7 @@ $Pago = strtoupper($_POST['efectivo'])
 				}
 if($ClientRef != ''){
 	global $h;
-	if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){$h = 'height=620px';}
+	if(($_SESSION['Nivel']=='admin') || ($_SESSION['Nivel']=='plus')){$h = 'height=620px';}
 	else {$h = 'height=250px';}
 	
 	if($_SESSION['nclient'] == 'cliente'){

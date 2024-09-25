@@ -371,7 +371,7 @@ function process_form(){
 	
 	global $db;
 					
-	if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus') || ($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'caja')){				 
+	if (($_SESSION['Nivel']=='admin') || ($_SESSION['Nivel']=='plus') || ($_SESSION['Nivel']=='user') || ($_SESSION['Nivel']=='caja')){				 
 		global $rutaindex;		$rutaindex = "../Mod_Admin/";
 			master_index();
 			recup_compra();
@@ -510,7 +510,7 @@ function recup_compra(){
 	}
 
 if($ClientRef != ''){
-	if(($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){$CssHeight = 'height=530px';}
+	if(($_SESSION['Nivel']=='admin') || ($_SESSION['Nivel']=='plus')){$CssHeight = 'height=530px';}
 	else {$CssHeight = 'height=250px';}
 
 	if($_SESSION['nclient'] == 'cliente'){

@@ -589,7 +589,6 @@ function show_formcl($errors=[]){
 	if($_SESSION['Nivel']=='cliente'){
 
 	}else{
-
 		print("<table align='center' style='border:0px;margin-top:4px;width:max-content;'>
 					<tr>
 						<th colspan=2 class='BorderSup'>
@@ -712,9 +711,9 @@ function show_formcl($errors=[]){
 						</td>
 					</tr>
 					<tr>
-						<td style='text-align:right;' class='BorderInf'>NOMBRE</td>
+						<td class='BorderInf'></td>
 						<td class='BorderInf'>
-				<input type='text' name='Nombre' size=20 maxlength=10 value='".$defaults['Nombre']."' />
+				<input type='text' name='Nombre' size=20 maxlength=10 value='".$defaults['Nombre']."' placeholder='NOMBRE' />
 					</form>
 						</td>
 					</tr>
@@ -1379,12 +1378,11 @@ function recup_compra(){
 					</div>");
 	}else{	print ("<table align='center'>
 						<tr style='font-size:14px'>
-							<th colspan=7 class='BorderInf ocultatd440'>SESIONES DE COMPRAS</th>
-							<th colspan=6 class='BorderInf muestratd440'>SESIONES DE COMPRAS</th>
+							<th colspan=6 class='BorderInf ocultatd440'>SESIONES DE COMPRAS</th>
+							<th colspan=5 class='BorderInf muestratd440'>SESIONES DE COMPRAS</th>
 						</tr>
 						<tr style='font-size:12px'>
 							<th class='BorderInfDch'>CAJERO</th>
-							<th class='BorderInfDch ocultatd440'>CAJERO</th>
 							<th class='BorderInfDch'>OPER SESION</th>		
 							<th class='BorderInfDch ocultatd440'>FECHA</th>
 							<th class='BorderInfDch'>CLIENTE</th>										

@@ -26,9 +26,10 @@ session_start();
 		}else{ 	show_form();
 				ver_todo(); }
 
-	}elseif($_SESSION['Nivel']=='cliente'){	master_index();
-											ver_todo();
-											unset($_SESSION['refcl']);
+	}elseif(($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){	
+										master_index();
+										ver_todo();
+										unset($_SESSION['refcl']);
 	}else{ require "../Inclu/AccesoDenegado.php"; }
 
 				   ////////////////////				   ////////////////////
@@ -120,7 +121,7 @@ function ver_todo(){
 	if($_SESSION['Nivel']=='admin'){
 		//$SqlSelectClientesWeb =  "SELECT * FROM $ClientesWeb ORDER BY $Orden ";
 		$SqlSelectClientesWeb =  "SELECT * FROM $ClientesWeb WHERE `doc` <> 'local' ORDER BY $Orden ";
-	}elseif($_SESSION['Nivel']=='cliente'){
+	}elseif(($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){
 		$SqlSelectClientesWeb =  "SELECT * FROM $ClientesWeb WHERE `ref` = '$clref' LIMIT 1 ";
 	}
 

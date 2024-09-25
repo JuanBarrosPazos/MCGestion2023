@@ -13,7 +13,19 @@
 	}else{
 		$accion = "ClienteCrear.php";
 		$BotonIco = "PersonAddBlack";
-		$valor = "CREAR CLIENTE";
+		
+		switch (true) {
+			case ($_SESSION['Nivel']=='admin'):
+				$valor = "CREAR CLIENTE O CAJERO";
+				break;
+			case (($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')):
+				$valor = "CREAR CLIENTE";
+				break;
+			default:
+				$valor = "CREAR CLIENTE";
+				break;
+		}
+
 		$BotonFeed = "<form name='boton' action='FeedbackClienteVer.php' method='post' style='display: inline-block;' >
 				<button type='submit' title='GESTION FEEDBACK' class='botonazul imgButIco CachedBlack'>
 				</button>

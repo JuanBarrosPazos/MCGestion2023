@@ -11,7 +11,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
+	if (($_SESSION['Nivel']=='admin') || ($_SESSION['Nivel']=='plus')){
 
 		master_index();
 		if((isset($_POST['oculto1']))||(isset($_POST['oculto2']))||(isset($_GET['seccion']))){ 

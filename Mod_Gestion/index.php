@@ -328,7 +328,7 @@ function validate_form(){
 
 function process_form(){
 	
-if($_SESSION['Nivel'] == 'cliente'){				 
+if(($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){				 
 	
 	master_index();
 								

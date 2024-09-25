@@ -11,7 +11,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if ($_SESSION['Nivel'] == 'admin'){
+	if ($_SESSION['Nivel']=='admin'){
 
 		master_index();
 		if(isset($_POST['todo'])){ 

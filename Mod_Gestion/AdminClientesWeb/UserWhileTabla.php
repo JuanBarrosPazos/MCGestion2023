@@ -4,7 +4,7 @@
 	global $KeyIndex;
 
 	global $BotonRefresca;
-	if($_SESSION['Nivel']=='cliente'){
+	if(($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){
 		$BotonRefresca = "<form name='todo' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
 					<button type='submit' title='REFRESCAR VISTA DESPUES DE MODIFICAR DATOS...' class='botonlila imgButIco RestoreWhite'>
 					</button>

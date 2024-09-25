@@ -49,9 +49,9 @@ function admin_entrada(){
 	global $userid; 		global $uservisita;
 
 	global $dir;
-	if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){ $dir = 'Admin';}
-	elseif ($_SESSION['Nivel'] == 'cliente'){ $dir = 'ClientesWeb';}
-	elseif (($_SESSION['Nivel'] == 'user') || ($_SESSION['Nivel'] == 'caja')){ $dir = 'User';}
+	if (($_SESSION['Nivel']=='admin') || ($_SESSION['Nivel']=='plus')){ $dir = 'Admin';}
+	elseif ($_SESSION['Nivel']=='cliente'){ $dir = 'ClientesWeb';}
+	elseif (($_SESSION['Nivel']=='user') || ($_SESSION['Nivel']=='caja')){ $dir = 'User';}
 	
 	$total = $uservisita + 1;
 	$datein = date('Y-m-d/H:i:s');
@@ -272,7 +272,7 @@ function validate_form(){
 
 function process_form(){
 	
-if ($_SESSION['Nivel'] == 'cliente'){				 
+if ($_SESSION['Nivel']=='cliente'){				 
 print("WELLCOME ".$_SESSION['Nombre']." ".$_SESSION['Apellidos'].". REF CLIENT: ".$_SESSION['ref']);
 	
 	master_index();

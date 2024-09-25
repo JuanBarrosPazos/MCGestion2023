@@ -5,7 +5,7 @@
                     <td>
                         <font color='red'>
                             ACCESO RESTRINGIDO.
-                                </br></br>
+                                </br>
                             CONSULTE SUS PERMISOS ADMINISTRATIVOS.
                         </font>
                     </td>

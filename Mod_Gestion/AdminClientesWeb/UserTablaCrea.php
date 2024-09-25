@@ -45,9 +45,9 @@
 		case (@$_SESSION['Nivel']=='cliente'):
 			$BotonCreaCliente = "";
 			break;
-		case (@$_SESSION['Nivel']=='admin'):
+		case ((@$_SESSION['Nivel']=='admin')||(@$_SESSION['Nivel']=='caja')):
 			$BotonCreaCliente = "<form name='boton' action='ClienteCrear.php' method='post' style='display: inline-block;' >
-			<button type='submit' title='CREAR CLIENTE' class='botonverde imgButIco PersonAddBlack'>
+			<button type='submit' title='CREAR CLIENTE O CAJERO' class='botonverde imgButIco PersonAddBlack'>
 			</button>
 					<input type='hidden' name='volver' value=1 />
 				</form>";

@@ -11,7 +11,7 @@
 				<tr>
 					<th colspan=2>
 						<div style='display:inline-block; color:#F1BD2D; margin: 1.2em 0.1em 0.1em 0.1em;'>
-							MODIFICAR DATOS ACTUALES
+							".$Titulo."
 						</div>
 							<img src='img_cliente/".$defaults['myimg']."' height='54px' width='43px' style='display:inline-block; float:right;'>
 					</th>

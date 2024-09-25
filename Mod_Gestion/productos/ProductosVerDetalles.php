@@ -10,7 +10,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'cliente')){
+	if (($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='cliente')){
 					
 		if($_POST['oculto2']){	process_form();
 								log_info();

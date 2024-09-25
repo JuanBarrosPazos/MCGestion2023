@@ -10,7 +10,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if (($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'cliente')){
+	if (($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){
 					
 		global $nombre;			$nombre = $_POST['Nombre'];
 		global $apellido;		$apellido = $_POST['Apellidos'];

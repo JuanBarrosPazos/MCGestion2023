@@ -23,7 +23,7 @@
 					<th class='BorderInfDch'>CAJERO</th>	
 					<th class='BorderInfDch'>ZONA / CLIENTE</th>
 					<th class='BorderInfDch'>OPER SESION</th>	
-					<th class='BorderInfDch'>FECHA</th>	
+					<th class='BorderInfDch'>FECHA</th>
 					<th class='BorderInfDch'>SECCION</th>
 					<th class='BorderInfDch'>PRODUCTO</th>
 					<th class='BorderInfDch'>CARRO</th>

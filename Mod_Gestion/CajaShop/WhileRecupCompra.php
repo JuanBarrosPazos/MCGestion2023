@@ -1,12 +1,17 @@
 <?php
 
 		print("<tr align='center'>
-					<td class='BorderInfDch' align='left'>".$RowCajaShopIni0['cname']."</td>
-					<td class='BorderInfDch ocultatd440' align='left'>".$RowCajaShopIni0['refcaja']."</td>
-					<td class='BorderInfDch' align='right'>".$RowCajaShopIni0['oper']."</td>
-					<td class='BorderInfDch ocultatd440' align='right'>".$RowCajaShopIni0['datecash']."</td>
-					<td class='BorderInfDch' align='right'>".strtoupper($RowCajaShopIni0['refclient'])."</td>
-					<td class='BorderInfDch' align='right'>".$SumaResult."</td>
+					<td class='BorderInfDch' style='text-align:right;'>
+						".$RowCajaShopIni0['cname']." ".$RowCajaShopIni0['refcaja']."
+					</td>
+					<td class='BorderInfDch' style='text-align:right;'>".$RowCajaShopIni0['oper']."</td>
+					<td class='BorderInfDch ocultatd440' style='text-align:right;'>
+						".$RowCajaShopIni0['datecash']."
+					</td>
+					<td class='BorderInfDch' style='text-align:right;'>
+						".strtoupper($RowCajaShopIni0['refclient'])."
+					</td>
+					<td class='BorderInfDch' style='text-align:right;'>".$SumaResult."</td>
 					<td class='BorderInf'>");
 
 		if($RowCajaShopIni0['ini'] == 1){

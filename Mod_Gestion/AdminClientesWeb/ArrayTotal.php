@@ -12,9 +12,7 @@
                          'cliente' => 'CLIENTE',);														
     }elseif($ArrayAdmin == 1){         
 		$Nivel = array ( '' => 'NIVEL USUARIO',
-                        'admin' => 'ADMINISTRADOR',
-                        'plus' => 'USER PLUS',
-                        'user'  => 'USER',
+                        'cliente' => 'CLIENTE',
                         'caja'  => 'USER CAJERO/A',);	
 	}else{ }               
 

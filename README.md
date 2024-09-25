@@ -22,11 +22,14 @@
 - ! Ojo al $txt no se define en ningún sitio. La defino global $txt para evitar el error.
 ----
 # ** ÚLTIMA VERSIÓN:
-## * MCGestion2023 V24.09.24
+## * MCGestion2023 V24.09.25
 - !!! AJUSTAR LOS ESTILOS MEDIA EN function subtotal(){...}
 - ! AJUSTAR MEDIA PRINT PARA function subtotal(){...}
 - ! REVISAR DISTINTOS NIVELES DE USUARIOS...
 - OJO A: $_SESSION['pvptotold'] & $cuadrapvptot & $_POST['pvptot'] & `pvptot` = '$cuadrapvptot'
+
+* !! AJUSTE NIVEL USUARIO CAJA...
+
 * AJUSTE DE LOS @media print
 * AJUSTES GENERALES EN CajaShop/
 ----

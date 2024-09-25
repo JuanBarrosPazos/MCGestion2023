@@ -73,7 +73,7 @@ session_start();
 								</td>
 							</tr>
 						</table>");
-			}elseif(((isset($_POST['formseccion']))&&($_POST['seccion']!=''))||((isset($_POST['formproducto']))&&($_POST['producto']!=''))||(isset($_POST['show_formcl']))||($_SESSION['Nivel']=='cliente')){
+			}elseif(((isset($_POST['formseccion']))&&($_POST['seccion']!=''))||((isset($_POST['formproducto']))&&($_POST['producto']!=''))||(isset($_POST['show_formcl']))||($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){
 					require 'VentasCalculos.php';
 					require 'VentasTabla.php';
 					require 'VentasGraficas.php';

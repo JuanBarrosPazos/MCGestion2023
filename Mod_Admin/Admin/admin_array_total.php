@@ -1,106 +1,65 @@
 <?php
 
 if(isset($array_cero)){
-    $defaults = array ( 'Nombre' => '',
-                        'Apellidos' => '',
-                        'Nivel' => '',
-                        'ref' => '',
-                        'doc' => '',
-                        'dni' => '',
-                        'ldni' => '',
+    $defaults = array ( 'Nombre' => '','Apellidos' => '',
+                        'Nivel' => '','ref' => '',
+                        'doc' => '','dni' => '','ldni' => '',
                         'Email' => '',
-                        'Usuario' => '',
-                        'Usuario2' => '',
-                        'Password' => '',
-                        'Password2' => '',
+                        'Usuario' => '','Usuario2' => '',
+                        'Password' => '','Password2' => '',
                         'Direccion' => '',
-                        'Tlf1' => '',
-                        'Tlf2' => '');
-} elseif(isset($array_defaults)) { 
-    $defaults = array ( 'id' => $defaults['id'],
-						'ref' => $defaults['ref'],
-						'Nombre' => $defaults['Nombre'],
-						'Apellidos' => $defaults['Apellidos'],
-						'myimg' => $defaults['myimgcl'],
-						'Nivel' => $defaults['Nivel'],			
+                        'Tlf1' => '','Tlf2' => '');
+}elseif(isset($array_defaults)) { 
+    $defaults = array ( 'id' => $defaults['id'],'ref' => $defaults['ref'],
+						'Nombre' => $defaults['Nombre'],'Apellidos' => $defaults['Apellidos'],
+						'myimg' => $defaults['myimgcl'],'Nivel' => $defaults['Nivel'],			
 						'doc' => $defaults['doc'],
-						'dni' => $defaults['dni'],
-						'ldni' => $defaults['ldni'],
+						'dni' => $defaults['dni'],'ldni' => $defaults['ldni'],
 						'Email' => $defaults['Email'],
-						'Usuario' => $defaults['Usuario'],
-						'Usuario2' => $defaults['Usuario'],
-						'Password' => $defaults['Pass'],
-						'Password2' => $defaults['Pass'],
+						'Usuario' => $defaults['Usuario'],'Usuario2' => $defaults['Usuario'],
+						'Password' => $defaults['Pass'],'Password2' => $defaults['Pass'],
 						'Direccion' => $defaults['Direccion'],
-						'Tlf1' => $defaults['Tlf1'],
-						'Tlf2' => $defaults['Tlf2']);
-} elseif(isset($array_a)) {
-    $defaults = array ( 'id' => $_POST['id'],
-						'ref' => $_POST['ref'],
-						'Nivel' => $_POST['Nivel'],
-						'Nombre' => $_POST['Nombre'],
-						'Apellidos' => $_POST['Apellidos'],
-						'myimg' => $_POST['myimg'],
-						'doc' => $_POST['doc'],
-						'dni' => $_POST['dni'],
-						'ldni' => $_POST['ldni'],
+						'Tlf1' => $defaults['Tlf1'],'Tlf2' => $defaults['Tlf2']);
+}elseif(isset($array_a)) {
+    $defaults = array ( 'id' => $_POST['id'],'ref' => $_POST['ref'],
+						'Nombre' => $_POST['Nombre'],'Apellidos' => $_POST['Apellidos'],
+						'myimg' => $_POST['myimg'],'Nivel' => $_POST['Nivel'],
+						'doc' => $_POST['doc'],'dni' => $_POST['dni'],'ldni' => $_POST['ldni'],
 						'Email' => $_POST['Email'],
-						'Usuario' => $_POST['Usuario'],
-						'Password' => $_POST['Password'],
+						'Usuario' => $_POST['Usuario'],'Password' => $_POST['Password'],
 						'Pass' => $_POST['Pass'],
 						'Direccion' => $_POST['Direccion'],
-						'Tlf1' => $_POST['Tlf1'],
-						'Tlf2' => $_POST['Tlf2'],
-						'lastin' => $_POST['lastin'],
-						'lastout' => $_POST['lastout'],
-						'visitadmin' => $_POST['visitadmin'],
-						'borrado' => $_POST['borrado'],);
-} elseif(isset($array_b)) {
-	$defaults = array ( 'id' => $_POST['id'],
-						'ref' => $_SESSION['refcl'],
-						'Nombre' => $_POST['Nombre'],
-						'Apellidos' => $_POST['Apellidos'],
-						'myimg' => $_SESSION['myimgcl'],
-						'Nivel' => $_POST['Nivel'],			
-						'doc' => $dt,
-						'dni' => $_POST['dni'],
-						'ldni' => $_POST['ldni'],
+						'Tlf1' => $_POST['Tlf1'],'Tlf2' => $_POST['Tlf2'],
+						'lastin' => $_POST['lastin'],'lastout' => $_POST['lastout'],
+						'visitadmin' => $_POST['visitadmin'],'borrado' => $_POST['borrado'],);
+}elseif(isset($array_b)) {
+	$defaults = array ( 'id' => $_POST['id'],'ref' => $_SESSION['refcl'],
+						'Nombre' => $_POST['Nombre'],'Apellidos' => $_POST['Apellidos'],
+						'myimg' => $_SESSION['myimgcl'],'Nivel' => $_POST['Nivel'],			
+						'doc' => $dt,'dni' => $_POST['dni'],'ldni' => $_POST['ldni'],
 						'Email' => $_POST['Email'],
-						'Usuario' => $_POST['Usuario'],
-						'Usuario2' => $_POST['Usuario'],
-						'Password' => $password,
-						'Password2' => $password2,
-						'Pass' => @$_POST['Pass'],
+						'Usuario' => $_POST['Usuario'],'Usuario2' => $_POST['Usuario'],
+						'Password' => $password,'Password2' => $password2,'Pass' => @$_POST['Pass'],
 						'Direccion' => $_POST['Direccion'],
-						'Tlf1' => $_POST['Tlf1'],
-						'Tlf2' => $_POST['Tlf2']);
-} elseif(isset($array_c)) { 
-	$defaults = array ( 'id' => $_POST['id'],
-						'Nombre' => $_POST['Nombre'],
-						'Apellidos' => $_POST['Apellidos'],
-						'ref' =>  $_SESSION['sref'],
-						'myimg' => @$_POST['myimg'],
-						'Nivel' => $_POST['Nivel'],
-					    'doc' => $_POST['doc'],
-						'dni' => $_POST['dni'],
-						'ldni' => $_POST['ldni'],
+						'Tlf1' => $_POST['Tlf1'],'Tlf2' => $_POST['Tlf2']);
+}elseif(isset($array_c)) { 
+	$defaults = array ( 'id' => $_POST['id'],'ref' =>  $_SESSION['sref'],
+						'Nombre' => $_POST['Nombre'],'Apellidos' => $_POST['Apellidos'],
+						'myimg' => @$_POST['myimg'],'Nivel' => $_POST['Nivel'],
+					    'doc' => $_POST['doc'],'dni' => $_POST['dni'],'ldni' => $_POST['ldni'],
 						'Email' => $_POST['Email'],
-						'Usuario' => $_POST['Usuario'],
-						'Usuario2' => $_POST['Usuario'],
-						'Password' => $_POST['Password'],
-						'Password2' => $_POST['Password'],
+						'Usuario' => $_POST['Usuario'],'Usuario2' => $_POST['Usuario'],
+						'Password' => $_POST['Password'],'Password2' => $_POST['Password'],
 						'Pass' => $_POST['Pass'],
 						'Direccion' => $_POST['Direccion'],
-						'Tlf1' => $_POST['Tlf1'],
-						'Tlf2' => $_POST['Tlf2']);
-
-} else { }
+						'Tlf1' => $_POST['Tlf1'],'Tlf2' => $_POST['Tlf2']);
+}else{ }
 
 if(isset($array_nive_doc)){
 
 		if(isset($config2)){ $Nivel = array ('admin' => 'WEBMASTER',
 											 'admin' => 'WEBMASTER',);
-		} else { $Nivel = array ('' => 'NIVEL USUARIO',
+		}else{ $Nivel = array ('' => 'NIVEL USUARIO',
 								 'admin' => 'ADMINISTRADOR',
 								 'plus' => 'USER PLUS',
 								 'user' => 'USER',
@@ -131,7 +90,7 @@ if(isset($array_nive_doc)){
 					*/
 				);
 
-} elseif(isset($array_nemp)) {	
+}elseif(isset($array_nemp)) {	
 				$nemp = array (	'' => 'EMPLEADOS PERMITIDOS',
 								'1' => '<= 1 EMPLEADOS',
 								'3' => '<= 3 EMPLEADOS',
@@ -141,6 +100,6 @@ if(isset($array_nive_doc)){
 								'50' => '<= 50 EMPLEADOS',
 								'100' => '<= 100 EMPLEADOS',
 										);														
-} else { }
+}else{ }
 
 ?>

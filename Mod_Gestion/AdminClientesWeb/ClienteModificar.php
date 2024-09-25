@@ -11,7 +11,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel']=='cliente')){
+	if(($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){
 
 		master_index();
 		if (isset($_POST['oculto2'])){  show_form();
@@ -159,7 +159,23 @@ function show_form($errors=[]){
 	require 'TableValidateErrors.php';
 
 	require 'ArrayTotalVar.php';
-	global $ArrayCliente; 			$ArrayCliente = 1;
+
+	global $ArrayCliente;		global $ArrayAdmin;		global $Titulo;
+	switch (true) {
+		case ($_SESSION['Nivel']=='admin'):
+			$ArrayCliente = 0;		$ArrayAdmin = 1;
+			$Titulo = "MODIFICAR CLIENTE O CAJERO";
+			break;
+		case (($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')):
+			$ArrayCliente = 1;		$ArrayAdmin = 0;
+			$Titulo = "MODIFICAR DATOS ACTUALES";
+			break;
+		default:
+			$ArrayCliente = 1;		$ArrayAdmin = 0;
+			$Titulo = "MODIFICAR DATOS ACTUALES";
+			break;
+	}
+
     global $ArrayClienteModif;      $ArrayClienteModif = 1;
 	require "ArrayTotal.php";
 	//require "UserRefCrea.php";

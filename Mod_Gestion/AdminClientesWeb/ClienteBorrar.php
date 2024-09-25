@@ -11,7 +11,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel']=='cliente')){
+	if(($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){
 
 		master_index();
 		if(isset($_POST['oculto2'])){
@@ -48,7 +48,8 @@ function process_form(){
 	}
 
 	global $RedirUrl;
-	if($_SESSION['Nivel']=='cliente'){ $RedirUrl = "../index.php?salir=1";
+	if(($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){ 
+			$RedirUrl = "../index.php?salir=1";
 	}else{ $RedirUrl = "ClienteVer.php"; }
 	global $RedirTime;	$RedirTime = 6000;
 	require '../Inclu/AutoRedirUrl.php';

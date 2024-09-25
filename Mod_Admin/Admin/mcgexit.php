@@ -11,7 +11,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-if(($_SESSION['Nivel'] == 'admin')||($_SESSION['Nivel'] == 'user')||($_SESSION['Nivel'] == 'plus')||($_SESSION['Nivel'] == 'cliente')){
+if(($_SESSION['Nivel']=='admin')||($_SESSION['Nivel']=='user')||($_SESSION['Nivel']=='plus')||($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){
  		
 	if(isset($_POST['salir'])){ UserLog();
 							  	salir();
@@ -33,7 +33,7 @@ function UserLog(){
 	global $dateadout; 	$dateadout = date('Y-m-d H:i:s');
 	global $dir;		global $logdocu;
 	global $table_name;	global $logdate;	
-	if($_SESSION['Nivel'] == 'cliente'){
+	if(($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){
 			$logdate = date('Y_m_d');			
 			$table_name = "`".$_SESSION['clave']."clientesweb`";
 			$logdocu = trim($_SESSION['Nombre'])."_".trim($_SESSION['Apellidos']);
@@ -118,7 +118,8 @@ function UserLog(){
 			</table>");
 			
 		global $RedirUrl;	
-		if($_SESSION['Nivel']=='cliente'){ $RedirUrl = "../../Mod_Gestion/index.php";
+		if(($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')){ 
+				$RedirUrl = "../../Mod_Gestion/index.php";
 		}else{ $RedirUrl = "../index.php?salir=1"; }
 		global $redir;
 		$redir = "<script type='text/javascript'>

@@ -16,7 +16,7 @@ session_start();
 ////////////////////				////////////////////				////////////////////
 				 ////////////////////				  ///////////////////
 
-	if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){
+	if (($_SESSION['Nivel']=='admin') || ($_SESSION['Nivel']=='plus')){
 
 		master_index();
 		if(isset($_POST['oculto2'])){ 	show_form();
@@ -177,7 +177,7 @@ function log_info(){
 	$ActionTime = date('H:i:s');
 
 	global $dir;
-	if (($_SESSION['Nivel'] == 'admin') || ($_SESSION['Nivel'] == 'plus')){ $dir = 'Admin';}
+	if (($_SESSION['Nivel']=='admin') || ($_SESSION['Nivel']=='plus')){ $dir = 'Admin';}
 	
  
 	global $LogText;

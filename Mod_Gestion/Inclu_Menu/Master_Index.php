@@ -2,7 +2,7 @@
 
 require 'Master_Index_Header.php';
 
-if($_SESSION['Nivel'] == 'admin'){	
+if($_SESSION['Nivel']=='admin'){	
 		
 print("<ul id='MenuBar1' class='MenuBarVertical'>
 			<li style='text-align:center !important;'>
@@ -55,7 +55,7 @@ print("<ul id='MenuBar1' class='MenuBarVertical'>
 		<!-- *************************** -->
 	</div>");
 
-}elseif($_SESSION['Nivel'] == 'plus') {
+}elseif($_SESSION['Nivel']=='plus') {
 	print("<ul id='MenuBar1' class='MenuBarVertical'>
 			<li style='text-align:center !important;'>
 				<button href='#' title='MENU APP' class='botonverde imgButIco MenuListBlack' style='width:2.4em !important; height:2.4em !important;' ></button>
@@ -100,7 +100,7 @@ print("<ul id='MenuBar1' class='MenuBarVertical'>
 		<!-- *************************** -->
 	</div>");
 	
-}elseif($_SESSION['Nivel'] == 'user'){ 
+}elseif($_SESSION['Nivel']=='user'){ 
 	print("<ul id='MenuBar1' class='MenuBarVertical'>
 			<li style='text-align:center !important;'>
 				<button href='#' title='MENU APP' class='botonverde imgButIco MenuListBlack' style='width: 2.4em !important; height: 2.4em !important;' ></button>
@@ -132,7 +132,7 @@ print("<ul id='MenuBar1' class='MenuBarVertical'>
 		<!-- *************************** -->
 	</div>");
 	
-}elseif($_SESSION['Nivel'] == 'caja'){ 
+}elseif($_SESSION['Nivel']=='caja'){
 	print("<ul id='MenuBar1' class='MenuBarVertical'>
 			<li style='text-align:center !important;'>
 				<button href='#' title='MENU APP' class='botonverde imgButIco MenuListBlack' style='width:2.4em !important; height:2.4em !important;' ></button>
@@ -164,7 +164,7 @@ print("<ul id='MenuBar1' class='MenuBarVertical'>
 		<!-- *************************** -->
 	</div>");
 
-}if($_SESSION['Nivel'] == 'cliente'){
+}if($_SESSION['Nivel']=='cliente'){
 	print("<ul id='MenuBar1' class='MenuBarVertical'>
 		<!-- MENU CLIENTES -->
 			<li style='text-align:center !important;'>
