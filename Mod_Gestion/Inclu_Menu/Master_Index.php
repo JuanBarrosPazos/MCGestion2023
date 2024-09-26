@@ -137,16 +137,11 @@ print("<ul id='MenuBar1' class='MenuBarVertical'>
 			<li style='text-align:center !important;'>
 				<button href='#' title='MENU APP' class='botonverde imgButIco MenuListBlack' style='width:2.4em !important; height:2.4em !important;' ></button>
 			<ul>
-	<!-- MENU CLIENTES -->
-		<li><a href='".$AdminClientesWeb."ClienteVer.php'>CLIENTES SHOP</a></li>  
-	<!-- Fin MENU CLIENTES-->
- 
-	<!-- Inicio CAJA -->
-      	<li><a href='".$caja."caja_00.php'>INICIO CAJA</a></li>
-	<!-- Fin CAJA -->
+		<li><a href='".$AdminClientesWeb."ClienteVer.php'>MI PERFIL</a></li>  
+      	<li><a href='".$caja."caja_00.php?tienda=1'>INICIO CAJA</a></li>
 		</ul>
 	</li>
-  	<!-- FIN MENU ADMINISTRADORES -->
+  	<!-- FIN MENU NIVEL CAJA -->
 		<li style='text-align:center'>
 					<form name='cerrar' action='".$rutaModAdmin."Admin/mcgexit.php' method='post'>
 			<button type='submit' title='CLOSE SESSION' class='botonrojo imgButIco CloseSessionBlack' style='width:2.4em !important; height: 2.4em !important; margin-top:0.3em !important;' ></button>
@@ -170,7 +165,7 @@ print("<ul id='MenuBar1' class='MenuBarVertical'>
 			<li style='text-align:center !important;'>
 				<button href='#' title='MENU APP' class='botonverde imgButIco MenuListBlack' style='width:2.4em !important; height:2.4em !important;' ></button>
     		<ul>
-				<li><a href='".$AdminClientesWeb."ClienteVer.php'>MIS DATOS</a></li>
+				<li><a href='".$AdminClientesWeb."ClienteVer.php'>MI PERFIL</a></li>
 				<li><a href='".$caja."caja_00.php?tienda=1'>TIENDA</a></li>
 				<li><a href='".$caja."Ventas.php'>MIS COMPRAS</a></li>  
 			</ul>

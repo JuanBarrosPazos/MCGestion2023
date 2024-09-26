@@ -160,18 +160,22 @@ function show_form($errors=[]){
 
 	require 'ArrayTotalVar.php';
 
-	global $ArrayCliente;		global $ArrayAdmin;		global $Titulo;
+	global $ArrayCliente;		global $ArrayAdmin;    global $ArrayCaja;		global $Titulo;
 	switch (true) {
 		case ($_SESSION['Nivel']=='admin'):
 			$ArrayCliente = 0;		$ArrayAdmin = 1;
 			$Titulo = "MODIFICAR CLIENTE O CAJERO";
 			break;
-		case (($_SESSION['Nivel']=='cliente')||($_SESSION['Nivel']=='caja')):
-			$ArrayCliente = 1;		$ArrayAdmin = 0;
-			$Titulo = "MODIFICAR DATOS ACTUALES";
+		case ($_SESSION['Nivel']=='caja'):
+			$ArrayCaja = 1;
+			$Titulo = "MODIFICAR DATOS CAJERO";
+			break;
+		case ($_SESSION['Nivel']=='cliente'):
+			$ArrayCliente = 1;
+			$Titulo = "MODIFICAR DATOS CLIENTE";
 			break;
 		default:
-			$ArrayCliente = 1;		$ArrayAdmin = 0;
+			$ArrayCliente = 1;
 			$Titulo = "MODIFICAR DATOS ACTUALES";
 			break;
 	}

@@ -22,7 +22,7 @@
 - ! Ojo al $txt no se define en ningún sitio. La defino global $txt para evitar el error.
 ----
 # ** ÚLTIMA VERSIÓN:
-## * MCGestion2023 V24.09.25
+## * MCGestion2023 V24.09.26A
 - !!! AJUSTAR LOS ESTILOS MEDIA EN function subtotal(){...}
 - ! AJUSTAR MEDIA PRINT PARA function subtotal(){...}
 - ! REVISAR DISTINTOS NIVELES DE USUARIOS...

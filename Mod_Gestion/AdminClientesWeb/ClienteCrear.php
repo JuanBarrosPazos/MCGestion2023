@@ -16,7 +16,9 @@ session_start();
 	global $KeyClienteCero;
 
 	if(isset($_SESSION['Nivel'])){
-		if($_SESSION['Nivel']=='admin'){ master_index(); }else{ require "../Inclu/AccesoDenegado.php"; }
+		if($_SESSION['Nivel']=='admin'){ 
+			master_index(); 
+		}else{ require "../Inclu/AccesoDenegado.php"; }
 		$KeyClienteCero = 0;
 	}else{ 
 		$KeyClienteCero = 1;
@@ -154,18 +156,22 @@ function show_form($errors=[]){
 
 		require 'ArrayTotalVar.php';
 
-		global $ArrayCliente;		global $ArrayAdmin;		global $Titulo;
+		global $ArrayCliente;		global $ArrayAdmin;		global $ArrayCaja;		global $Titulo;
 		switch (true) {
 			case (@$_SESSION['Nivel']=='admin'):
-				$ArrayCliente = 0;		$ArrayAdmin = 1;
+				$ArrayAdmin = 1;
 				$Titulo = "NUEVO CLIENTE O CAJERO";
 				break;
-			case ((@$_SESSION['Nivel']=='cliente')||(@$_SESSION['Nivel']=='caja')):
-				$ArrayCliente = 1;		$ArrayAdmin = 0;
+			case ($_SESSION['Nivel']=='caja'):
+				$ArrayCaja = 1;
+				$Titulo = "NUEVO CAJERO CAJERO";
+				break;
+			case (@$_SESSION['Nivel']=='cliente'):
+				$ArrayCliente = 1;
 				$Titulo = "DATOS NUEVO CLIENTE";
 				break;
 			default:
-				$ArrayCliente = 1;		$ArrayAdmin = 0;
+				$ArrayCliente = 1;
 				$Titulo = "DATOS NUEVO CLIENTE";
 				break;
 		}

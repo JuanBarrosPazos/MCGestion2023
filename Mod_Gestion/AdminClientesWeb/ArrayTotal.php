@@ -2,7 +2,7 @@
 
     global $Nivel;				global $defaults;		
 	global $ArrayConfig;		global $ArrayCliente;
-	global $ArrayAdmin;			global $ArrayProveedor;
+	global $ArrayAdmin;			global $ArrayProveedor;		global $ArrayCaja;
 
     if($ArrayConfig == 1){
         $Nivel = array ( 'admin' => 'NIVEL USUARIO',
@@ -10,13 +10,18 @@
     }elseif($ArrayCliente == 1){
         $Nivel = array ( 'cliente' => 'NIVEL USUARIO',
                          'cliente' => 'CLIENTE',);														
-    }elseif($ArrayAdmin == 1){         
+    }elseif($ArrayCaja == 1){
+		$Nivel = array ( '' => 'NIVEL USUARIO',
+						'cliente' => 'CLIENTE',
+						'caja'  => 'USER CAJERO/A',);
+	}elseif($ArrayAdmin == 1){        
 		$Nivel = array ( '' => 'NIVEL USUARIO',
                         'cliente' => 'CLIENTE',
-                        'caja'  => 'USER CAJERO/A',);	
+                        'caja'  => 'USER CAJERO/A',
+						'close'  => 'USER CAJERO/A',);	
 	}else{ }               
 
-	if(($ArrayAdmin == 1)||($ArrayCliente == 1)){
+	if(($ArrayAdmin == 1)||($ArrayCliente == 1)||($ArrayCaja == 1)){
 	
 		/* EL ARRAY DE MOD ADMIN...
 		$Nivel = array ('' => 'NIVEL USUARIO',
@@ -70,8 +75,7 @@
 						'NIFoaeca' => 'NIF Organos Admin Estado y Comunidades Autonomas',
 						'NIFute' => 'NIF Uniones Temporales de Empresas',
 						'NIFotnd' => 'NIF Otros Tipos no Definidos',
-						'NIFepenr' => 'NIF Establecimientos Permanentes Entidades no Residentes',
-					);
+						'NIFepenr' => 'NIF Establecimientos Permanentes Entidades no Residentes',);
     }else { }
 
 	global $ArrayFeedRecup;

@@ -1089,13 +1089,16 @@ function init_compra(){
 	if($_SESSION['Nivel']=='cliente'){
 		$ClienteName = $CajaShopName; 		$ClienteRef = $refcaja;
 		$FiltroNivelCliente = " AND `refclient`= '$refcaja' ";
+	}elseif($_SESSION['Nivel']=='caja'){
+		$ClienteName = ""; 		$ClienteRef = "";
+		$FiltroNivelCliente = " AND `refcaja`= '$refcaja' ";
 	}else{
 		$ClienteName = ""; 		$ClienteRef = "";
 		$FiltroNivelCliente = "";
 	}
 
 	$SqlCajaShopKgCash =  "SELECT * FROM $CajaShop WHERE `kgcash` = '0.00' $FiltroNivelCliente ";
-	// echo "** ".$SqlCajaShopKgCash."<br>";
+	echo "** ".$SqlCajaShopKgCash."<br>";
 		$QrySqlCajaShopKgCash = mysqli_query($db, $SqlCajaShopKgCash);
 
 	if(mysqli_num_rows($QrySqlCajaShopKgCash) >= 1){
@@ -1365,10 +1368,13 @@ function recup_compra(){
 	global $FiltroNivelCliente;
 	if($_SESSION['Nivel']=='cliente'){
 		$FiltroNivelCliente = " AND `refclient`= '$refcaja' ";
+	}elseif($_SESSION['Nivel']=='caja'){
+		$FiltroNivelCliente = " AND `refcaja`= '$refcaja' ";
 	}else{
 		$FiltroNivelCliente = "";
 	}
 	$SqlCajaShopIni0 = "SELECT * FROM $CajaShop WHERE `ini` > '0' $FiltroNivelCliente ";
+	echo "** ".$SqlCajaShopIni0."<br>";
 		$QrySqlCajaShopIni0 = mysqli_query($db, $SqlCajaShopIni0);
 		$CountSqlCajaShopIni0 = mysqli_num_rows($QrySqlCajaShopIni0);
 		
@@ -1456,8 +1462,8 @@ function subtotal(){
 		global $Cabecera;
 		$Cabecera = "<div style='display:inline-block; margin-top: 0.6em; '>
 					SUBTOTAL COMPRA ".$_SESSION['oper']."</div> ".$BotonContinuaCompra."
-				<form action='' method='get'> 
-					<input type='button' name='imprimir' title='IMPRIMIR COMPROBANTE' class='botonverde imgButIco PrintBlack' onClick='window.print();' style='display:inline-block; float:right'>
+				<form action='' method='get' style='display:inline-block; float:right'> 
+					<input type='button' name='imprimir' title='IMPRIMIR COMPROBANTE' class='botonverde imgButIco PrintBlack' onClick='window.print();'>
 				</form>";
 
 		print("<table align='center'> 
@@ -1626,14 +1632,16 @@ function subtotal(){
 			}else{ 	$CssHeight = 'height=290px'; }
 	
 			global $SqlClientesWebClientRef2;
-			if($_SESSION['nclient']=='cliente'){
+			if(($_SESSION['nclient']=='cliente')||($_SESSION['nclient']=='caja')){
 				$SqlClientesWebClientRef2 =  "SELECT * FROM $ClientesWeb WHERE `ref` = '$ClientRef' ORDER BY `Nombre` ASC ";
 					$CssHeight = 'height=530px';
-			}elseif(($_SESSION['nclient']=='admin')||($_SESSION['nclient']=='plus')||($_SESSION['nclient']== 'user')||($_SESSION['nclient']=='caja')){
+			}elseif(($_SESSION['nclient']=='admin')||($_SESSION['nclient']=='plus')||($_SESSION['nclient']== 'user')){
 				$SqlClientesWebClientRef2 =  "SELECT * FROM $Admin WHERE `ref` = '$ClientRef' ORDER BY `Nombre` ASC ";
 			}
 				$QryClientesWebClientRef2 = mysqli_query($db, $SqlClientesWebClientRef2);
 				$RowClientesWebClientRef2 = mysqli_fetch_assoc($QryClientesWebClientRef2);
+				//echo "** ".$SqlClientesWebClientRef2.">br>";
+
 			if($RowClientesWebClientRef2['doc']=='local'){ $CssHeight = 'height=290px'; }else{ $CssHeight = 'height=530px'; }
 
 				print("<form name='data_client' action='ClienteVer02.php' target='popup' method='POST' onsubmit=\"window.open('', 'popup', 'width=320px,".$CssHeight."')\" style='display:inline-block;'>
@@ -2559,12 +2567,6 @@ function show_form(){
 					</form>";
 		}
 
-		print($BotonSelecCliente."<form name='subtotal' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
-			<button type='submit' title='CONTINUAR COMPRA' class='botonazul imgButIco CarroBlack'></button>
-						<input type='hidden' name='subtotal' value=1 />
-					</form>	
-				</td></tr>");
-
 		// SI NO HAY CLIENTE SE MUESTRA EL FORMULARIO PARA SELECCIONAR UN CLIENTE
 		$RefOperShop = $_SESSION['oper'];
 		$sqlClName =  "SELECT * FROM `$db_name`.$CajaShop WHERE `oper` = '$RefOperShop' AND `ini` = 1 AND `clname` = '' AND `refclient` = ''  LIMIT 1 ";
@@ -2576,9 +2578,13 @@ function show_form(){
 				$KeyShowFormCl = 1;
 		}else{ $KeyShowFormCl = 0; }
 
-		if(($sqlClNumsRow>0)&&($KeyShowFormCl<1)){	
-									print("</table>");
-										show_formcl();	$KeySubTotal = 1;
+		if(($sqlClNumsRow>0)&&($KeyShowFormCl<1)){
+			print($BotonSelecCliente."<form name='subtotal' method='post' action='$_SERVER[PHP_SELF]' style='display:inline-block;'>
+			<button type='submit' title='CONTINUAR COMPRA' class='botonazul imgButIco CarroBlack'></button>
+						<input type='hidden' name='subtotal' value=1 />
+					</form>	
+				</td></tr></table>");
+			show_formcl();	$KeySubTotal = 1;
 		}elseif(($KeyShowFormCl<1)&&(!isset($_POST['init_compra']))&&($sqlClNumsRow<1)){
 			$KeySubTotal = 0;
 
